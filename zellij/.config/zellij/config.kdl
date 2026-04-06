@@ -1,0 +1,36 @@
+load_plugins {
+    "https://github.com/Cynary/zellij-tab-name/releases/download/v0.4.1/zellij-tab-name.wasm"
+}
+
+options {
+    default_shell "fish"
+    copy_clipboard "primary"
+    copy_on_select true
+    theme "ayu_dark"
+}
+
+// Start in locked mode so Ctrl+Q etc. go to your apps, not zellij
+default_mode "locked"
+
+// Use fish as default shell
+default_shell "fish"
+
+keybinds {
+    // Keep pane/tab navigation available even in locked mode
+    locked {
+        bind "Alt h" "Alt Left"  { MoveFocusOrTab "Left"; }
+        bind "Alt l" "Alt Right" { MoveFocusOrTab "Right"; }
+        bind "Alt j" "Alt Down"  { MoveFocus "Down"; }
+        bind "Alt k" "Alt Up"    { MoveFocus "Up"; }
+        bind "Alt 1" { GoToTab 1; }
+        bind "Alt 2" { GoToTab 2; }
+        bind "Alt 3" { GoToTab 3; }
+        bind "Alt 4" { GoToTab 4; }
+        bind "Alt 5" { GoToTab 5; }
+        bind "Alt 6" { GoToTab 6; }
+        bind "Alt =" { GoToNextTab; }
+        bind "Alt -" { GoToPreviousTab; }
+        bind "Alt [" { PreviousSwapLayout; }
+        bind "Alt ]" { NextSwapLayout; }
+    }
+}
