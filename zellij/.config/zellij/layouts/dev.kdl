@@ -1,0 +1,14 @@
+// ~/.config/zellij/layouts/dev.kdl
+
+layout {
+    pane size=1 borderless=true {
+        plugin location="zellij:tab-bar"
+    }
+    pane split_direction="vertical" {
+        pane size="70%"  // Neovim
+        pane size="30%"  // Claude Code CLI
+    }
+    pane size=1 borderless=true {
+        plugin location="zellij:status-bar"
+    }
+}

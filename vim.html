@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Cheatsheet - Portrait Printable</title>
+    <script>
+        // EDIT YOUR KEYBINDINGS AND CONTENT HERE
+        const cheatsheetData = {
+            side1: [
+                {
+                    title: "The 5 Modes",
+                    type: "table",
+                    content: [
+                        ["Normal", "Esc: Home base. Nav, delete, run commands."],
+                        ["Insert", "i, a, o: Type text like a normal editor."],
+                        ["Visual", "v, V, C-v: Select characters, lines, or blocks."],
+                        ["Command", ": : Run file/config commands (:w, :q)."],
+                        ["Search", "/ or ?: Find text forward or backward."]
+                    ],
+                    note: "The Golden Rule: Always Esc back to Normal mode."
+                },
+                {
+                    title: "Operators + Motions",
+                    type: "group",
+                    note: "Pattern: [number] + operator + motion",
+                    sections: [
+                        {
+                            subtitle: "Common Operators",
+                            content: [
+                                ["d", "Delete"], ["c", "Change (Delete + Insert)"], ["y", "Yank (Copy)"],
+                                ["> / <", "Indent Right / Left"], ["=", "Auto-indent"], ["gU / gu", "Upper / Lowercase"]
+                            ]
+                        },
+                        {
+                            subtitle: "Common Combinations",
+                            content: [
+                                ["dd / yy", "Line: Delete / Yank"], ["dw / yw", "Word: Delete / Yank"],
+                                ["d$ / y$", "To End: Delete / Yank"], ["diw / daw", "Inner Word / A Word"],
+                                ["di\" / da\"", "Inside / Incl. Quotes"], ["ci( / ci{", "Change Inside ( ) or { }"],
+                                ["dG / yG", "Delete / Yank to end of file"], ["guG", "Lowercase to end of file"],
+                                ["3dd / 5j", "Multiplier: 3 lines / 5 down"]
+                            ]
+                        }
+                    ]
+                },
+                {
+                    title: "Insert Mode Shortcuts",
+                    type: "table",
+                    content: [
+                        ["i / a", "Before / After cursor"],
+                        ["I / A", "Start / End of line"],
+                        ["o / O", "New line Below / Above"],
+                        ["s / S", "Delete Char / Line + Insert"],
+                        ["C", "Delete to EOL + Insert"],
+                        ["gi", "Jump to last insertion point and Insert"]
+                    ]
+                },
+                {
+                    title: "Visual Mode (Selecting)",
+                    type: "table",
+                    content: [
+                        ["v / V", "Character / Line-wise selection"],
+                        ["Ctrl+v", "Block visual (column selection)"],
+                        ["o", "Move to other end of selection"],
+                        ["~", "Toggle Case of selection"],
+                        ["I / A", "Insert/Append (Block mode only)"]
+                    ],
+                    note: "Block Edit: C-v -> select down -> I -> type -> Esc."
+                },
+                {
+                    title: "Copy, Paste, Undo",
+                    type: "table",
+                    content: [
+                        ["p / P", "Paste After / Before cursor"],
+                        ["\"0p / \"0P", "Paste from Yank Register (ignores deletes)"],
+                        ["\"_d / \"_c", "Delete/Change to Black Hole (keep yank)"],
+                        ["x / X", "Delete char under / before cursor"],
+                        ["u / C-r", "Undo / Redo"],
+                        ["U", "Undo all on current line"],
+                        ["\"*y / \"+y", "Copy to System Clipboard"]
+                    ],
+                    note: "Registers: \"0 always holds the last yank, even after d/x."
+                },
+                {
+                    title: "Essential Commands",
+                    type: "table",
+                    content: [
+                        [":w / :q", "Save / Quit"],
+                        [":wq / :q!", "Save & Quit / Force Quit"],
+                        [":noh", "Clear search highlight"],
+                        [":%s/old/new/g", "Search & Replace all"],
+                        [":Lazy / :Mason", "Plugins / LSP Manager"],
+                        [":checkhealth", "Diagnose environment"]
+                    ]
+                }
+            ],
+            side2: [
+                {
+                    title: "Movement & Navigation",
+                    type: "group",
+                    sections: [
+                        {
+                            subtitle: "Basic & Words",
+                            content: [
+                                ["h j k l", "Left, Down, Up, Right"], ["w / b", "Next / Prev word start"],
+                                ["e / E", "Next word end (E ignores punct)"], ["W / B", "Large word (ignores punct)"],
+                                ["0 / $", "Start / End of line"], ["^ / _", "First non-blank character"]
+                            ]
+                        },
+                        {
+                            subtitle: "Vertical & Jumps",
+                            content: [
+                                ["gg / G", "Top / Bottom of file"], ["{ / }", "Prev / Next empty line"],
+                                ["C-u / C-d", "Page Half Up / Down"], ["zz / zt / zb", "Center / Top / Bottom cursor"],
+                                ["%", "Matching bracket/paren"], ["'' / ``", "Jump to last / exact position"]
+                            ]
+                        },
+                        {
+                            subtitle: "Character Search",
+                            content: [
+                                ["f / F", "Find char on line (Forward / Back)"],
+                                ["t / T", "To char on line (Forward / Back)"],
+                                ["; / ,", "Repeat last f/t search (Fwd / Rev)"],
+                                ["* / #", "Find next / prev instance of word"]
+                            ]
+                        }
+                    ]
+                },
+                {
+                    title: "Windows & Buffers",
+                    type: "table",
+                    content: [
+                        [":vs / :sp", "Vertical / Horizontal Split"],
+                        ["C-h/j/k/l", "Navigate focus between panes"],
+                        ["C-w = / o", "Equalize sizes / Close others"],
+                        [":bn / :bp", "Next / Prev Buffer"],
+                        [":bd", "Close Buffer (delete)"],
+                        ["gt / gT", "Next / Prev Tab"]
+                    ]
+                },
+                {
+                    title: "Gnome & Workspace",
+                    type: "group",
+                    sections: [
+                        {
+                            subtitle: "Window Management",
+                            content: [
+                                ["Alt+F4", "Close Window"], ["Alt+F10", "Toggle Maximize"],
+                                ["Super+h", "Minimize Window"], ["Alt+Space", "Window Menu"],
+                                ["Alt+Tab / S-Alt+Tab", "Switch Windows (Fwd/Rev)"],
+                                ["Super+d", "Show Desktop"]
+                            ]
+                        },
+                        {
+                            subtitle: "Workspaces & Apps",
+                            content: [
+                                ["C-Alt+Up/Down", "Switch Workspace Up/Down"],
+                                ["C-S-A+Up/Down", "Move Window to Workspace"],
+                                ["Super+1-9", "Switch to App on Dock"],
+                                ["Super+a / Super+s", "Show All Apps / Quick Settings"],
+                                ["Print / Alt+Print", "Screenshot UI / Window"]
+                            ]
+                        }
+                    ]
+                },
+                {
+                    title: "Zellij & Browser",
+                    type: "group",
+                    sections: [
+                        {
+                            subtitle: "Zellij (Locked Mode)",
+                            content: [
+                                ["Alt+h/j/k/l", "Move Focus (L, D, U, R)"],
+                                ["Alt+1-9", "Jump to Tab number"],
+                                ["Alt+n / Alt+p", "Next / Previous Tab"],
+                                ["Alt+[ / ]", "Cycle Swap Layouts (70/30)"]
+                            ]
+                        },
+                        {
+                            subtitle: "Chrome / Browser",
+                            content: [
+                                ["C-l", "Focus Address Bar"],
+                                ["C-t / C-w", "New Tab / Close Tab"],
+                                ["C-Tab / C-S-Tab", "Next / Prev Tab"],
+                                ["C-f / C-g", "Find / Find Next"]
+                            ]
+                        }
+                    ]
+                },
+                {
+                    title: "Tools & Plugins",
+                    type: "group",
+                    sections: [
+                        {
+                            subtitle: "LSP / Telescope",
+                            content: [
+                                ["gd / gr", "Definition / References"], ["K", "Hover Docs"],
+                                ["Sp+ff / fg", "Find File / Live Grep"], ["Sp+fb", "View buffers (Telescope)"], ["Sp+rn / ca", "Rename / Code Action"]
+                            ]
+                        },
+                        {
+                            subtitle: "Git / File",
+                            content: [
+                                ["Sp+gd / gc", "Git Diff Open / Close"], ["]h / [h", "Next / Prev Hunk"],
+                                ["Sp+e / -", "Oil (Explorer) / Go Up Dir"]
+                            ]
+                        }
+                    ]
+                },
+                {
+                    title: "Useful Tricks",
+                    type: "table",
+                    content: [
+                        [".", "Repeat last change command"],
+                        ["gg=G", "Auto-indent whole file"],
+                        ["ggyG", "Yank entire file to clipboard"],
+                        ["ggdGp", "Overwrite file with clipboard"],
+                        ["Sp+sc", "Open Scratchpad"],
+                        ["cs\"'", "Change surround \" to ' (surround)"],
+                        ["gv", "Reselect last visual selection"],
+                        ["C-\\", "Toggle floating terminal (ToggleTerm)"]
+                    ]
+                }
+            ]
+        };
+    </script>
+    <style>
+        :root {
+            --primary: #000;
+            --bg-gray: #f2f2f2;
+            --border: #ccc;
+            --text: #000;
+            --key-bg: #eee;
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 9.5px;
+            line-height: 1.25;
+            color: var(--text);
+            margin: 0;
+            background: #fff;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            padding: 10mm;
+            box-sizing: border-box;
+            column-count: 2;
+            column-gap: 8mm;
+            page-break-after: always;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .page {
+                width: 210mm;
+                height: 297mm;
+                margin: 0;
+                padding: 10mm;
+            }
+        }
+
+        .section-group {
+            break-inside: avoid;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            column-span: all;
+            text-align: center;
+            font-size: 18px;
+            margin: 0 0 10px 0;
+            padding-bottom: 5px;
+            border-bottom: 3px solid #000;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            background: #000;
+            color: #fff;
+            font-size: 10px;
+            padding: 4px 8px;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+        }
+
+        h3 {
+            font-size: 8.5px;
+            text-transform: uppercase;
+            margin: 6px 0 3px 0;
+            border-bottom: 1px solid #000;
+            font-weight: 800;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 4px;
+        }
+
+        td {
+            padding: 2px 4px;
+            vertical-align: top;
+            border-bottom: 0.5px solid var(--border);
+        }
+
+        td:first-child {
+            width: 38%;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-weight: 700;
+        }
+
+        .note {
+            font-size: 8.5px;
+            font-style: italic;
+            padding: 4px;
+            background: var(--bg-gray);
+            border: 1px solid #000;
+            margin-top: 3px;
+        }
+
+        code {
+            font-family: monospace;
+            background: var(--key-bg);
+            padding: 0 2px;
+            border: 0.5px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="content"></div>
+
+    <script>
+        function renderTable(content) {
+            let html = '<table>';
+            content.forEach(row => {
+                html += `<tr><td>${row[0]}</td><td>${row[1]}</td></tr>`;
+            });
+            html += '</table>';
+            return html;
+        }
+
+        function renderSection(section) {
+            let html = `<div class="section-group">`;
+            html += `<h2>${section.title}</h2>`;
+
+            if (section.type === 'table') {
+                html += renderTable(section.content);
+            } else if (section.type === 'group') {
+                if (section.note) html += `<div class="note">${section.note}</div>`;
+                section.sections.forEach(s => {
+                    html += `<h3>${s.subtitle}</h3>`;
+                    html += renderTable(s.content);
+                });
+            }
+
+            if (section.note && section.type !== 'group') {
+                html += `<div class="note">${section.note}</div>`;
+            }
+
+            html += `</div>`;
+            return html;
+        }
+
+        function renderPage(sideKey, title) {
+            let html = `<div class="page"><h1>${title}</h1>`;
+            cheatsheetData[sideKey].forEach(section => {
+                html += renderSection(section);
+            });
+            html += `</div>`;
+            return html;
+        }
+
+        document.getElementById('content').innerHTML =
+            renderPage('side1', 'Vim Core & Editing') +
+            renderPage('side2', 'Navigation & Environment');
+    </script>
+
+</body>
+
+</html>

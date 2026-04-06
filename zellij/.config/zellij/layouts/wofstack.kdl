@@ -1,0 +1,207 @@
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=1 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+
+    swap_tiled_layout name="vrt2" {
+        tab {
+            pane split_direction="vertical" {
+                pane size="60%"
+                pane size="40%"
+            }
+        }
+    }
+
+    swap_tiled_layout name="vrt50" {
+        tab {
+            pane split_direction="vertical" {
+                pane size="50%"
+                pane size="50%"
+            }
+        }
+    }
+
+
+    swap_tiled_layout name="hz2" {
+        tab {
+            pane split_direction="horizontal" {
+                pane size="60%"
+                pane size="40%"
+            }
+        }
+    }
+
+    swap_tiled_layout name="vrt3" {
+        tab {
+            pane split_direction="vertical" {
+                pane size="30%"
+                pane size="40%"
+                pane size="30%"
+            }
+        }
+    }
+
+    swap_tiled_layout name="3pane" {
+        tab {
+            pane split_direction="vertical" {
+                pane size="60%"
+                pane size="40%" {
+                    pane
+                    pane
+                }
+            }
+        }
+    }
+
+    swap_tiled_layout name="stack" {
+        tab {
+            pane split_direction="vertical" {
+                pane size="60%"
+                pane size="40%" stacked=true {
+                    pane
+                    pane
+                }
+            }
+        }
+    }
+
+
+    swap_tiled_layout name="hz3" {
+        tab {
+            pane split_direction="horizontal" {
+                pane size="30%"
+                pane size="30%"
+                pane size="40%"
+            }
+        }
+    }
+
+    tab name="wofstack" cwd="~/localdev/wofstack" split_direction="vertical" {
+        pane size="60%" {
+            command "nvim"
+        }
+        pane size="40%" stacked=true {
+            pane command="gemini"
+            pane {
+                command "claude"
+                args "--model" "opusplan" "--chrome" 
+            }
+        }
+    }
+
+    tab name="w1" cwd="~/localdev/wofstack1" split_direction="vertical" {
+        pane size="60%" {
+            command "nvim"
+        }
+        pane size="40%" stacked=true {
+            pane command="gemini"
+            pane {
+                command "claude"
+                args "--model" "opusplan" "--no-chrome" 
+            }
+        }
+    }
+
+    tab name="w2" cwd="~/localdev/wofstack2" split_direction="vertical" {
+        pane size="60%" {
+            command "nvim"
+        }
+        pane size="40%" stacked=true {
+            pane command="gemini"
+            pane {
+                command "claude"
+                args "--model" "opusplan" "--no-chrome" 
+            }
+        }
+    }
+
+    tab name="w3" cwd="~/localdev/wofstack3" split_direction="vertical" {
+       pane size="60%" {
+            command "nvim"
+        }
+        pane size="40%" stacked=true {
+            pane command="gemini"
+            pane {
+                command "claude"
+                args "--model" "opusplan" "--no-chrome" 
+            }
+        }
+    }
+
+    tab name="w4" cwd="~/localdev/wofstack4" split_direction="vertical" {
+        pane size="60%" {
+            command "nvim"
+        }
+        pane size="40%" stacked=true {
+            pane command="gemini"
+            pane {
+                command "claude"
+                args "--model" "opusplan" "--no-chrome" 
+            }
+        } 
+    }
+
+    tab name="w5" cwd="~/localdev/wofstack5" split_direction="vertical" {
+        pane size="60%" {
+            command "nvim"
+        }
+        pane size="40%" stacked=true {
+            pane command="gemini"
+            pane {
+                command "claude"
+                args "--model" "opusplan" "--no-chrome" 
+            }
+        }
+    }
+
+    tab name="w6" cwd="~/localdev/wofstack6" split_direction="vertical" {
+       pane size="60%" {
+            command "nvim"
+        }
+        pane size="40%" stacked=true {
+            pane command="gemini"
+            pane {
+                command "claude"
+                args "--model" "opusplan" "--no-chrome" 
+            }
+        }
+    }
+
+    tab name="w7" cwd="~/localdev/wofstack7" split_direction="vertical" {
+        pane size="60%" {
+            command "nvim"
+        }
+        pane size="40%" stacked=true {
+            pane command="gemini"
+            pane {
+                command "claude"
+                args "--model" "opusplan" "--no-chrome" 
+            }
+        }
+    }
+
+    tab name="db" cwd="~/localdev/wofstack" {
+    	pane {
+    		name "proddb"
+    		command "pgcli"
+    		args "postgres://readonly:gLfPPDFG8X6QrTZYXh*r@10.113.192.234:5432/tmx_production"
+    	}
+    }
+
+    tab name="server" cwd="~/localdev/wofstack" split_direction="vertical" {
+        pane {
+            name "deployments"
+        }
+        pane {
+            name "ssh admin"
+            command "ssh"
+            args "admin"
+        }
+    }
+}

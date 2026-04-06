@@ -1,0 +1,42 @@
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=1 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+
+    tab name="workspace" cwd="~/localdev/wayfarer" split_direction="vertical" {
+        pane size="60%" {
+            command "nvim"
+            args "~/localdev/wayfarer"
+            name "neovim"
+        }
+        pane size="40%" stacked=true {
+        	pane
+            pane
+            pane
+        }
+    }
+
+    tab name="npm-dev" split_direction="vertical" {
+        pane command="npm" {
+            name "editor"
+            cwd "~/localdev/wayfarer"
+            args "run" "dev:editor"
+        }
+        pane command="npm" {
+            name "designer"
+            cwd "~/localdev/wayfarer"
+            args "run" "dev:designer"
+        }
+        pane command="npm" {
+            name "dev"
+            cwd "~/localdev/wayfarer"
+            args "run" "dev"
+        }
+    }
+}

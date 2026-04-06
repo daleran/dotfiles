@@ -1,0 +1,4 @@
+yazi/.config/yazi/flavors/
+fish/.config/fish/fish_variables
+nvim/.config/nvim/lua/config/db_local.lua
+fish/.config/fish/.env.fish
