@@ -1,0 +1,95 @@
+layout {
+    default_tab_template {
+        children
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+    }
+
+    swap_tiled_layout name="stacked" {
+        tab {
+            pane stacked=true {
+                pane
+                pane
+                pane
+            }
+        }
+    }
+
+    swap_tiled_layout name="vrt2" {
+        tab {
+            pane split_direction="vertical" {
+                pane size="60%"
+                pane size="40%"
+            }
+        }
+    }
+
+    swap_tiled_layout name="vrt2+" {
+        tab {
+            pane split_direction="vertical" {
+                pane size="60%"
+                pane size="40%" stacked=true {
+                    pane
+                    pane
+                }
+            }
+        }
+    }
+
+    swap_tiled_layout name="vrt50" {
+        tab {
+            pane split_direction="vertical" {
+                pane size="50%"
+                pane size="50%"
+            }
+        }
+    }
+
+    swap_tiled_layout name="vrt3" {
+        tab {
+            pane split_direction="vertical" {
+                pane size="30%"
+                pane size="40%"
+                pane size="30%"
+            }
+        }
+    }
+
+    swap_tiled_layout name="hz2" {
+        tab {
+            pane split_direction="horizontal" {
+                pane size="60%"
+                pane size="40%"
+            }
+        }
+    }
+
+    swap_tiled_layout name="hz3" {
+        tab {
+            pane split_direction="horizontal" {
+                pane size="30%"
+                pane size="30%"
+                pane size="40%"
+            }
+        }
+    }
+
+    tab name="dotfiles" cwd="~/dotfiles" split_direction="vertical" {
+        pane size="60%" {
+            command "yazi"
+            args "~/dotfiles"
+        }
+        pane size="40%" split_direction="horizontal" {
+            pane stacked=true size="80%" {
+                pane
+                pane {
+                    command "claude"
+                    args "--model" "opusplan" "--chrome"
+                }
+            }
+            pane size="20%"
+        }
+    }
+
+}
