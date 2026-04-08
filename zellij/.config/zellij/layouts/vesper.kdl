@@ -75,6 +75,19 @@ layout {
         }
     }
 
+    tab name="gemini" cwd="~/localdev/vesper" split_direction="vertical" {
+        pane size="60%" {
+            command "nvim"
+        }
+        pane size="40%" stacked=true {
+            pane command="gemini"
+            pane {
+                command "claude"
+                args "--model" "opusplan"
+            }
+        }
+    }
+
     tab name="workspace" cwd="~/localdev/vesper" split_direction="vertical" {
         pane size="60%" {
             command "yazi"

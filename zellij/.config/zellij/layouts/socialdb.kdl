@@ -94,17 +94,14 @@ layout {
 
     tab name="gemini" cwd="~/localdev/socialdb" split_direction="vertical" {
         pane size="60%" {
-            command "yazi"
-            args "~/localdev/socialdb"
+            command "nvim"
         }
-        pane size="40%" split_direction="horizontal" {
-            pane stacked=true size="80%" {
-                pane
-                pane {
-                    command "gemini"
-                }
+        pane size="40%" stacked=true {
+            pane command="gemini"
+            pane {
+                command "claude"
+                args "--model" "opusplan"
             }
-            pane size="20%"
         }
     }
 
