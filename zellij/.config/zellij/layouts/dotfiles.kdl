@@ -85,7 +85,7 @@ layout {
                 pane
                 pane {
                     command "claude"
-                    args "--model" "opusplan" "--chrome"
+                    args "--model" "opusplan"
                 }
             }
             pane size="20%"
