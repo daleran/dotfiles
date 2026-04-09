@@ -77,7 +77,8 @@ layout {
 
     tab name="gemini" cwd="~/localdev/vesper" split_direction="vertical" {
         pane size="60%" {
-            command "nvim"
+            command "yazi"
+            args "~/localdev/vesper"
         }
         pane size="40%" stacked=true {
             pane command="gemini"
@@ -101,7 +102,13 @@ layout {
                     args "--model" "opusplan"
                 } 
             }
-            pane size="20%"
+            pane size="20%" stacked=true {
+                pane
+                pane {
+                    command "npm"
+                    args "run" "dev"
+                }
+            }
         }
     }
 
