@@ -17,4 +17,17 @@ max_height    = 900
 edit = [
     { run = 'nvim "$@"', block = true, desc = "Neovim", for = "unix" },
 ]
+chrome = [
+    { run = 'google-chrome "$@"', desc = "Chrome", for = "unix" },
+]
+nautilus = [
+    { run = 'nautilus "$@"', desc = "Nautilus", for = "unix" },
+]
+
+[open]
+rules = [
+    { mime = "text/html",       use = ["chrome", "edit"] },
+    { name = "*.html",          use = ["chrome", "edit"] },
+    { mime = "inode/directory", use = ["nautilus"] },
+]
  
