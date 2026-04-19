@@ -6,14 +6,14 @@
 # On startup: renames all tabs, then drops into fish.
 
 DIRS=(
-    "$HOME/localdev/wofstack"
-    "$HOME/localdev/wofstack1"
-    "$HOME/localdev/wofstack2"
-    "$HOME/localdev/wofstack3"
-    "$HOME/localdev/wofstack4"
-    "$HOME/localdev/wofstack5"
-    "$HOME/localdev/wofstack6"
-    "$HOME/localdev/wofstack7"
+    "$HOME/wofstack"
+    "$HOME/w1"
+    "$HOME/w2"
+    "$HOME/w3"
+    "$HOME/w4"
+    "$HOME/w5"
+    "$HOME/w6"
+    "$HOME/w7"
 )
 
 # Only run the rename cycle once (skip if ZELLIJ_TABS_NAMED is set)
