@@ -75,25 +75,25 @@ layout {
         }
     }
 
-    tab name="wofstack" cwd="~/wofstack" split_direction="vertical" {
-        pane size="60%" split_direction="horizontal" {
-            pane size="85%" {
-                command "yazi"
-                args "~/wofstack"
-            }
-            pane size="15%"
+    tab name="wofstack" cwd="~/localdev/wofstack" split_direction="vertical" {
+        pane size="60%" {
+            command "yazi"
+            args "~/localdev/wofstack"
         }
-        pane size="40%" stacked=true {
-            pane {
-                command "claude"
-                args "--model" "opusplan"
+        pane size="40%" split_direction="horizontal" {
+            pane size="80%" stacked=true {
+                pane expanded=true {
+                    command "claude"
+                    args "--model" "opusplan"
+                }
+                pane command="gemini"
+                pane
             }
-            pane command="gemini"
-            pane
+            pane size="20%"
         }
     }
 
-    tab name="db" cwd="~/wofstack" {
+    tab name="db" cwd="~/localdev/wofstack" {
         pane {
             name "proddb"
             command "pgcli"
@@ -101,7 +101,7 @@ layout {
         }
     }
 
-    tab name="server" cwd="~/wofstack" split_direction="vertical" {
+    tab name="server" cwd="~/localdev/wofstack" split_direction="vertical" {
         pane {
             name "deployments"
         }

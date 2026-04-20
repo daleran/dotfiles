@@ -12,7 +12,8 @@ function cwt --description "Create a worktree for a branch with its own DB, .env
     end
 
     set -l repo_name (basename "$repo_root")
-    set -l worktree "$HOME/$repo_name-$branch"
+    set -l repo_parent (dirname "$repo_root")
+    set -l worktree "$repo_parent/$repo_name-$branch"
     set -l db_suffix (string replace -ra '[^a-zA-Z0-9]' _ -- "$branch" | string lower)
     set -l db "$repo_name"_"$db_suffix"
 
