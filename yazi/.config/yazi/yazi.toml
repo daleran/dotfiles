@@ -29,5 +29,6 @@ rules = [
     { mime = "text/html",       use = ["chrome", "edit"] },
     { name = "*.html",          use = ["chrome", "edit"] },
     { mime = "inode/directory", use = ["nautilus"] },
+    { name = "*",               use = ["edit"] },
 ]
  
