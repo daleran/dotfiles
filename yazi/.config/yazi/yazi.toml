@@ -13,22 +13,3 @@ tab_size      = 4
 max_width     = 600
 max_height    = 900
  
-[opener]
-edit = [
-    { run = 'nvim %s', block = true, desc = "Neovim", for = "unix" },
-]
-chrome = [
-    { run = 'google-chrome %s', desc = "Chrome", for = "unix" },
-]
-nautilus = [
-    { run = 'nautilus %s', desc = "Nautilus", for = "unix" },
-]
-
-[open]
-rules = [
-    { mime = "text/html",       use = ["chrome", "edit"] },
-    { name = "*.html",          use = ["chrome", "edit"] },
-    { mime = "inode/directory", use = ["nautilus"] },
-    { name = "*",               use = ["edit"] },
-]
- 
