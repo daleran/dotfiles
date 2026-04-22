@@ -15,13 +15,13 @@ max_height    = 900
  
 [opener]
 edit = [
-    { run = 'nvim "$@"', block = true, desc = "Neovim", for = "unix" },
+    { run = 'nvim %s', block = true, desc = "Neovim", for = "unix" },
 ]
 chrome = [
-    { run = 'google-chrome "$@"', desc = "Chrome", for = "unix" },
+    { run = 'google-chrome %s', desc = "Chrome", for = "unix" },
 ]
 nautilus = [
-    { run = 'nautilus "$@"', desc = "Nautilus", for = "unix" },
+    { run = 'nautilus %s', desc = "Nautilus", for = "unix" },
 ]
 
 [open]
