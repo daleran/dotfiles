@@ -203,8 +203,20 @@
                         {
                             subtitle: "Git / File",
                             content: [
-                                ["Sp+gd / gc", "Git Diff Open / Close"], ["]h / [h", "Next / Prev Hunk"],
+                                ["Sp+gd / gh / gc", "Diff vs main / File History / Close"],
+                                ["Sp+go", "PR List (Octo)"],
+                                ["]h / [h", "Next / Prev Hunk"],
+                                ["Sp+gs / gr / gp", "Stage / Reset / Preview Hunk"],
                                 ["Sp+e / -", "Oil (Explorer) / Go Up Dir"]
+                            ]
+                        },
+                        {
+                            subtitle: "Octo Review",
+                            content: [
+                                ["Sp+ca / ce / cd", "Add / Edit / Delete Comment"],
+                                ["Sp+cs", "Submit Review"],
+                                ["/address-reviews", "Address REVIEW: markers (Claude)"],
+                                ["/address-pr N", "Address PR threads (Claude)"]
                             ]
                         }
                     ]

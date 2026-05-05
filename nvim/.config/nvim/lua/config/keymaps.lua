@@ -14,6 +14,7 @@ map("n", "<C-k>", "<C-w>k")
 map("n", "<leader>gd", ":DiffviewOpen main<CR>", { desc = "Diff vs main" })
 map("n", "<leader>gh", ":DiffviewFileHistory %<CR>", { desc = "File history" })
 map("n", "<leader>gc", ":DiffviewClose<CR>", { desc = "Close diffview" })
+map("n", "<leader>go", ":Octo pr list<CR>", { desc = "PR list (Octo)" })
 
 -- Telescope
 map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
