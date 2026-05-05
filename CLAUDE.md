@@ -39,3 +39,7 @@ Each package follows the pattern `<package>/.config/<app>/...`, which stow maps 
 - Neovim uses **lazy.nvim** with plugin specs auto-loaded from `lua/plugins/*.lua`
 - Node version managed via **nvm** (fish plugin), defaulting to Node 22
 - Default editor is `nvim`
+
+## Conventions
+
+**Keybindings:** Whenever a new Neovim or system keybinding is added, also update `vim.html` at the repo root. The binding should appear in the relevant section in `cheatsheetData` (side1 or side2). Keep the label concise — match the existing style (`Sp+xx` for space-leader bindings).
