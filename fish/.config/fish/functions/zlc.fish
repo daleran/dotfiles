@@ -1,3 +1,4 @@
-function zlc --wraps='zellij --layout lcconf' --description 'alias zlc=zellij --layout lcconf'
-    zellij --layout lcconf $argv
+function zlc --description 'zellij lcconf workspace'
+    set -gx PROJECT_DIR ~/localdev/lcconf
+    zellij --layout project $argv
 end

@@ -1,3 +1,4 @@
-function zjd --wraps='zellij --layout javidare' --description 'alias zjd=zellij --layout javidare'
-    zellij --layout javidare $argv
+function zjd --description 'zellij javidare workspace'
+    set -gx PROJECT_DIR ~/localdev/javidare
+    zellij --layout project $argv
 end

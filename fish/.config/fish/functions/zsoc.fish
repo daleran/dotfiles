@@ -1,3 +1,4 @@
-function zsoc --wraps='zellij --layout socialdb' --description 'alias zsoc=zellij --layout socialdb'
+function zsoc --description 'zellij socialdb workspace'
+    set -gx PROJECT_DIR ~/localdev/socialdb
     zellij --layout socialdb $argv
 end

@@ -1,3 +1,4 @@
-function zdot --wraps='zellij --layout dotfiles' --description 'alias zdot=zellij --layout dotfiles'
-    zellij --layout dotfiles $argv
+function zdot --description 'zellij dotfiles workspace'
+    set -gx PROJECT_DIR ~/dotfiles
+    zellij --layout project $argv
 end

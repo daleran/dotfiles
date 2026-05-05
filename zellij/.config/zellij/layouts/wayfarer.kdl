@@ -1,41 +1,117 @@
 layout {
     default_tab_template {
-        pane size=1 borderless=true {
-            plugin location="zellij:tab-bar"
-        }
         children
         pane size=1 borderless=true {
-            plugin location="zellij:status-bar"
+            plugin location="zellij:compact-bar"
         }
     }
 
-    tab name="workspace" cwd="~/localdev/wayfarer" split_direction="vertical" {
-        pane size="60%" {
-            command "nvim"
-            args "~/localdev/wayfarer"
-            name "neovim"
-        }
-        pane size="40%" stacked=true {
-        	pane
-            pane
-            pane
+    swap_tiled_layout name="stacked" {
+        tab {
+            pane stacked=true {
+                pane
+                pane
+                pane
+            }
         }
     }
 
-    tab name="npm-dev" split_direction="vertical" {
+    swap_tiled_layout name="vrt2" {
+        tab {
+            pane split_direction="vertical" {
+                pane size="60%"
+                pane size="40%"
+            }
+        }
+    }
+
+    swap_tiled_layout name="vrt2+" {
+        tab {
+            pane split_direction="vertical" {
+                pane size="60%"
+                pane size="40%" stacked=true {
+                    pane
+                    pane
+                }
+            }
+        }
+    }
+
+    swap_tiled_layout name="vrt50" {
+        tab {
+            pane split_direction="vertical" {
+                pane size="50%"
+                pane size="50%"
+            }
+        }
+    }
+
+    swap_tiled_layout name="vrt3" {
+        tab {
+            pane split_direction="vertical" {
+                pane size="30%"
+                pane size="40%"
+                pane size="30%"
+            }
+        }
+    }
+
+    swap_tiled_layout name="hz2" {
+        tab {
+            pane split_direction="horizontal" {
+                pane size="60%"
+                pane size="40%"
+            }
+        }
+    }
+
+    swap_tiled_layout name="hz3" {
+        tab {
+            pane split_direction="horizontal" {
+                pane size="30%"
+                pane size="30%"
+                pane size="40%"
+            }
+        }
+    }
+
+    tab name="workspace" cwd="${PROJECT_DIR}" split_direction="vertical" {
+        pane size="60%" stacked=true {
+            pane {
+                name "README"
+                command "yazi"
+                args "~/dotfiles/docs"
+            }
+            pane expanded=true {
+                name "yazi"
+                command "yazi"
+                args "${PROJECT_DIR}"
+            }
+        }
+        pane size="40%" split_direction="horizontal" {
+            pane size="80%" stacked=true {
+                pane expanded=true {
+                    command "claude"
+                    args "--model" "opusplan"
+                }
+                pane command="gemini"
+                pane
+            }
+            pane size="20%"
+        }
+    }
+
+    tab name="npm-dev" cwd="${PROJECT_DIR}" split_direction="vertical" {
         pane command="npm" {
             name "editor"
-            cwd "~/localdev/wayfarer"
             args "run" "dev:editor"
         }
         pane command="npm" {
             name "designer"
-            cwd "~/localdev/wayfarer"
             args "run" "dev:designer"
         }
         pane command="npm" {
             name "dev"
-            cwd "~/localdev/wayfarer"
             args "run" "dev"
         }
     }

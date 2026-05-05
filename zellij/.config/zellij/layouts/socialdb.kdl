@@ -75,24 +75,33 @@ layout {
         }
     }
 
-    tab name="workspace" cwd="~/localdev/socialdb" split_direction="vertical" {
-        pane size="60%" {
-            command "yazi"
-            args "~/localdev/socialdb"
+    tab name="workspace" cwd="${PROJECT_DIR}" split_direction="vertical" {
+        pane size="60%" stacked=true {
+            pane {
+                name "README"
+                command "yazi"
+                args "~/dotfiles/docs"
+            }
+            pane expanded=true {
+                name "yazi"
+                command "yazi"
+                args "${PROJECT_DIR}"
+            }
         }
         pane size="40%" split_direction="horizontal" {
-            pane stacked=true size="80%" {
-                pane
-                pane {
+            pane size="80%" stacked=true {
+                pane expanded=true {
                     command "claude"
                     args "--model" "opusplan"
                 }
+                pane command="gemini"
+                pane
             }
             pane size="20%"
         }
     }
 
-    tab name="gemini" cwd="~/localdev/socialdb" split_direction="vertical" {
+    tab name="gemini" cwd="${PROJECT_DIR}" split_direction="vertical" {
         pane size="60%" {
             command "nvim"
         }
@@ -105,8 +114,7 @@ layout {
         }
     }
 
-    tab name="terminal" cwd="~/localdev/socialdb" {
+    tab name="terminal" cwd="${PROJECT_DIR}" {
         pane
     }
-
 }
