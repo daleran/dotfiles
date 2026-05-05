@@ -75,21 +75,29 @@ layout {
         }
     }
 
-    tab name="javidare" cwd="~/localdev/javidare" split_direction="vertical" {
-        pane size="60%" {
-            command "yazi"
-            args "~/localdev/javidare"
+    tab name="workspace" cwd="${PROJECT_DIR}" split_direction="vertical" {
+        pane size="60%" stacked=true {
+            pane {
+                name "README"
+                command "yazi"
+                args "~/dotfiles/docs"
+            }
+            pane expanded=true {
+                name "yazi"
+                command "yazi"
+                args "${PROJECT_DIR}"
+            }
         }
         pane size="40%" split_direction="horizontal" {
-            pane stacked=true size="80%" {
-                pane
-                pane {
+            pane size="80%" stacked=true {
+                pane expanded=true {
                     command "claude"
                     args "--model" "opusplan"
                 }
+                pane command="gemini"
+                pane
             }
             pane size="20%"
         }
     }
-
 }

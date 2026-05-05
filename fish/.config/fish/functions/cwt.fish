@@ -64,6 +64,7 @@ function cwt --description "Create a worktree for a branch with its own DB, .env
     echo "✓ Port:     $port (serve with: php artisan serve --port=$port)"
 
     if set -q ZELLIJ
-        zellij action new-tab --name "$branch" --cwd "$worktree"
+        set -gx PROJECT_DIR "$worktree"
+        zellij action new-tab --name "$branch" --layout worktree --cwd "$worktree"
     end
 end

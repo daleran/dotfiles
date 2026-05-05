@@ -1,3 +1,4 @@
-function zwy --wraps='zellij --layout ~/.config/zellij/layouts/wayfarer.kdl' --description 'alias zwy=zellij --layout ~/.config/zellij/layouts/wayfarer.kdl'
-    zellij --layout ~/.config/zellij/layouts/wayfarer.kdl $argv
+function zwy --description 'zellij wayfarer workspace'
+    set -gx PROJECT_DIR ~/localdev/wayfarer
+    zellij --layout wayfarer $argv
 end

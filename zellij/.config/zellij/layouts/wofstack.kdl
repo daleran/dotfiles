@@ -75,10 +75,18 @@ layout {
         }
     }
 
-    tab name="wofstack" cwd="~/localdev/wofstack" split_direction="vertical" {
-        pane size="60%" {
-            command "yazi"
-            args "~/localdev/wofstack"
+    tab name="workspace" cwd="${PROJECT_DIR}" split_direction="vertical" {
+        pane size="60%" stacked=true {
+            pane {
+                name "README"
+                command "yazi"
+                args "~/dotfiles/docs"
+            }
+            pane expanded=true {
+                name "yazi"
+                command "yazi"
+                args "${PROJECT_DIR}"
+            }
         }
         pane size="40%" split_direction="horizontal" {
             pane size="80%" stacked=true {
@@ -93,7 +101,7 @@ layout {
         }
     }
 
-    tab name="db" cwd="~/localdev/wofstack" {
+    tab name="db" cwd="${PROJECT_DIR}" {
         pane {
             name "proddb"
             command "pgcli"
@@ -101,7 +109,7 @@ layout {
         }
     }
 
-    tab name="server" cwd="~/localdev/wofstack" split_direction="vertical" {
+    tab name="server" cwd="${PROJECT_DIR}" split_direction="vertical" {
         pane {
             name "deployments"
         }

@@ -1,3 +1,4 @@
-function zwf --wraps='zellij --layout wofstack' --description 'alias zwf=zellij --layout wofstack'
+function zwf --description 'zellij wofstack workspace'
+    set -gx PROJECT_DIR ~/localdev/wofstack
     zellij --layout wofstack $argv
 end
