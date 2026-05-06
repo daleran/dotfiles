@@ -13,6 +13,7 @@ keybinds clear-defaults=true {
         bind "Alt 6" { GoToTab 6; }
         bind "Alt =" { GoToNextTab; }
         bind "Alt s" { NewPane "stacked"; }
+        bind "Alt t" { NewTab; }
         bind "Alt x" { CloseFocus; }
         bind "Ctrl g" { SwitchToMode "normal"; }
     }
