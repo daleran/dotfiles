@@ -75,7 +75,7 @@ layout {
         }
     }
 
-    tab name="workspace" cwd="${PROJECT_DIR}" split_direction="vertical" {
+    tab name="workspace" cwd="~/dotfiles" split_direction="vertical" {
         pane size="60%" stacked=true {
             pane {
                 name "README"
@@ -85,7 +85,7 @@ layout {
             pane expanded=true {
                 name "yazi"
                 command "yazi"
-                args "~/localdev/wayfarer"
+                args "~/dotfiles"
             }
         }
         pane size="40%" split_direction="horizontal" {
@@ -98,21 +98,6 @@ layout {
                 pane
             }
             pane size="20%"
-        }
-    }
-
-    tab name="npm-dev" cwd="${PROJECT_DIR}" split_direction="vertical" {
-        pane command="npm" {
-            name "editor"
-            args "run" "dev:editor"
-        }
-        pane command="npm" {
-            name "designer"
-            args "run" "dev:designer"
-        }
-        pane command="npm" {
-            name "dev"
-            args "run" "dev"
         }
     }
 }

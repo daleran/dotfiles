@@ -85,6 +85,7 @@ layout {
             pane expanded=true {
                 name "yazi"
                 command "yazi"
+                args "~/localdev/socialdb"
             }
         }
         pane size="40%" split_direction="horizontal" {
