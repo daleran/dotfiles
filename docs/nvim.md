@@ -1,0 +1,246 @@
+# Neovim
+
+Leader key: `<Space>`
+
+---
+
+## The 5 Modes
+
+| Mode | Enter | Description |
+|------|-------|-------------|
+| Normal | `Esc` | Home base. Navigate, delete, run commands. |
+| Insert | `i`, `a`, `o` | Type text. |
+| Visual | `v`, `V`, `Ctrl-v` | Select characters, lines, or blocks. |
+| Command | `:` | Run file/config commands (`:w`, `:q`). |
+| Search | `/` or `?` | Find text forward or backward. |
+
+> **Golden Rule:** Always `Esc` back to Normal mode.
+
+---
+
+## Operators + Motions
+
+Pattern: `[number] + operator + motion`
+
+| Operator | Description |
+|----------|-------------|
+| `d` | Delete |
+| `c` | Change (delete + insert) |
+| `y` | Yank (copy) |
+| `>` / `<` | Indent right / left |
+| `=` | Auto-indent |
+| `gU` / `gu` | Uppercase / lowercase |
+
+Common combinations:
+
+| Keys | Description |
+|------|-------------|
+| `dd` / `yy` | Delete / yank line |
+| `dw` / `yw` | Delete / yank word |
+| `d$` / `y$` | Delete / yank to end of line |
+| `diw` / `daw` | Inner word / a word (includes surrounding space) |
+| `di"` / `da"` | Inside / including quotes |
+| `ci(` / `ci{` | Change inside `()` / `{}` |
+| `dG` / `yG` | Delete / yank to end of file |
+| `guG` | Lowercase to end of file |
+| `3dd` / `5j` | Multiplier: apply to N lines / move N lines |
+
+---
+
+## Insert Mode
+
+| Key | Description |
+|-----|-------------|
+| `i` / `a` | Insert before / after cursor |
+| `I` / `A` | Insert at start / end of line |
+| `o` / `O` | New line below / above |
+| `s` / `S` | Delete char / line + insert |
+| `C` | Delete to end of line + insert |
+| `gi` | Jump to last insertion point + insert |
+
+---
+
+## Visual Mode
+
+| Key | Description |
+|-----|-------------|
+| `v` / `V` | Character / line-wise selection |
+| `Ctrl-v` | Block (column) selection |
+| `o` | Move to other end of selection |
+| `~` | Toggle case of selection |
+| `I` / `A` | Insert / append in block mode |
+
+> **Block edit:** `Ctrl-v` → select down → `I` → type → `Esc`
+
+---
+
+## Copy, Paste, Undo
+
+| Key | Description |
+|-----|-------------|
+| `p` / `P` | Paste after / before cursor |
+| `"0p` / `"0P` | Paste from yank register (ignores deletes) |
+| `"_d` / `"_c` | Delete / change to black hole (preserve yank) |
+| `x` / `X` | Delete char under / before cursor |
+| `u` / `Ctrl-r` | Undo / redo |
+| `U` | Undo all changes on current line |
+| `"*y` / `"+y` | Copy to system clipboard |
+
+> `"0` always holds the last yank, even after `d`/`x`.
+
+---
+
+## Commands
+
+| Key | Description |
+|-----|-------------|
+| `:w` / `:q` | Save / quit |
+| `:wq` / `:q!` | Save & quit / force quit |
+| `:noh` | Clear search highlight |
+| `:%s/old/new/g` | Search & replace all |
+| `:Lazy` / `:Mason` | Plugin manager / LSP manager |
+| `:checkhealth` | Diagnose environment |
+
+---
+
+## Movement
+
+### Basic & Words
+
+| Key | Description |
+|-----|-------------|
+| `h` `j` `k` `l` | Left, down, up, right |
+| `w` / `b` | Next / prev word start |
+| `e` / `E` | Next word end (`E` ignores punctuation) |
+| `W` / `B` | Large word (ignores punctuation) |
+| `0` / `$` | Start / end of line |
+| `^` / `_` | First non-blank character |
+
+### Vertical & Jumps
+
+| Key | Description |
+|-----|-------------|
+| `gg` / `G` | Top / bottom of file |
+| `{` / `}` | Prev / next empty line |
+| `Ctrl-u` / `Ctrl-d` | Half page up / down |
+| `zz` / `zt` / `zb` | Center / top / bottom cursor on screen |
+| `%` | Jump to matching bracket/paren |
+| `''` / ` `` ` | Jump to last / exact position |
+
+### Character Search
+
+| Key | Description |
+|-----|-------------|
+| `f` / `F` | Find char on line (forward / backward) |
+| `t` / `T` | Move to before char (forward / backward) |
+| `;` / `,` | Repeat last `f`/`t` search (fwd / rev) |
+| `*` / `#` | Find next / prev instance of word under cursor |
+
+---
+
+## Windows & Buffers
+
+| Key | Description |
+|-----|-------------|
+| `:vs` / `:sp` | Vertical / horizontal split |
+| `Ctrl-h/j/k/l` | Navigate between splits |
+| `Ctrl-w =` / `o` | Equalize sizes / close others |
+| `:bn` / `:bp` | Next / prev buffer |
+| `:bd` | Close buffer |
+| `gt` / `gT` | Next / prev tab |
+
+---
+
+## Useful Tricks
+
+| Key | Description |
+|-----|-------------|
+| `.` | Repeat last change |
+| `gg=G` | Auto-indent whole file |
+| `ggyG` | Yank entire file to clipboard |
+| `ggdGp` | Overwrite file with clipboard content |
+| `gv` | Reselect last visual selection |
+| `cs"'` | Change surround `"` to `'` (vim-surround) |
+
+---
+
+## Leader Keybindings
+
+### File Navigation
+
+| Key | Description |
+|-----|-------------|
+| `<leader>ff` | Find files (Telescope) |
+| `<leader>fg` | Live grep (Telescope) |
+| `<leader>fb` | Browse buffers (Telescope) |
+| `<leader>fr` | Recent files (Telescope oldfiles) |
+| `<leader>e` | File explorer (Oil) |
+| `-` | Go up a directory (Oil) |
+| `<leader>sc` | Open scratch pad |
+
+### Git
+
+| Key | Description |
+|-----|-------------|
+| `<leader>gd` | Diff vs main (`DiffviewOpen main`) |
+| `<leader>gh` | File history (`DiffviewFileHistory %`) |
+| `<leader>gc` | Close diff view |
+| `<leader>go` | PR list (Octo) |
+| `]h` / `[h` | Next / prev hunk |
+| `<leader>gs` | Stage hunk |
+| `<leader>gr` | Reset hunk |
+| `<leader>gp` | Preview hunk |
+
+### LSP
+
+| Key | Description |
+|-----|-------------|
+| `gd` | Go to definition |
+| `K` | Hover docs |
+| `gr` | References |
+| `<leader>rn` | Rename symbol |
+| `<leader>ca` | Code action |
+
+### Completion (insert mode)
+
+| Key | Description |
+|-----|-------------|
+| `Ctrl-Space` | Trigger completion |
+| `Enter` | Confirm selection |
+| `Tab` | Next item / expand snippet |
+
+### Octo (PR review)
+
+| Key | Description |
+|-----|-------------|
+| `<Space>ca` | Add comment |
+| `<Space>ce` | Edit comment |
+| `<Space>cd` | Delete comment |
+| `<Space>cs` | Submit review |
+| `<Space>cr` | React to comment |
+
+Run `:h octo-mappings` for the full reference.
+
+### Other
+
+| Key | Description |
+|-----|-------------|
+| `Ctrl-\` | Toggle floating terminal |
+| `<leader>tm` | Toggle table mode (markdown files) |
+
+---
+
+## AI Review Workflow
+
+### Mode A — Review markers (no PR needed)
+
+1. Add `// REVIEW: your note` comments anywhere in source files.
+2. In the Claude agent pane, run `/address-reviews`.
+
+### Mode B — GitHub PR review
+
+1. `<leader>go` → pick the PR (Octo opens it).
+2. `<Space>ca` on a line to add a comment, `<Space>cs` to submit the review batch.
+3. In the Claude agent pane, run `/address-pr <N>` where `N` is the PR number.
+
+Slash commands live in `~/.claude/commands/` (symlinked from `dotfiles/claude/.claude/commands/`).
