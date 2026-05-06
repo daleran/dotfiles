@@ -150,6 +150,7 @@ mode = "type"
 
 # Fall back to clipboard if typing fails
 fallback_to_clipboard = true
+paste_mode = true
 
 # Custom driver order for type mode (optional)
 # Default order: wtype -> dotool -> ydotool -> clipboard
@@ -173,7 +174,7 @@ type_delay_ms = 0
 # Saves clipboard before transcription, restores it after paste keystroke
 # Only applies to mode = "paste". Useful when you want to preserve your
 # existing clipboard content across dictation operations.
-# restore_clipboard = false
+restore_clipboard = true
 
 # Delay after paste before restoring clipboard (milliseconds)
 # Allows time for the paste operation to complete (default: 200)
