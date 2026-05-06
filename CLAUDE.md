@@ -42,4 +42,4 @@ Each package follows the pattern `<package>/.config/<app>/...`, which stow maps 
 
 ## Conventions
 
-**Keybindings:** Whenever a new Neovim or system keybinding is added, also update `vim.html` at the repo root. The binding should appear in the relevant section in `cheatsheetData` (side1 or side2). Keep the label concise — match the existing style (`Sp+xx` for space-leader bindings).
+**Documentation:** Per-tool docs live in `docs/<tool>.md`. When adding a new keybinding, function, or shortcut, update the matching file (e.g., a new Neovim leader key → `docs/nvim.md`; a new fish function → `docs/fish.md`). Match the existing markdown table style.
