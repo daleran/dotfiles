@@ -80,12 +80,12 @@ layout {
             pane {
                 name "README"
                 command "yazi"
-                args "~/dotfiles/docs"
+                cwd "~/dotfiles/docs"
             }
             pane expanded=true {
                 name "yazi"
                 command "yazi"
-                args "${PROJECT_DIR}"
+                cwd "${PROJECT_DIR}"
             }
         }
         pane size="40%" split_direction="horizontal" {
