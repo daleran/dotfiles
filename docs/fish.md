@@ -25,6 +25,7 @@ See [worktrees.md](worktrees.md) for the full guide.
 | `zjd` | `javidare` | `~/localdev/javidare` |
 | `zlc` | `lcconf` | `~/localdev/lcconf` |
 | `zsoc` | `socialdb` | `~/localdev/socialdb` |
+| `ziz` | `izaddit` | `~/localdev/izaddit` |
 | `zvesp` | `vesper` | `~/localdev/vesper` |
 | `zwy` | `wayfarer` | `~/localdev/wayfarer` |
 

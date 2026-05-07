@@ -162,6 +162,7 @@ Default mode: **locked**. Press `Ctrl-g` to enter normal mode; `Ctrl-g` again to
 |--------|----------|-------------|
 | `project` | `zdot`, `zjd`, `zlc` | Canonical workspace. Set `PROJECT_DIR` env var; fish wrappers do this automatically. |
 | `socialdb` | `zsoc` | Workspace + `gemini` tab (nvim+AI) + `terminal` tab. |
+| `izaddit` | `ziz` | Workspace + `gemini` tab (nvim+AI) + `terminal` tab. |
 | `vesper` | `zvesp` | Workspace with `npm run dev` in 20% bottom-right pane. |
 | `wofstack` | `zwf` | Workspace + `db` tab (pgcli) + `server` tab (ssh admin). |
 | `wayfarer` | `zwy` | Workspace + `npm-dev` tab (dev:editor, dev:designer, dev). |
