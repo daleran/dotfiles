@@ -82,6 +82,7 @@ layout {
                 command "yazi"
                 args "~/dotfiles/docs"
             }
+            pane
             pane expanded=true {
                 name "yazi"
                 command "yazi"
@@ -89,13 +90,9 @@ layout {
             }
         }
         pane size="40%" split_direction="horizontal" {
-            pane size="80%" stacked=true {
-                pane expanded=true {
-                    command "claude"
-                    args "--model" "opusplan"
-                }
-                pane command="gemini"
-                pane
+            pane expanded=true {
+                command "claude"
+                args "--model" "opusplan" "--chrome"
             }
             pane size="20%" stacked=true {
                 pane {
