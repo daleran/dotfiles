@@ -86,6 +86,7 @@ layout {
             pane expanded=true {
                 name "yazi"
                 command "yazi"
+                args "."
             }
         }
         pane size="40%" split_direction="horizontal" {
