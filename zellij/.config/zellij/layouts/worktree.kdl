@@ -96,7 +96,11 @@ layout {
                 pane command="gemini"
                 pane
             }
-            pane size="20%"
+            pane size="20%" {
+                name "serve"
+                command "fish"
+                args "-c" "set port (grep -oP 'APP_PORT=\\K[0-9]+' .env 2>/dev/null); php artisan serve --port=$port"
+            }
         }
     }
 }
