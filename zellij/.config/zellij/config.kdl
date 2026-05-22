@@ -12,6 +12,8 @@ keybinds clear-defaults=true {
         bind "Alt 5" { GoToTab 5; }
         bind "Alt 6" { GoToTab 6; }
         bind "Alt =" { GoToNextTab; }
+        bind "Alt c" { Run "claude" { args "--model" "opusplan" "--chrome"; stacked true; }; }
+        bind "Alt g" { Run "gemini" { stacked true; }; }
         bind "Alt s" { NewPane "stacked"; }
         bind "Alt t" { NewTab; }
         bind "Alt x" { CloseFocus; }
