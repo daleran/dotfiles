@@ -59,6 +59,18 @@ function cwt --description "Create a worktree for a branch with its own DB, .env
         echo "• Database $db already exists"
     end
 
+    echo "→ composer install..."
+    composer install --no-interaction --working-dir="$worktree"
+    or return 1
+
+    echo "→ npm install..."
+    npm install --prefix "$worktree"
+    or return 1
+
+    echo "→ php artisan migrate..."
+    php -d error_reporting=0 "$worktree/artisan" migrate --force
+    or return 1
+
     echo "✓ Worktree: $worktree"
     echo "✓ Branch:   $branch"
     echo "✓ Port:     $port (serve with: php artisan serve --port=$port)"
