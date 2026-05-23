@@ -90,7 +90,7 @@ layout {
             }
         }
         pane size="40%" split_direction="horizontal" {
-            pane expanded=true {
+            pane {
                 command "claude"
                 args "--model" "opusplan" "--chrome"
             }
