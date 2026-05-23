@@ -85,8 +85,8 @@ layout {
             pane
             pane expanded=true {
                 name "yazi"
-                command "yazi"
-                args "."
+                command "fish"
+                args "-c" "yazi $PROJECT_DIR"
             }
         }
         pane size="40%" split_direction="horizontal" {
