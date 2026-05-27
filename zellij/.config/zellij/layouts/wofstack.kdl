@@ -84,7 +84,6 @@ layout {
             }
             pane
             pane {
-                name "nvim"
                 command "nvim"
                 args "."
             }
