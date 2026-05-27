@@ -103,21 +103,17 @@ layout {
     }
 
     tab name="db" cwd="${PROJECT_DIR}" {
-        pane {
-            name "proddb"
-            command "pgcli"
-            args "postgres://readonly:DB_PASSWORD_REMOVED@10.113.192.234:5432/tmx_production"
-        }
-    }
-
-    tab name="server" cwd="${PROJECT_DIR}" split_direction="vertical" {
-        pane {
-            name "deployments"
-        }
-        pane {
-            name "ssh admin"
-            command "ssh"
-            args "admin"
+        pane stacked=true {
+            pane {
+                name "proddb"
+                command "pgcli"
+                args "postgres://readonly:DB_PASSWORD_REMOVED@10.113.192.234:5432/tmx_production"
+            }
+            pane expanded=true {
+                name "diff"
+                command "nvim"
+                args "-c" "DiffviewOpen main"
+            }
         }
     }
 }
