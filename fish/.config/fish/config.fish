@@ -21,3 +21,7 @@ set -gx VISUAL nvim
 if test -f (status dirname)/.env.fish
     source (status dirname)/.env.fish
 end
+
+
+# Added by Antigravity CLI installer
+set -gx PATH "/home/sdavis/.local/bin" $PATH
