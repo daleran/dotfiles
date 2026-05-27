@@ -83,6 +83,11 @@ layout {
                 args "~/dotfiles/docs"
             }
             pane
+            pane {
+                name "nvim"
+                command "nvim"
+                args "."
+            }
             pane expanded=true {
                 name "yazi"
                 command "yazi"
