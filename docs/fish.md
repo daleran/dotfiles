@@ -45,6 +45,15 @@ See [worktrees.md](worktrees.md) for the full guide.
 
 ---
 
+## Database
+
+| Command | Description |
+|---------|-------------|
+| `dbp` | Open `pgcli` on the **prod** database as the read-only user. Connection details come from `$PGSQL_READONLY_USER`, `$PGSQL_READONLY_PASS`, `$PGSQL_PROD_HOST`, `$PGSQL_PROD_DB` (set in gitignored `.env.fish`). |
+| `dbl` | Open `pgcli` on the **local** `tmx` database as the `postgres` superuser. |
+
+---
+
 ## Misc
 
 | Command | Description |
@@ -61,5 +70,5 @@ See [worktrees.md](worktrees.md) for the full guide.
 - Editor: `nvim` (`$EDITOR` and `$VISUAL`)
 - Node: managed via nvm, default version 22
 - `~/.local/bin` on PATH
-- Secret env vars: `~/.env.fish` — sourced at startup if present (gitignored)
+- Secret env vars: `.env.fish` — sourced at startup if present (gitignored). Holds DB creds (`PGSQL_READONLY_*`, `PGSQL_PROD_*`), tokens, etc. — never commit it.
 - Plugins: `jorgebucaran/fisher` (plugin manager), `jorgebucaran/nvm.fish`

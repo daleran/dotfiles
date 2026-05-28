@@ -106,8 +106,8 @@ layout {
         pane stacked=true {
             pane {
                 name "proddb"
-                command "pgcli"
-                args "postgres://readonly:DB_PASSWORD_REMOVED@10.113.192.234:5432/tmx_production"
+                command "fish"
+                args "-C" "dbp"
             }
             pane expanded=true {
                 name "diff"
