@@ -11,7 +11,11 @@ Default mode: **locked**. Press `Ctrl-g` to enter normal mode; `Ctrl-g` again to
 | `Alt -` | Previous tab |
 | `Alt =` | Next tab |
 | `Alt 1`–`6` | Jump to tab N |
+| `Alt c` | Run Claude (in stacked pane) |
+| `Alt g` | Run agy (in stacked pane) |
+| `Alt r` | Open docs directory in `yazi` (in stacked pane) |
 | `Alt s` | New stacked pane |
+| `Alt t` | New tab |
 | `Alt x` | Close focused pane |
 | `Ctrl-g` | Enter normal mode |
 
