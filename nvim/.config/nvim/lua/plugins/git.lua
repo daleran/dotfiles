@@ -6,6 +6,22 @@ return {
     "sindrets/diffview.nvim",
     dependencies = "nvim-lua/plenary.nvim",
     cmd = { "DiffviewOpen", "DiffviewFileHistory", "DiffviewClose" },
+    config = function()
+      local actions = require("diffview.actions")
+      require("diffview").setup({
+        keymaps = {
+          -- `gR` ("go Review"): pop the file under the cursor out of the diff
+          -- into a full-screen tab at the same line, ready to drop a
+          -- `// REVIEW:` marker for the address-reviews workflow.
+          view = {
+            { "n", "gR", actions.goto_file_tab, { desc = "Open file full-screen at this line (REVIEW)" } },
+          },
+          file_panel = {
+            { "n", "gR", actions.goto_file_tab, { desc = "Open file full-screen at this line (REVIEW)" } },
+          },
+        },
+      })
+    end,
   },
 
   -- Inline hunk indicators in the sign column

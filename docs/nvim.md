@@ -195,6 +195,7 @@ Common combinations:
 |-----|-------------|
 | `<leader>gd` | Diff vs main (`DiffviewOpen main`) |
 | `<leader>ge` | Toggle diffview file list |
+| `gR` | (In Diffview) Open the file under the cursor full-screen in a new tab at the same line — for dropping `// REVIEW:` markers (see below) |
 | `<leader>gh` | File history (`DiffviewFileHistory %`) |
 | `<leader>gc` | Close diff view |
 | `<leader>go` | PR list (Octo) |
@@ -248,8 +249,13 @@ Run `:h octo-mappings` for the full reference.
 
 ### Mode A — Review markers (no PR needed)
 
-1. Add `// REVIEW: your note` comments anywhere in source files.
-2. In the Claude agent pane, run `/address-reviews`.
+1. Open the diff: `<leader>gd` (`DiffviewOpen main`).
+2. While viewing a hunk, press `gR` on the line you want to flag — this pops the
+   file open full-screen in a new tab at that exact line.
+3. Add a `// REVIEW: your note` comment there (e.g. `// REVIEW: make this a service class`), then save.
+4. In the Claude agent pane, run `/address-reviews`.
+
+You can also add `// REVIEW:` comments directly in any source file without going through Diffview.
 
 ### Mode B — GitHub PR review
 
