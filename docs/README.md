@@ -6,6 +6,8 @@ Per-tool reference for custom setups. Update the relevant file when adding a new
 |------|----------|
 | [nvim.md](nvim.md) | Vim modes, motions, operators, Neovim leader keymaps, plugin bindings, AI review workflow |
 | [fish.md](fish.md) | Custom functions, git wrappers, zellij launchers, environment |
+| [gemini.md](gemini.md) | Antigravity settings and custom keybindings reference |
+| [claude.md](claude.md) | Claude Code statusline and window title customization reference |
 | [zellij.md](zellij.md) | Mode keybindings, layout list |
 | [yazi.md](yazi.md) | Keymap reference, config notes |
 | [alacritty.md](alacritty.md) | Custom keybindings, config notes |

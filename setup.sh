@@ -128,7 +128,7 @@ fi
 # 12. Stow dotfiles
 echo -e "${YELLOW}🔗 Stowing dotfiles...${NC}"
 cd "$(dirname "$0")"
-stow alacritty claude fish nvim yazi zellij
+stow alacritty claude fish gemini nvim yazi zellij
 
 # 13. Setup Fish shell as default
 if [[ "$SHELL" != *"fish"* ]]; then

@@ -1,0 +1,63 @@
+{
+  "allowNonWorkspaceAccess": true,
+  "enableTelemetry": false,
+  "gcp": {
+    "project": "wof-sites",
+    "location": "global"
+  },
+  "permissions": {
+    "allow": [
+      "command(git status)",
+      "command(gh)",
+      "command(git)",
+      "command(./vendor/bin/pest)",
+      "command(./vendor/bin/phpstan)",
+      "command(find)",
+      "command(vendor/bin/phpunit)",
+      "command(./vendor/bin/phpunit)",
+      "command(cat)",
+      "command(composer)",
+      "command(./vendor/bin/pint)",
+      "command(grep)",
+      "command(bin/run-affected-tests)",
+      "command(ls)",
+      "command(stow)",
+      "command(psql)",
+      "command(mkdir)",
+      "command(cp)",
+      "command(jq)",
+      "command(type)",
+      "command(./gemini/.gemini/antigravity-cli/title.sh)",
+      "command(zellij)",
+      "command(./gemini/.gemini/antigravity-cli/statusline.sh)",
+      "command(du)",
+      "command(nvim)",
+      "command(df)",
+      "command(/home/sdavis/.claude/statusline.sh)",
+      "command(tput)",
+      "command(command)",
+      "command(ln)",
+      "command(/home/sdavis/dotfiles/claude/.claude/statusline.sh)",
+      "command(/home/sdavis/.claude/title.sh)",
+      "command(claude)",
+      "command(which)",
+      "command(agy)",
+      "command(sort)",
+      "command(head)"
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.gemini/antigravity-cli/statusline.sh",
+    "enabled": true
+  },
+  "title": {
+    "type": "command",
+    "command": "~/.gemini/antigravity-cli/title.sh"
+  },
+  "trustedWorkspaces": [
+    "/home/sdavis/localdev/wofstack",
+    "/home/sdavis/localdev/wofstack-b3-gem",
+    "/home/sdavis/dotfiles"
+  ]
+}

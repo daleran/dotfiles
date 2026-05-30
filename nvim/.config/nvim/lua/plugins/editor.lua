@@ -5,8 +5,36 @@ return {
     {
         "stevearc/oil.nvim",
         config = function()
-            require("oil").setup({
+            local oil = require("oil")
+
+            local function open_preview_with_ratio()
+                if oil.get_cursor_entry() then
+                    local oil_win = vim.api.nvim_get_current_win()
+                    local total_width = vim.o.columns
+                    oil.open_preview({ vertical = true, split = "botright" })
+                    local target_width = math.max(20, math.floor(total_width * 0.3))
+                    vim.api.nvim_win_set_width(oil_win, target_width)
+                end
+            end
+
+            oil.setup({
                 view_options = { show_hidden = true },
+                keymaps = {
+                    ["<C-p>"] = {
+                        callback = open_preview_with_ratio,
+                        desc = "Open preview in vertical split (30% selector, 70% preview)",
+                    },
+                },
+            })
+
+            -- Auto-open Yazi-like vertical split preview on entry
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "OilEnter",
+                callback = vim.schedule_wrap(function(args)
+                    if vim.api.nvim_get_current_buf() == args.data.buf then
+                        open_preview_with_ratio()
+                    end
+                end),
             })
         end,
     },

@@ -31,12 +31,14 @@ cd ~/dotfiles
 ## 📂 Project Structure
 
 - `alacritty/`: Terminal configuration.
-- `claude/`: Claude Code custom commands and markers.
+- `claude/`: Claude Code custom commands, markers, and settings.
 - `docs/`: Detailed reference documentation for each tool.
 - `fish/`: Shell functions, aliases, and completions.
+- `gemini/`: Gemini/Antigravity user settings and keybindings.
 - `nvim/`: Neovim configuration (Lua).
 - `yazi/`: File manager configuration.
 - `zellij/`: Multiplexer layouts and configuration.
+
 
 ## 🛠️ Requirements
 - **OS:** Ubuntu (tested on 22.04 and 24.04).

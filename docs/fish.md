@@ -62,6 +62,7 @@ See [worktrees.md](worktrees.md) for the full guide.
 | `wst` | `cd ~/localdev/wofstack` |
 | `rsh` | `gcloud compute ssh` |
 | `clswch` | Switch Claude SSO accounts (logout + re-login) |
+| `zwf_pane <num> <cmd>` | Run a command inside a wofstack pane and immediately rename its Zellij tab to `w<num>: branch_name` |
 
 ---
 

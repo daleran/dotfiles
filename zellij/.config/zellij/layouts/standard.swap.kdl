@@ -1,0 +1,71 @@
+swap_tiled_layout name="Standard" {
+    tab exact_panes=1 {
+        pane
+    }
+    tab exact_panes=2 {
+        pane split_direction="vertical" {
+            pane size="60%"
+            pane size="40%"
+        }
+    }
+    tab min_panes=3 {
+        pane split_direction="vertical" {
+            pane size="60%"
+            pane size="40%" stacked=true {
+                pane
+                pane
+            }
+        }
+    }
+}
+
+swap_tiled_layout name="Vertical 50/50" {
+    tab exact_panes=1 {
+        pane
+    }
+    tab exact_panes=2 {
+        pane split_direction="vertical" {
+            pane size="50%"
+            pane size="50%"
+        }
+    }
+    tab min_panes=3 {
+        pane split_direction="vertical" {
+            pane size="50%"
+            pane size="50%" stacked=true {
+                pane
+                pane
+            }
+        }
+    }
+}
+
+swap_tiled_layout name="Horizontal 50/50" {
+    tab exact_panes=1 {
+        pane
+    }
+    tab exact_panes=2 {
+        pane split_direction="horizontal" {
+            pane size="50%"
+            pane size="50%"
+        }
+    }
+    tab min_panes=3 {
+        pane split_direction="horizontal" {
+            pane size="50%"
+            pane size="50%" stacked=true {
+                pane
+                pane
+            }
+        }
+    }
+}
+
+swap_tiled_layout name="Stacked" {
+    tab {
+        pane stacked=true {
+            pane
+            pane
+        }
+    }
+}

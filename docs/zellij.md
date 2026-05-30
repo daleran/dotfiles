@@ -12,6 +12,8 @@ Default mode: **locked**. Press `Ctrl-g` to enter normal mode; `Ctrl-g` again to
 | `Alt =` | Next tab |
 | `Alt 1`–`6` | Jump to tab N |
 | `Alt c` | Run Claude (in stacked pane) |
+| `Alt d` | Open Neovim in DiffviewOpen main (in stacked pane) |
+| `Alt e` | Open Neovim in Oil view (in stacked pane) |
 | `Alt g` | Run agy (in stacked pane) |
 | `Alt r` | Open docs directory in `yazi` (in stacked pane) |
 | `Alt s` | New stacked pane |
@@ -27,6 +29,8 @@ Default mode: **locked**. Press `Ctrl-g` to enter normal mode; `Ctrl-g` again to
 |-----|--------|
 | `Alt h` / `Alt l` | Move focus left / right |
 | `Alt j` / `Alt k` | Move focus down / up |
+| `Alt Shift h/j/k/l` (bound as `Alt H/J/K/L`) | Move pane left/down/up/right (reorder stacks, etc.) |
+| `Alt Shift ←/↓/↑/→` | Move pane left/down/up/right |
 | `Alt [` | Previous swap layout |
 | `Alt ]` | Next swap layout |
 
@@ -168,14 +172,23 @@ Default mode: **locked**. Press `Ctrl-g` to enter normal mode; `Ctrl-g` again to
 | `socialdb` | `zsoc` | Workspace + `gemini` tab (nvim+AI) + `terminal` tab. |
 | `izaddit` | `ziz` | Workspace + `gemini` tab (nvim+AI) + `terminal` tab. |
 | `vesper` | `zvesp` | Workspace with `npm run dev` in 20% bottom-right pane. |
-| `wofstack` | `zwf` | Workspace + `db` tab (pgcli) + `server` tab (ssh admin). |
+| `wofstack` | `zwf` | Overhauled WofStack workspace: 1 main tab (`w1`: 60% nvim, 40% shell) and 7 agent dev tabs (`w2`–`w8` with diff panes). |
 | `wayfarer` | `zwy` | Workspace + `npm-dev` tab (dev:editor, dev:designer, dev). |
 | `worktree` | `cwt <branch>` | Single-tab worktree workspace. Used by `cwt` via `zellij action new-tab`. |
 | `dev` | — | Generic 70/30 split: nvim + Claude Code. No project. |
 
 All layouts open with: yazi (stacked with a README pane pointing at `~/dotfiles/docs`) on the left 60%, and Claude Code (expanded) + Gemini + blank terminal stacked on the right 80%, with a blank terminal below at 20%.
 
-Cycle through the stack with `Alt k` (focus up within stack), or swap tiled layout views with `Alt [`/`Alt ]`.
+Cycle through the stack with `Alt j` / `Alt k` (focus down/up within stack), or swap tiled layout views with `Alt [` / `Alt ]`.
+
+### Standard Swap Layouts
+
+All layouts share a standard, unified set of swap layouts via symlinked companion `.swap.kdl` files pointing to `standard.swap.kdl`. You can cycle through them using `Alt [` and `Alt ]`:
+
+1. **Standard** (default): Left side gets 60% of the screen. Right side gets 40%. When there are 3 or more panes, the right side automatically stacks additional panes.
+2. **Vertical 50/50**: Split 50% left and 50% right. When there are 3 or more panes, the right side automatically stacks additional panes.
+3. **Horizontal 50/50**: Split 50% top and 50% bottom. When there are 3 or more panes, the bottom side automatically stacks additional panes.
+4. **Stacked**: All panes are vertically stacked on top of each other.
 
 ### Adding a new project launcher
 

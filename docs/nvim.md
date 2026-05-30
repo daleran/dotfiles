@@ -146,6 +146,7 @@ Common combinations:
 | `Ctrl-h/j/k/l` | Navigate between splits |
 | `Ctrl-w =` / `o` | Equalize sizes / close others |
 | `:bn` / `:bp` | Next / prev buffer |
+| `<Tab>` / `<S-Tab>` | Next / prev buffer (Normal mode shortcut) |
 | `:bd` | Close buffer |
 | `gt` / `gT` | Next / prev tab |
 
@@ -174,15 +175,26 @@ Common combinations:
 | `<leader>fg` | Live grep (Telescope) |
 | `<leader>fb` | Browse buffers (Telescope) |
 | `<leader>fr` | Recent files (Telescope oldfiles) |
-| `<leader>e` | File explorer (Oil) |
+| `<leader>e` | File explorer (Oil with auto-opening vertical preview: 30% selector, 70% preview) |
 | `-` | Go up a directory (Oil) |
-| `<leader>sc` | Open scratch pad |
+| `<C-p>` | Open/toggle vertical preview in Oil (30% selector, 70% preview) |
+| `<leader>sc` | Open notes pad (`~/Documents/notes.md`) |
+
+### Buffer Management
+
+| Key | Description |
+|-----|-------------|
+| `<leader>bp` | Buffer pick (select buffer by typing hint letter) |
+| `<leader>bc` | Buffer pick close (close buffer by typing hint letter) |
+| `<leader>bo` | Close all other buffers |
+| `<leader>bd` | Close current buffer |
 
 ### Git
 
 | Key | Description |
 |-----|-------------|
 | `<leader>gd` | Diff vs main (`DiffviewOpen main`) |
+| `<leader>ge` | Toggle diffview file list |
 | `<leader>gh` | File history (`DiffviewFileHistory %`) |
 | `<leader>gc` | Close diff view |
 | `<leader>go` | PR list (Octo) |
@@ -218,6 +230,8 @@ Common combinations:
 | `<Space>cd` | Delete comment |
 | `<Space>cs` | Submit review |
 | `<Space>cr` | React to comment |
+| `:Octo review` | Open full interactive PR review mode with file panel and side-by-side diff |
+| `:Octo pr diff` | Open PR diff view |
 
 Run `:h octo-mappings` for the full reference.
 
@@ -244,3 +258,14 @@ Run `:h octo-mappings` for the full reference.
 3. In the Claude agent pane, run `/address-pr <N>` where `N` is the PR number.
 
 Slash commands live in `~/.claude/commands/` (symlinked from `dotfiles/claude/.claude/commands/`).
+
+---
+
+## Zellij Integration
+
+These locked-mode global keybindings inside Zellij immediately launch Neovim into specific views:
+
+| Key | Action | Description |
+|-----|--------|-------------|
+| `Alt e` | Open Neovim in Oil file explorer | Shows directories/files in a 30% left list and 70% right preview pane (matching yazi). |
+| `Alt d` | Open Neovim in DiffviewOpen main | Opens Neovim showing all files changed on the current local branch compared to `main`. |

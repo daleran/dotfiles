@@ -10,8 +10,13 @@ map("n", "<C-l>", "<C-w>l")
 map("n", "<C-j>", "<C-w>j")
 map("n", "<C-k>", "<C-w>k")
 
+-- Buffer navigation
+map("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Next buffer" })
+map("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
+
 -- Git
 map("n", "<leader>gd", ":DiffviewOpen main<CR>", { desc = "Diff vs main" })
+map("n", "<leader>ge", ":DiffviewToggleFiles<CR>", { desc = "Toggle diffview file list" })
 map("n", "<leader>gh", ":DiffviewFileHistory %<CR>", { desc = "File history" })
 map("n", "<leader>gc", ":DiffviewClose<CR>", { desc = "Close diffview" })
 map("n", "<leader>go", ":Octo pr list<CR>", { desc = "PR list (Octo)" })
@@ -26,7 +31,7 @@ map("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Recent files" })
 map("n", "<leader>e", "<cmd>Oil<CR>", { desc = "File explorer" })
 
 -- Sean's Specials
-map("n", "<leader>sc", ":e ~/localdev/wofstack/._scratch/scratch.md<CR>Go", { desc = "Open scratch" })
+map("n", "<leader>sc", ":e ~/Documents/notes.md<CR>Go", { desc = "Open notes" })
 
 -- LSP (set in lsp on_attach, but useful to see together)
 -- gd = go to definition
