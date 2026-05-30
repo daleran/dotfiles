@@ -20,6 +20,7 @@ Default mode: **locked**. Press `Ctrl-g` to enter normal mode; `Ctrl-g` again to
 | `Alt t` | New tab |
 | `Alt w` | Open blank Neovim instance in current directory (in stacked pane) |
 | `Alt x` | Close focused pane |
+| `Alt y` | Open `yazi` file manager in current directory (in stacked pane) |
 | `Ctrl-g` | Enter normal mode |
 
 ---
