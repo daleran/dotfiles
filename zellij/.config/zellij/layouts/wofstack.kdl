@@ -15,58 +15,30 @@ layout {
     }
 
     tab name="w2" cwd="/home/sdavis/localdev/wofstack2" {
-        pane {
-            name "diff"
-            command "fish"
-            args "-c" "zwf_pane 2 nvim -c 'DiffviewOpen main'"
-        }
+        pane { name "shell" }
     }
 
     tab name="w3" cwd="/home/sdavis/localdev/wofstack3" {
-        pane {
-            name "diff"
-            command "fish"
-            args "-c" "zwf_pane 3 nvim -c 'DiffviewOpen main'"
-        }
+        pane { name "shell" }
     }
 
     tab name="w4" cwd="/home/sdavis/localdev/wofstack4" {
-        pane {
-            name "diff"
-            command "fish"
-            args "-c" "zwf_pane 4 nvim -c 'DiffviewOpen main'"
-        }
+        pane { name "shell" }
     }
 
     tab name="w5" cwd="/home/sdavis/localdev/wofstack5" {
-        pane {
-            name "diff"
-            command "fish"
-            args "-c" "zwf_pane 5 nvim -c 'DiffviewOpen main'"
-        }
+        pane { name "shell" }
     }
 
     tab name="w6" cwd="/home/sdavis/localdev/wofstack6" {
-        pane {
-            name "diff"
-            command "fish"
-            args "-c" "zwf_pane 6 nvim -c 'DiffviewOpen main'"
-        }
+        pane { name "shell" }
     }
 
     tab name="w7" cwd="/home/sdavis/localdev/wofstack7" {
-        pane {
-            name "diff"
-            command "fish"
-            args "-c" "zwf_pane 7 nvim -c 'DiffviewOpen main'"
-        }
+        pane { name "shell" }
     }
 
     tab name="w8" cwd="/home/sdavis/localdev/wofstack8" {
-        pane {
-            name "diff"
-            command "fish"
-            args "-c" "zwf_pane 8 nvim -c 'DiffviewOpen main'"
-        }
+        pane { name "shell" }
     }
 }
