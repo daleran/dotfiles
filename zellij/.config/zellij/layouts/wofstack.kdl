@@ -15,30 +15,30 @@ layout {
     }
 
     tab name="w2" cwd="/home/sdavis/localdev/wofstack2" {
-        pane { name "shell" }
+        pane name="shell"
     }
 
     tab name="w3" cwd="/home/sdavis/localdev/wofstack3" {
-        pane { name "shell" }
+        pane name="shell"
     }
 
     tab name="w4" cwd="/home/sdavis/localdev/wofstack4" {
-        pane { name "shell" }
+        pane name="shell"
     }
 
     tab name="w5" cwd="/home/sdavis/localdev/wofstack5" {
-        pane { name "shell" }
+        pane name="shell"
     }
 
     tab name="w6" cwd="/home/sdavis/localdev/wofstack6" {
-        pane { name "shell" }
+        pane name="shell"
     }
 
     tab name="w7" cwd="/home/sdavis/localdev/wofstack7" {
-        pane { name "shell" }
+        pane name="shell"
     }
 
     tab name="w8" cwd="/home/sdavis/localdev/wofstack8" {
-        pane { name "shell" }
+        pane name="shell"
     }
 }
