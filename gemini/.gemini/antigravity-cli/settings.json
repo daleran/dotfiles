@@ -43,7 +43,8 @@
       "command(which)",
       "command(agy)",
       "command(sort)",
-      "command(head)"
+      "command(head)",
+      "command(strings)"
     ]
   },
   "statusLine": {

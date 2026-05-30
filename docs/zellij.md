@@ -18,12 +18,13 @@ Default mode: **locked**. Press `Ctrl-g` to enter normal mode; `Ctrl-g` again to
 | `Alt r` | Open docs directory in `yazi` (in stacked pane) |
 | `Alt s` | New stacked pane |
 | `Alt t` | New tab |
+| `Alt w` | Open blank Neovim instance in current directory (in stacked pane) |
 | `Alt x` | Close focused pane |
 | `Ctrl-g` | Enter normal mode |
 
 ---
 
-## Shared (work in all non-locked modes)
+## Shared (work in all modes, including locked)
 
 | Key | Action |
 |-----|--------|

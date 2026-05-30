@@ -95,6 +95,7 @@ Common combinations:
 | Key | Description |
 |-----|-------------|
 | `:w` / `:q` | Save / quit |
+| `:saveas <file>` | Save as different filename |
 | `:wq` / `:q!` | Save & quit / force quit |
 | `:noh` | Clear search highlight |
 | `:%s/old/new/g` | Search & replace all |

@@ -19,6 +19,7 @@ keybinds clear-defaults=true {
         bind "Alt r" { Run "yazi" "/home/sdavis/dotfiles/docs" { name "README"; stacked true; }; }
         bind "Alt s" { NewPane "stacked"; }
         bind "Alt t" { NewTab; }
+        bind "Alt w" { Run "nvim" { name "neovim"; stacked true; }; }
         bind "Alt x" { CloseFocus; }
         bind "Ctrl g" { SwitchToMode "normal"; }
     }
@@ -164,6 +165,14 @@ keybinds clear-defaults=true {
         bind "Alt j" { MoveFocus "down"; }
         bind "Alt k" { MoveFocus "up"; }
         bind "Alt l" { MoveFocusOrTab "right"; }
+        bind "Alt Shift left" { MovePane "left"; }
+        bind "Alt Shift down" { MovePane "down"; }
+        bind "Alt Shift up" { MovePane "up"; }
+        bind "Alt Shift right" { MovePane "right"; }
+        bind "Alt H" { MovePane "left"; }
+        bind "Alt J" { MovePane "down"; }
+        bind "Alt K" { MovePane "up"; }
+        bind "Alt L" { MovePane "right"; }
     }
     shared_except "locked" {
         bind "Alt +" { Resize "Increase"; }
@@ -177,14 +186,6 @@ keybinds clear-defaults=true {
         bind "Alt p" { TogglePaneInGroup; }
         bind "Alt P" { ToggleGroupMarking; }
         bind "Ctrl q" { Quit; }
-        bind "Alt Shift left" { MovePane "left"; }
-        bind "Alt Shift down" { MovePane "down"; }
-        bind "Alt Shift up" { MovePane "up"; }
-        bind "Alt Shift right" { MovePane "right"; }
-        bind "Alt H" { MovePane "left"; }
-        bind "Alt J" { MovePane "down"; }
-        bind "Alt K" { MovePane "up"; }
-        bind "Alt L" { MovePane "right"; }
     }
     shared_except "locked" "move" {
         bind "Ctrl h" { SwitchToMode "move"; }
