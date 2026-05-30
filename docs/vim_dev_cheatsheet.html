@@ -104,7 +104,9 @@
                                 ["Sp+ff / fg", "Find File / Live Grep"],
                                 ["Sp+fb / fr", "Buffers / Recent Files"],
                                 ["Sp+e / -", "File Explorer (Oil) / Go Up Dir"],
-                                ["Sp+sc", "Open Scratchpad"]
+                                ["Sp+sc", "Open Scratchpad"],
+                                ["Sp+bp / bc", "Buffer Pick / Pick Close"],
+                                ["Sp+bo / bd", "Close Others / Close Buffer"]
                             ]
                         },
                         {
@@ -112,8 +114,10 @@
                             content: [
                                 ["Sp+gd / gh", "Diff vs Main / File History"],
                                 ["Sp+gc / go", "Close Diff / PR List (Octo)"],
+                                ["Sp+ge", "Toggle Diffview File List"],
+                                ["gR", "Open file full-screen (REVIEW markers)"],
                                 ["]h / [h", "Next / Prev Hunk"],
-                                ["Sp+gs / gp", "Stage Hunk / Preview Hunk"]
+                                ["Sp+gs / gr / gp", "Stage / Reset / Preview Hunk"]
                             ]
                         },
                         {
@@ -175,7 +179,7 @@
                     type: "table",
                     content: [
                         [".", "Repeat last change command"],
-                        ["gg=G", "Auto-indent whole file"],
+                        ["gg=G / ggyG", "Auto-indent / Yank whole file"],
                         ["gv", "Reselect last visual selection"],
                         ["cs\"'", "Change surround \" to ' (nvim-surround)"],
                         ["C-\\", "Toggle floating terminal (ToggleTerm)"]
@@ -231,9 +235,11 @@
                             subtitle: "Locked Mode (default)",
                             content: [
                                 ["Alt - / Alt =", "Prev Tab / Next Tab"],
-                                ["Alt 1-6", "Jump to Tab N"],
-                                ["Alt s", "New Stacked Pane"],
-                                ["Alt x", "Close Focused Pane"],
+                                ["Alt 1-6 / Alt t", "Jump to Tab N / New Tab"],
+                                ["Alt s / Alt x", "New Stacked Pane / Close Pane"],
+                                ["Alt c / Alt g", "Claude Code / agy pane"],
+                                ["Alt e / Alt d", "Oil Explorer / Diffview pane"],
+                                ["Alt w / Alt r", "Blank Neovim / Docs (yazi) pane"],
                                 ["Ctrl-g", "Toggle Normal Mode"]
                             ]
                         },
@@ -241,6 +247,7 @@
                             subtitle: "Shared (all modes) + Normal",
                             content: [
                                 ["Alt h/j/k/l", "Move Focus (L, D, U, R)"],
+                                ["Alt H/J/K/L", "Move Pane in direction"],
                                 ["Alt [ / ]", "Cycle Swap Layouts"],
                                 ["Alt f", "Toggle Floating Pane"],
                                 ["Ctrl-q", "Quit Zellij"]
@@ -253,21 +260,23 @@
                     type: "group",
                     sections: [
                         {
-                            subtitle: "Worktree Workflow",
+                            subtitle: "Zellij Launchers",
                             content: [
-                                ["cwt <branch>", "Create worktree + DB + Zellij tab"],
-                                ["cwt-rm <branch>", "Destroy worktree + drop DB"],
-                                ["wt", "Fuzzy-pick worktree (fzf)"]
+                                ["zdot / zwf", "dotfiles / wofstack workspace"],
+                                ["zjd / zlc", "javidare / lcconf workspace"],
+                                ["zsoc / ziz", "socialdb / izaddit workspace"],
+                                ["zvesp / zwy", "vesper / wayfarer workspace"]
                             ]
                         },
                         {
                             subtitle: "Git & Misc",
                             content: [
                                 ["gst / gco", "git status / git checkout"],
-                                ["gac \"msg\"", "git add . && commit -m"],
+                                ["gf / gac \"msg\"", "git fetch / add . && commit -m"],
                                 ["gpso / gplo", "git push / pull origin"],
                                 ["gmain", "checkout main + fetch + pull"],
-                                ["ll / wst", "ls -la / cd ~/localdev/wofstack"]
+                                ["dbp / dbl", "pgcli prod / local DB"],
+                                ["ll / wst / rsh", "ls -la / cd wofstack / gcloud ssh"]
                             ]
                         }
                     ]
