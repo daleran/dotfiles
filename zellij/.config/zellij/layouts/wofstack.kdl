@@ -6,11 +6,12 @@ layout {
         }
     }
 
-    tab name="w1" cwd="${PROJECT_DIR}" {
-        pane {
+    tab name="w1" cwd="/home/sdavis/localdev/wofstack" split_direction="vertical" {
+        pane size="60%" {
             command "yazi"
-            args "."
+            args "/home/sdavis/localdev/wofstack"
         }
+        pane size="40%"
     }
 
     tab name="w2" cwd="/home/sdavis/localdev/wofstack2" {
