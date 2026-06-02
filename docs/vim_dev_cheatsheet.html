@@ -103,7 +103,7 @@
                             content: [
                                 ["Sp+ff / fg", "Find File / Live Grep"],
                                 ["Sp+fb / fr", "Buffers / Recent Files"],
-                                ["Sp+e / -", "File Explorer (Oil) / Go Up Dir"],
+                                ["Sp+e / - (C-p)", "Explorer (Oil) / Up Dir (Preview)"],
                                 ["Sp+sc", "Open Scratchpad"],
                                 ["Sp+bp / bc", "Buffer Pick / Pick Close"],
                                 ["Sp+bo / bd", "Close Others / Close Buffer"]
@@ -121,11 +121,14 @@
                             ]
                         },
                         {
-                            subtitle: "LSP",
+                            subtitle: "LSP & Octo (PRs)",
                             content: [
-                                ["gd / gr", "Go to Definition / References"],
-                                ["K", "Hover Docs"],
-                                ["Sp+rn / ca", "Rename Symbol / Code Action"]
+                                ["gd / gr / K", "Go to Def / Refs / Hover Docs"],
+                                ["Sp+rn / ca", "Rename Symbol / Code Action"],
+                                ["Sp+tm", "Toggle Table Mode (Markdown)"],
+                                ["Sp+ca / ce / cd", "Octo: Add / Edit / Delete PR Comment"],
+                                ["Sp+cs / cr", "Octo: Submit Review / React to Comment"],
+                                [":Octo review", "Open Interactive PR Review Mode"]
                             ]
                         }
                     ]
@@ -169,7 +172,7 @@
                     content: [
                         [":vs / :sp", "Vertical / Horizontal split"],
                         ["C-h/j/k/l", "Navigate between splits"],
-                        [":bn / :bp", "Next / Prev buffer"],
+                        [":bn / :bp (Tab/S-Tab)", "Next / Prev buffer"],
                         [":bd", "Close buffer"],
                         ["gt / gT", "Next / Prev tab"]
                     ]
@@ -179,7 +182,7 @@
                     type: "table",
                     content: [
                         [".", "Repeat last change command"],
-                        ["gg=G / ggyG", "Auto-indent / Yank whole file"],
+                        ["gg=G / ggyG / ggdGp", "Indent / Yank file / Overwrite file"],
                         ["gv", "Reselect last visual selection"],
                         ["cs\"'", "Change surround \" to ' (nvim-surround)"],
                         ["C-\\", "Toggle floating terminal (ToggleTerm)"]
@@ -236,10 +239,10 @@
                             content: [
                                 ["Alt - / Alt =", "Prev Tab / Next Tab"],
                                 ["Alt 1-6 / Alt t", "Jump to Tab N / New Tab"],
-                                ["Alt s / Alt x", "New Stacked Pane / Close Pane"],
+                                ["Alt s / Alt p / Alt x", "New Stack / Pane (Right) / Close Pane"],
                                 ["Alt c / Alt g", "Claude Code / agy pane"],
                                 ["Alt e / Alt d", "Oil Explorer / Diffview pane"],
-                                ["Alt w / Alt r", "Blank Neovim / Docs (yazi) pane"],
+                                ["Alt w / Alt r / Alt y", "Blank Nvim / Docs (yazi) / Yazi in CWD"],
                                 ["Ctrl-g", "Toggle Normal Mode"]
                             ]
                         },
@@ -276,32 +279,35 @@
                                 ["gpso / gplo", "git push / pull origin"],
                                 ["gmain", "checkout main + fetch + pull"],
                                 ["dbp / dbl", "pgcli prod / local DB"],
-                                ["ll / wst / rsh", "ls -la / cd wofstack / gcloud ssh"]
+                                ["ll / wst / rsh", "ls -la / cd wofstack / gcloud ssh"],
+                                ["cwt / cwt-rm", "Create / Remove Worktree"],
+                                ["wt", "Fuzzy Worktree Picker (fzf)"],
+                                ["clswch / zwf_pane", "Switch Claude SSO / Run command in pane"]
                             ]
                         }
                     ]
                 },
                 {
-                    title: "GNOME & Browser",
+                    title: "System & Gemini",
                     type: "group",
                     sections: [
                         {
-                            subtitle: "GNOME Window / Workspace",
+                            subtitle: "GNOME & Chrome Browser",
                             content: [
-                                ["Alt-F4 / Super-h", "Close / Minimize Window"],
-                                ["Alt-Tab", "Switch Windows"],
-                                ["C-Alt-↑/↓", "Switch Workspace"],
-                                ["C-S-A-↑/↓", "Move Window to Workspace"],
-                                ["Super-a / Print", "All Apps / Screenshot"]
+                                ["Alt-F4 / Super-h", "GNOME: Close / Minimize Window"],
+                                ["Alt-Tab", "GNOME: Switch Windows"],
+                                ["C-Alt-↑/↓", "GNOME: Switch Workspace"],
+                                ["C-l / C-t / C-w", "Chrome: Focus bar / New tab / Close tab"],
+                                ["C-Tab / C-f", "Chrome: Next tab / Find"]
                             ]
                         },
                         {
-                            subtitle: "Chrome / Browser",
+                            subtitle: "Gemini (Antigravity CLI)",
                             content: [
-                                ["C-l", "Focus Address Bar"],
-                                ["C-t / C-w", "New Tab / Close Tab"],
-                                ["C-Tab / C-S-Tab", "Next / Prev Tab"],
-                                ["C-f / C-g", "Find / Find Next"]
+                                ["C-r / C-o", "Review active artifact / Toggle trajectory"],
+                                ["C-k / Alt-J", "Approve subagent / Jump to waiting task"],
+                                ["C-g", "Open input text editor"],
+                                ["y / n / e", "Prompt: Yes / No / Edit command"]
                             ]
                         }
                     ]
