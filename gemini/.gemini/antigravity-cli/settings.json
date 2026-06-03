@@ -44,7 +44,21 @@
       "command(agy)",
       "command(sort)",
       "command(head)",
-      "command(strings)"
+      "command(strings)",
+      "command(npx)",
+      "command(tail)",
+      "command(pg_isready)",
+      "command(docker ps)",
+      "command(ss)",
+      "command(id)",
+      "command(getfacl)",
+      "command(vendor/bin/pint)",
+      "command(vendor/bin/phpstan)",
+      "command(vendor/bin/pest)",
+      "command(touch)",
+      "command(npm test)",
+      "mcp(postgres/query)",
+      "mcp(postgres/*)"
     ]
   },
   "statusLine": {
@@ -59,6 +73,10 @@
   "trustedWorkspaces": [
     "/home/sdavis/localdev/wofstack",
     "/home/sdavis/localdev/wofstack-b3-gem",
-    "/home/sdavis/dotfiles"
+    "/home/sdavis/dotfiles",
+    "/home/sdavis/localdev/wofstack2",
+    "/home/sdavis/localdev/wofstack3",
+    "/home/sdavis/localdev/wofstack4",
+    "/home/sdavis/localdev/socialdb"
   ]
 }

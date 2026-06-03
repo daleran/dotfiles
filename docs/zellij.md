@@ -15,6 +15,7 @@ Default mode: **locked**. Press `Ctrl-g` to enter normal mode; `Ctrl-g` again to
 | `Alt d` | Open Neovim in DiffviewOpen main (in stacked pane) |
 | `Alt e` | Open Neovim in Oil view (in stacked pane) |
 | `Alt g` | Run agy (in stacked pane) |
+| `Alt p` | Open a new pane in a right split |
 | `Alt r` | Open docs directory in `yazi` (in stacked pane) |
 | `Alt s` | New stacked pane |
 | `Alt t` | New tab |

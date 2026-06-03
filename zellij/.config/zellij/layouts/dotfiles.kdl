@@ -9,25 +9,10 @@ layout {
 
 
     tab name="workspace" cwd="~/dotfiles" split_direction="vertical" {
-        pane size="60%" stacked=true {
-            pane {
-                name "README"
-                command "yazi"
-                args "~/dotfiles/docs"
-            }
-            pane
-            pane expanded=true {
-                name "yazi"
-                command "yazi"
-                args "~/dotfiles"
-            }
+        pane size="60%" {
+            command "yazi"
+            args "~/dotfiles"
         }
-        pane size="40%" split_direction="horizontal" {
-            pane {
-                command "claude"
-                args "--model" "opusplan" "--chrome"
-            }
-            pane size="20%"
-        }
+        pane size="40%"
     }
 }
