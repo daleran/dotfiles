@@ -179,7 +179,7 @@ Common combinations:
 | `<leader>e` | File explorer (Oil with auto-opening vertical preview: 30% selector, 70% preview) |
 | `-` | Go up a directory (Oil) |
 | `<C-p>` | Open/toggle vertical preview in Oil (30% selector, 70% preview) |
-| `<leader>sc` | Open notes pad (`~/Documents/notes.md`) |
+| `<leader>sc` | Open scratch note + prepend new `## ` entry (`~/notes/the.md`) |
 
 ### Buffer Management
 

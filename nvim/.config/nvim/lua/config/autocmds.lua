@@ -30,3 +30,19 @@ vim.api.nvim_create_autocmd("FileType", {
         -- vim.opt_local.formatoptions:append("t")
     end,
 })
+
+-- Scratch note (~/notes/the.md): fold by markdown heading level
+function _G.scratch_foldexpr()
+    local hashes = vim.fn.getline(vim.v.lnum):match("^(#+)%s")
+    if hashes then return ">" .. #hashes end
+    return "="
+end
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+    pattern = vim.fn.expand("~/notes/the.md"),
+    callback = function()
+        vim.opt_local.foldmethod = "expr"
+        vim.opt_local.foldexpr = "v:lua.scratch_foldexpr()"
+        vim.opt_local.foldlevel = 99 -- start fully open, nothing hidden
+    end,
+})

@@ -31,7 +31,13 @@ map("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Recent files" })
 map("n", "<leader>e", "<cmd>Oil<CR>", { desc = "File explorer" })
 
 -- Sean's Specials
-map("n", "<leader>sc", ":e ~/Documents/notes.md<CR>Go", { desc = "Open notes" })
+map("n", "<leader>sc", function()
+    vim.cmd("edit " .. vim.fn.expand("~/notes/the.md"))
+    -- "## " heading on line 1, two blank lines below it
+    vim.api.nvim_buf_set_lines(0, 0, 0, false, { "## ", "", "" })
+    vim.api.nvim_win_set_cursor(0, { 1, 0 })
+    vim.cmd("startinsert!") -- append at end of the "## " line
+end, { desc = "Open scratch note, new entry" })
 
 -- LSP (set in lsp on_attach, but useful to see together)
 -- gd = go to definition
