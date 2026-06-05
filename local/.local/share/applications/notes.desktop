@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Notes
+Comment=Open ~/notes/the.md
+Exec=alacritty --option window.startup_mode=Fullscreen -e nvim /home/sdavis/notes/the.md
+Icon=text-editor
+Terminal=false
+Type=Application
+Categories=Utility;TextEditor;
