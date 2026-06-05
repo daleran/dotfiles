@@ -16,6 +16,7 @@ keybinds clear-defaults=true {
         bind "Alt d" { Run "nvim" "-c" "DiffviewOpen main" { name "diff"; stacked true; }; }
         bind "Alt e" { Run "nvim" "-c" "Oil" { name "oil"; stacked true; }; }
         bind "Alt g" { Run "agy" { stacked true; }; }
+        bind "Alt n" { Run "nvim" "/home/sdavis/notes/the.md" { name "notes"; stacked true; }; }
         bind "Alt p" { NewPane "right"; }
         bind "Alt r" { Run "yazi" "/home/sdavis/dotfiles/docs" { name "README"; stacked true; }; }
         bind "Alt s" { NewPane "stacked"; }
