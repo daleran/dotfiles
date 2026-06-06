@@ -243,6 +243,7 @@ Run `:h octo-mappings` for the full reference.
 |-----|-------------|
 | `Ctrl-\` | Toggle floating terminal |
 | `<leader>tm` | Toggle table mode (markdown files) |
+| `<leader>mr` | Toggle rendered Markdown view (in-buffer; markdown files) |
 
 ---
 
