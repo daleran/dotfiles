@@ -6,43 +6,11 @@ layout {
         }
     }
 
-
-
     tab name="workspace" cwd="${PROJECT_DIR}" split_direction="vertical" {
-        pane size="60%" stacked=true {
-            pane {
-                name "README"
-                command "yazi"
-                args "~/dotfiles/docs"
-            }
-            pane
-            pane expanded=true {
-                name "yazi"
-                command "yazi"
-                args "~/localdev/wayfarer"
-            }
+        pane size="60%" {
+            command "yazi"
+            args "~/localdev/wayfarer"
         }
-        pane size="40%" split_direction="horizontal" {
-            pane {
-                command "claude"
-                args "--model" "opusplan" "--chrome"
-            }
-            pane size="20%"
-        }
-    }
-
-    tab name="npm-dev" cwd="${PROJECT_DIR}" split_direction="vertical" {
-        pane command="npm" {
-            name "editor"
-            args "run" "dev:editor"
-        }
-        pane command="npm" {
-            name "designer"
-            args "run" "dev:designer"
-        }
-        pane command="npm" {
-            name "dev"
-            args "run" "dev"
-        }
+        pane size="40%"
     }
 }

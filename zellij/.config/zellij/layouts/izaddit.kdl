@@ -6,45 +6,11 @@ layout {
         }
     }
 
-
-
     tab name="workspace" cwd="${PROJECT_DIR}" split_direction="vertical" {
-        pane size="60%" stacked=true {
-            pane {
-                name "README"
-                command "yazi"
-                args "~/dotfiles/docs"
-            }
-            pane
-            pane expanded=true {
-                name "yazi"
-                command "yazi"
-                args "~/localdev/izaddit"
-            }
-        }
-        pane size="40%" split_direction="horizontal" {
-            pane {
-                command "claude"
-                args "--model" "opusplan" "--chrome"
-            }
-            pane size="20%"
-        }
-    }
-
-    tab name="agy" cwd="${PROJECT_DIR}" split_direction="vertical" {
         pane size="60%" {
-            command "nvim"
+            command "yazi"
+            args "~/localdev/izaddit"
         }
-        pane size="40%" stacked=true {
-            pane command="agy"
-            pane {
-                command "claude"
-                args "--model" "opusplan"
-            }
-        }
-    }
-
-    tab name="terminal" cwd="${PROJECT_DIR}" {
-        pane
+        pane size="40%"
     }
 }

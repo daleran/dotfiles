@@ -6,32 +6,10 @@ layout {
         }
     }
 
-
-
-    tab split_direction="vertical" {
-        pane size="60%" stacked=true {
-            pane {
-                name "README"
-                command "yazi"
-                args "~/dotfiles/docs"
-            }
-            pane
-            pane expanded=true {
-                name "yazi"
-                command "fish"
-                args "-c" "yazi $PROJECT_DIR"
-            }
+    tab name="workspace" split_direction="vertical" {
+        pane size="60%" {
+            command "yazi"
         }
-        pane size="40%" split_direction="horizontal" {
-            pane {
-                command "claude"
-                args "--model" "opusplan" "--chrome"
-            }
-            pane size="20%" {
-                name "serve"
-                command "fish"
-                args "-c" "set port (grep -oP 'APP_PORT=\\K[0-9]+' .env 2>/dev/null); php artisan serve --port=$port"
-            }
-        }
+        pane size="40%"
     }
 }

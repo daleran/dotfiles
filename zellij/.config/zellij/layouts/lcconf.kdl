@@ -6,28 +6,11 @@ layout {
         }
     }
 
-
-
     tab name="workspace" cwd="~/localdev/lcconf" split_direction="vertical" {
-        pane size="60%" stacked=true {
-            pane {
-                name "README"
-                command "yazi"
-                args "~/dotfiles/docs"
-            }
-            pane
-            pane expanded=true {
-                name "yazi"
-                command "yazi"
-                args "~/localdev/lcconf"
-            }
+        pane size="60%" {
+            command "yazi"
+            args "~/localdev/lcconf"
         }
-        pane size="40%" split_direction="horizontal" {
-            pane {
-                command "claude"
-                args "--model" "opusplan" "--chrome"
-            }
-            pane size="20%"
-        }
+        pane size="40%"
     }
 }

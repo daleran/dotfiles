@@ -172,17 +172,17 @@ Default mode: **locked**. Press `Ctrl-g` to enter normal mode; `Ctrl-g` again to
 | Layout | Launcher | Description |
 |--------|----------|-------------|
 | `project` | `zdot`, `zjd`, `zlc` | Canonical workspace. Set `PROJECT_DIR` env var; fish wrappers do this automatically. |
-| `socialdb` | `zsoc` | Workspace + `gemini` tab (nvim+AI) + `terminal` tab. |
-| `izaddit` | `ziz` | Workspace + `gemini` tab (nvim+AI) + `terminal` tab. |
-| `vesper` | `zvesp` | Workspace with `npm run dev` in 20% bottom-right pane. |
-| `wofstack` | `zwf` | Overhauled WofStack workspace: 1 main tab (`w1`: 60% nvim, 40% shell) and 7 agent dev tabs (`w2`–`w8` with diff panes). |
-| `wayfarer` | `zwy` | Workspace + `npm-dev` tab (dev:editor, dev:designer, dev). |
+| `socialdb` | `zsoc` | Single workspace tab. 60% yazi + 40% shell. |
+| `izaddit` | `ziz` | Single workspace tab. 60% yazi + 40% shell. |
+| `vesper` | `zvesp` | Single workspace tab. 60% yazi + 40% shell. |
+| `wofstack` | `zwf` | WofStack workspace: 1 main tab (`w1`: 60% yazi, 40% shell) and 7 numbered agent-dev tabs (`w2`–`w8`). |
+| `wayfarer` | `zwy` | Single workspace tab. 60% yazi + 40% shell. |
 | `worktree` | `cwt <branch>` | Single-tab worktree workspace. Used by `cwt` via `zellij action new-tab`. |
-| `dev` | — | Generic 70/30 split: nvim + Claude Code. No project. |
+| `dev` | — | Generic single workspace tab. 60% yazi + 40% shell. No project cwd. |
 
-All layouts open with: yazi (stacked with a README pane pointing at `~/dotfiles/docs`) on the left 60%, and Claude Code (expanded) + Gemini + blank terminal stacked on the right 80%, with a blank terminal below at 20%.
+All layouts open with a flat vertical split: `yazi` on the left 60% and a bare shell on the right 40%, with a `compact-bar` at the bottom.
 
-Cycle through the stack with `Alt j` / `Alt k` (focus down/up within stack), or swap tiled layout views with `Alt [` / `Alt ]`.
+Swap tiled layout views with `Alt [` / `Alt ]`.
 
 ### Standard Swap Layouts
 
