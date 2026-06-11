@@ -12,7 +12,7 @@ keybinds clear-defaults=true {
         bind "Alt 5" { GoToTab 5; }
         bind "Alt 6" { GoToTab 6; }
         bind "Alt =" { GoToNextTab; }
-        bind "Alt c" { Run "claude" "--model" "opusplan" "--chrome" { stacked true; }; }
+        bind "Alt c" { Run "claude" "--model" "opusplan" "--plan" { stacked true; }; }
         bind "Alt d" { Run "nvim" "-c" "DiffviewOpen main" { name "diff"; stacked true; }; }
         bind "Alt e" { Run "nvim" "-c" "Oil" { name "oil"; stacked true; }; }
         bind "Alt g" { Run "agy" { stacked true; }; }
