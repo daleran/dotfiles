@@ -10,8 +10,8 @@ return {
             "nvim-tree/nvim-web-devicons",     -- icons (already pulled in by lualine/bufferline)
         },
         opts = {
-            -- Render automatically when a Markdown file opens; toggle to raw for editing
-            enabled = true,
+            -- Start with raw text + syntax highlighting; toggle render on with <leader>mr
+            enabled = false,
             -- Sensible table rendering: full box with rounded corners + padded cells
             pipe_table = {
                 preset = "round",  -- ╭─╮ rounded corners
