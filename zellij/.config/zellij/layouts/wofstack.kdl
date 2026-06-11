@@ -41,4 +41,20 @@ layout {
     tab name="w8" cwd="/home/sdavis/localdev/wofstack8" {
         pane
     }
+
+    tab name="w9" cwd="/home/sdavis/localdev/wofstack9" {
+        pane
+    }
+
+    tab name="w10" cwd="/home/sdavis/localdev/wofstack10" {
+        pane
+    }
+
+    tab name="w11" cwd="/home/sdavis/localdev/wofstack11" {
+        pane
+    }
+
+    tab name="w12" cwd="/home/sdavis/localdev/wofstack12" {
+        pane
+    }
 }

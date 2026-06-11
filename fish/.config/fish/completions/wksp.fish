@@ -9,11 +9,13 @@ function __wksp_workspace_numbers
 end
 
 # Subcommands
-set -l subcommands reset provision deprovision doctor list help
+set -l subcommands reset all provision deprovision doctor list help
 
 # Top-level subcommand completions (no file suggestions)
 complete -c wksp -f -n "not __fish_seen_subcommand_from $subcommands" \
     -a reset       -d 'Reset workspaces in parallel'
+complete -c wksp -f -n "not __fish_seen_subcommand_from $subcommands" \
+    -a all         -d 'Reset all numbered workspaces (confirms first)'
 complete -c wksp -f -n "not __fish_seen_subcommand_from $subcommands" \
     -a provision   -d 'Provision nginx/hosts/DB for workspaces (one-time, sudo)'
 complete -c wksp -f -n "not __fish_seen_subcommand_from $subcommands" \
@@ -36,11 +38,11 @@ complete -c wksp -f -n "not __fish_seen_subcommand_from $subcommands" \
     -a "(__wksp_workspace_numbers)" -d 'Workspace number (reset alias)'
 
 # Flags per subcommand
-complete -c wksp -f -n "__fish_seen_subcommand_from reset" \
+complete -c wksp -f -n "__fish_seen_subcommand_from reset all" \
     -l force    -d 'Discard dirty w1 state'
-complete -c wksp -f -n "__fish_seen_subcommand_from reset" \
+complete -c wksp -f -n "__fish_seen_subcommand_from reset all" \
     -l no-seed  -d 'Skip database seeding'
-complete -c wksp -f -n "__fish_seen_subcommand_from reset provision" \
+complete -c wksp -f -n "__fish_seen_subcommand_from reset all provision" \
     -l dry-run  -d 'Print actions without executing'
 complete -c wksp -f -n "__fish_seen_subcommand_from provision" \
     -l force    -d 'Overwrite existing nginx/hosts configs'

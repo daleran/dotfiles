@@ -175,7 +175,7 @@ Default mode: **locked**. Press `Ctrl-g` to enter normal mode; `Ctrl-g` again to
 | `socialdb` | `zsoc` | Single workspace tab. 60% yazi + 40% shell. |
 | `izaddit` | `ziz` | Single workspace tab. 60% yazi + 40% shell. |
 | `vesper` | `zvesp` | Single workspace tab. 60% yazi + 40% shell. |
-| `wofstack` | `zwf` | WofStack workspace: 1 main tab (`w1`: 60% yazi, 40% shell) and 7 numbered agent-dev tabs (`w2`–`w8`). |
+| `wofstack` | `zwf` | WofStack workspace: 1 main tab (`w1`: 60% yazi, 40% shell) and 11 numbered agent-dev tabs (`w2`–`w12`). |
 | `wayfarer` | `zwy` | Single workspace tab. 60% yazi + 40% shell. |
 | `worktree` | `cwt <branch>` | Single-tab worktree workspace. Used by `cwt` via `zellij action new-tab`. |
 | `dev` | — | Generic single workspace tab. 60% yazi + 40% shell. No project cwd. |
