@@ -21,9 +21,3 @@ require("lazy").setup("plugins", {
   change_detection = { notify = false },
   rocks = { enabled = false },
 })
-
-vim.o.autoread = true
-vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
-  pattern = "*",
-  command = "checktime",
-})

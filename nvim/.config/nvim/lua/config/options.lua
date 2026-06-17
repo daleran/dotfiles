@@ -17,3 +17,4 @@ opt.ignorecase = true
 opt.smartcase = true            -- case-sensitive only when you use uppercase
 opt.termguicolors = true
 opt.clipboard = "unnamedplus"   -- use system clipboard
+opt.autoread = true             -- re-read files changed outside Neovim

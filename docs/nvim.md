@@ -269,6 +269,14 @@ Slash commands live in `~/.claude/commands/` (symlinked from `dotfiles/claude/.c
 
 ---
 
+## Behaviors
+
+| Behavior | Description |
+|----------|-------------|
+| Auto-reload on external change | `autoread` + a 1s background `checktime` timer re-read buffers edited on disk (e.g. by Claude Code in another pane), with a "Buffer reloaded" notice. Buffers with unsaved edits prompt instead of clobbering. |
+
+---
+
 ## Zellij Integration
 
 These locked-mode global keybindings inside Zellij immediately launch Neovim into specific views:
