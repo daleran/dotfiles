@@ -179,6 +179,8 @@ Common combinations:
 | `<leader>e` | File explorer (Oil with auto-opening vertical preview: 30% selector, 70% preview) |
 | `-` | Go up a directory (Oil) |
 | `<C-p>` | Open/toggle vertical preview in Oil (30% selector, 70% preview) |
+| `gx` | Open entry under cursor with the system handler (`xdg-open` — uses default app/browser) |
+| `gX` | Open entry under cursor in Chrome (Oil) |
 | `<leader>sc` | Open scratch note + prepend new `## ` entry (`~/notes/the.md`) |
 
 ### Buffer Management

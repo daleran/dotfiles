@@ -24,6 +24,15 @@ return {
                         callback = open_preview_with_ratio,
                         desc = "Open preview in vertical split (30% selector, 70% preview)",
                     },
+                    ["gX"] = {
+                        callback = function()
+                            local entry = oil.get_cursor_entry()
+                            if entry then
+                                vim.system({ "google-chrome", oil.get_current_dir() .. entry.name })
+                            end
+                        end,
+                        desc = "Open entry under cursor in Chrome",
+                    },
                 },
             })
 
