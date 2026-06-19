@@ -33,7 +33,7 @@ What it does:
 2. `git worktree add ~/localdev/wofstack-remove-customer-part3 -b remove-customer-part3`
 3. Copies `~/localdev/wofstack/.env` → `~/localdev/wofstack-remove-customer-part3/.env`, patches `DB_DATABASE=wofstack_remove_customer_part3` and `APP_PORT=8101` (or whatever was free).
 4. `createdb wofstack_remove_customer_part3`.
-5. If you're inside Zellij, opens a new tab named `remove-customer-part3` using the `worktree` layout (yazi + Claude/Gemini stack + README pane).
+5. If you're inside Zellij, opens a new tab named `remove-customer-part3` using the `worktree` layout (Oil + Claude/Gemini stack + README pane).
 
 Output:
 

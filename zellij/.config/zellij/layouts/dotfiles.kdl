@@ -10,8 +10,8 @@ layout {
 
     tab name="workspace" cwd="~/dotfiles" split_direction="vertical" {
         pane size="60%" {
-            command "yazi"
-            args "~/dotfiles"
+            command "nvim"
+            args "-c" "Oil"
         }
         pane size="40%"
     }

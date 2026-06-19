@@ -190,42 +190,37 @@
                     ]
                 },
                 {
-                    title: "Yazi (File Manager)",
+                    title: "Oil (File Manager)",
                     type: "group",
-                    note: "Opens: Enter/o → Neovim. O → interactive menu.",
+                    note: "Edit the filesystem like a buffer: create/rename/delete by editing lines, then :w to apply.",
                     sections: [
                         {
-                            subtitle: "Navigation & Tabs",
+                            subtitle: "Navigation",
                             content: [
-                                ["h / l", "Parent dir / Enter dir"],
-                                ["j / k", "Next / Prev item"],
-                                ["H / L", "History Back / Forward"],
-                                ["gg / G", "Top / Bottom of list"],
-                                ["C-u / C-d", "Half page Up / Down"],
-                                ["t / 1-9", "New Tab / Switch to Tab N"],
-                                ["[ / ]", "Prev Tab / Next Tab"]
+                                ["<leader>e", "Open Oil in current dir"],
+                                ["- ", "Go up a directory"],
+                                ["<CR>", "Open entry / enter dir"],
+                                ["_", "Open Oil in cwd"],
+                                ["`", "cd to current Oil dir"]
                             ]
                         },
                         {
-                            subtitle: "Operations",
+                            subtitle: "Open & Preview",
                             content: [
-                                ["Enter / O", "Open (Neovim) / Open With..."],
-                                ["Space", "Toggle selection"],
-                                ["y / x / p", "Yank / Cut / Paste"],
-                                ["d / D", "Trash / Delete Permanently"],
-                                ["a / r", "Create File or Dir / Rename"],
-                                ["cc / cf", "Copy Full Path / Filename"],
-                                ["g+h / g+c", "Goto Home / .config"],
-                                [". / w", "Toggle Hidden / Task Manager"]
+                                ["C-p", "Vertical preview (30% / 70%)"],
+                                ["C-s / C-h", "Open in vsplit / split"],
+                                ["C-t", "Open in new tab"],
+                                ["C-l", "Refresh listing"]
                             ]
                         },
                         {
-                            subtitle: "Search & Jump",
+                            subtitle: "Edit & Toggle",
                             content: [
-                                ["s / S", "Search (fd) / Content (rg)"],
-                                ["f / /", "Filter / Find next"],
-                                ["z / Z", "Jump via fzf / zoxide"],
-                                [", then n/s/e/m", "Sort: Natural / Size / Ext / Modified"]
+                                [":w", "Apply pending fs changes"],
+                                ["g.", "Toggle hidden files"],
+                                ["gs", "Change sort"],
+                                ["gx", "Open in external program"],
+                                ["g?", "Show all Oil keymaps"]
                             ]
                         }
                     ]
@@ -243,7 +238,7 @@
                                 ["Alt s / Alt p / Alt x", "New Stack / Pane (Right) / Close Pane"],
                                 ["Alt c / Alt g", "Claude Code / agy pane"],
                                 ["Alt e / Alt d", "Oil Explorer / Diffview pane"],
-                                ["Alt w / Alt r / Alt y", "Blank Nvim / Docs (yazi) / Yazi in CWD"],
+                                ["Alt w / Alt r / Alt y", "Blank Nvim / Docs (Oil) / Oil in CWD"],
                                 ["Ctrl-g", "Toggle Normal Mode"]
                             ]
                         },

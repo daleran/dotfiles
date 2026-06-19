@@ -8,8 +8,8 @@ layout {
 
     tab name="workspace" cwd="~/localdev/javidare" split_direction="vertical" {
         pane size="60%" {
-            command "yazi"
-            args "~/localdev/javidare"
+            command "nvim"
+            args "-c" "Oil"
         }
         pane size="40%"
     }

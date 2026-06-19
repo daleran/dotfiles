@@ -18,11 +18,11 @@ keybinds clear-defaults=true {
         bind "Alt g" { Run "agy" { stacked true; }; }
         bind "Alt n" { Run "nvim" "/home/sdavis/notes/the.md" { name "notes"; stacked true; }; }
         bind "Alt p" { NewPane "right"; }
-        bind "Alt r" { Run "yazi" "/home/sdavis/dotfiles/docs" { name "README"; stacked true; }; }
+        bind "Alt r" { Run "nvim" "-c" "Oil /home/sdavis/dotfiles/docs" { name "README"; stacked true; }; }
         bind "Alt s" { NewPane "stacked"; }
         bind "Alt t" { NewTab; }
         bind "Alt w" { Run "nvim" { name "neovim"; stacked true; }; }
-        bind "Alt y" { Run "yazi" { name "yazi"; stacked true; }; }
+        bind "Alt y" { Run "nvim" "-c" "Oil" { name "oil"; stacked true; }; }
         bind "Alt x" { CloseFocus; }
         bind "Ctrl g" { SwitchToMode "normal"; }
     }

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # setup.sh - Environment installation script for Ubuntu
-# Installs Fish, Neovim, Zellij, Yazi, Alacritty, Node, and more.
+# Installs Fish, Neovim, Zellij, Alacritty, Node, and more.
 
 set -e
 
@@ -70,18 +70,7 @@ if ! command -v zellij &> /dev/null; then
     mv zellij "$HOME/.local/bin/"
 fi
 
-# 6. Yazi Installation
-if ! command -v yazi &> /dev/null; then
-    echo -e "${YELLOW}📥 Installing Yazi...${NC}"
-    TEMP_DIR=$(mktemp -d)
-    curl -L -o "$TEMP_DIR/yazi.zip" https://github.com/sxyazi/yazi/releases/latest/download/yazi-x86_64-unknown-linux-gnu.zip
-    unzip "$TEMP_DIR/yazi.zip" -d "$TEMP_DIR"
-    mv "$TEMP_DIR"/yazi-x86_64-unknown-linux-gnu/yazi "$HOME/.local/bin/"
-    mv "$TEMP_DIR"/yazi-x86_64-unknown-linux-gnu/ya "$HOME/.local/bin/"
-    rm -rf "$TEMP_DIR"
-fi
-
-# 7. NVM & Node 22
+# 6. NVM & Node 22
 if [ ! -d "$HOME/.nvm" ]; then
     echo -e "${YELLOW}📦 Installing NVM...${NC}"
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
@@ -96,24 +85,24 @@ nvm install 22
 nvm use 22
 nvm alias default 22
 
-# 8. Claude CLI
+# 7. Claude CLI
 echo -e "${YELLOW}🤖 Installing Claude CLI...${NC}"
 npm install -g @anthropic-ai/claude-code
 
-# 9. Composer Installation
+# 8. Composer Installation
 if ! command -v composer &> /dev/null; then
     echo -e "${YELLOW}🎼 Installing Composer...${NC}"
     curl -sS https://getcomposer.org/installer | php
     sudo mv composer.phar /usr/local/bin/composer
 fi
 
-# 10. Pgcli
+# 9. Pgcli
 if ! command -v pgcli &> /dev/null; then
     echo -e "${YELLOW}🐘 Installing pgcli...${NC}"
     pipx install pgcli
 fi
 
-# 11. JetBrainsMono Nerd Font
+# 10. JetBrainsMono Nerd Font
 FONT_DIR="$HOME/.local/share/fonts"
 if [ ! -d "$FONT_DIR/JetBrainsMono" ]; then
     echo -e "${YELLOW}🔡 Installing JetBrainsMono Nerd Font...${NC}"
@@ -125,18 +114,18 @@ if [ ! -d "$FONT_DIR/JetBrainsMono" ]; then
     fc-cache -fv
 fi
 
-# 12. Stow dotfiles
+# 11. Stow dotfiles
 echo -e "${YELLOW}🔗 Stowing dotfiles...${NC}"
 cd "$(dirname "$0")"
-stow alacritty claude fish gemini nvim yazi zellij
+stow alacritty claude fish gemini nvim zellij
 
-# 13. Setup Fish shell as default
+# 12. Setup Fish shell as default
 if [[ "$SHELL" != *"fish"* ]]; then
     echo -e "${YELLOW}🐚 Changing default shell to fish...${NC}"
     sudo chsh -s "$(which fish)" "$USER"
 fi
 
-# 14. Install Fisher and plugins
+# 13. Install Fisher and plugins
 echo -e "${YELLOW}🐟 Installing Fisher and plugins...${NC}"
 fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher && fisher update"
 

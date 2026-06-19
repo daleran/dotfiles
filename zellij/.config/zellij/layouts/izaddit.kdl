@@ -8,8 +8,8 @@ layout {
 
     tab name="workspace" cwd="${PROJECT_DIR}" split_direction="vertical" {
         pane size="60%" {
-            command "yazi"
-            args "~/localdev/izaddit"
+            command "nvim"
+            args "-c" "Oil"
         }
         pane size="40%"
     }

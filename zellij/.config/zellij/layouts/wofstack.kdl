@@ -8,8 +8,8 @@ layout {
 
     tab name="w1" cwd="/home/sdavis/localdev/wofstack" split_direction="vertical" {
         pane size="60%" {
-            command "yazi"
-            args "/home/sdavis/localdev/wofstack"
+            command "nvim"
+            args "-c" "Oil"
         }
         pane size="40%"
     }

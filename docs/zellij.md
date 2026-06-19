@@ -16,12 +16,12 @@ Default mode: **locked**. Press `Ctrl-g` to enter normal mode; `Ctrl-g` again to
 | `Alt e` | Open Neovim in Oil view (in stacked pane) |
 | `Alt g` | Run agy (in stacked pane) |
 | `Alt p` | Open a new pane in a right split |
-| `Alt r` | Open docs directory in `yazi` (in stacked pane) |
+| `Alt r` | Open docs directory in Oil (in stacked pane) |
 | `Alt s` | New stacked pane |
 | `Alt t` | New tab |
 | `Alt w` | Open blank Neovim instance in current directory (in stacked pane) |
 | `Alt x` | Close focused pane |
-| `Alt y` | Open `yazi` file manager in current directory (in stacked pane) |
+| `Alt y` | Open Oil file manager in current directory (in stacked pane) |
 | `Ctrl-g` | Enter normal mode |
 
 ---
@@ -172,15 +172,15 @@ Default mode: **locked**. Press `Ctrl-g` to enter normal mode; `Ctrl-g` again to
 | Layout | Launcher | Description |
 |--------|----------|-------------|
 | `project` | `zdot`, `zjd`, `zlc` | Canonical workspace. Set `PROJECT_DIR` env var; fish wrappers do this automatically. |
-| `socialdb` | `zsoc` | Single workspace tab. 60% yazi + 40% shell. |
-| `izaddit` | `ziz` | Single workspace tab. 60% yazi + 40% shell. |
-| `vesper` | `zvesp` | Single workspace tab. 60% yazi + 40% shell. |
-| `wofstack` | `zwf` | WofStack workspace: 1 main tab (`w1`: 60% yazi, 40% shell) and 11 numbered agent-dev tabs (`w2`–`w12`). |
-| `wayfarer` | `zwy` | Single workspace tab. 60% yazi + 40% shell. |
+| `socialdb` | `zsoc` | Single workspace tab. 60% Oil + 40% shell. |
+| `izaddit` | `ziz` | Single workspace tab. 60% Oil + 40% shell. |
+| `vesper` | `zvesp` | Single workspace tab. 60% Oil + 40% shell. |
+| `wofstack` | `zwf` | WofStack workspace: 1 main tab (`w1`: 60% Oil, 40% shell) and 11 numbered agent-dev tabs (`w2`–`w12`). |
+| `wayfarer` | `zwy` | Single workspace tab. 60% Oil + 40% shell. |
 | `worktree` | `cwt <branch>` | Single-tab worktree workspace. Used by `cwt` via `zellij action new-tab`. |
-| `dev` | — | Generic single workspace tab. 60% yazi + 40% shell. No project cwd. |
+| `dev` | — | Generic single workspace tab. 60% Oil + 40% shell. No project cwd. |
 
-All layouts open with a flat vertical split: `yazi` on the left 60% and a bare shell on the right 40%, with a `compact-bar` at the bottom.
+All layouts open with a flat vertical split: Oil on the left 60% and a bare shell on the right 40%, with a `compact-bar` at the bottom.
 
 Swap tiled layout views with `Alt [` / `Alt ]`.
 

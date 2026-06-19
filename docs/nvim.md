@@ -283,5 +283,5 @@ These locked-mode global keybindings inside Zellij immediately launch Neovim int
 
 | Key | Action | Description |
 |-----|--------|-------------|
-| `Alt e` | Open Neovim in Oil file explorer | Shows directories/files in a 30% left list and 70% right preview pane (matching yazi). |
+| `Alt e` | Open Neovim in Oil file explorer | Shows directories/files in a 30% left list and 70% right preview pane. |
 | `Alt d` | Open Neovim in DiffviewOpen main | Opens Neovim showing all files changed on the current local branch compared to `main`. |
