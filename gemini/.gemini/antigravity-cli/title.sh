@@ -53,7 +53,14 @@ else
   prefix=""
 fi
 
-title_text="${prefix}agy${working_on}${vcs_part} - ${state}"
+# Current directory name to prefix the title (basename of the workspace dir)
+dir_path=$(echo "$input" | jq -r '.workspace.current_dir // .cwd // .workspace.cwd // ""')
+if [ "$dir_path" = "null" ] || [ -z "$dir_path" ]; then
+  dir_path="$PWD"
+fi
+dir_name=$(basename "$dir_path")
+
+title_text="${prefix}${dir_name} agy${working_on}${vcs_part} - ${state}"
 
 # Inside zellij, the host's OSC title is swallowed by zellij; rename the pane directly
 # via the zellij CLI (targeted by pane id). Dedupe to avoid spamming the server.
