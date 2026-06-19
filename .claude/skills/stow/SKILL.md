@@ -1,6 +1,6 @@
 ---
 name: stow
-description: Re-stow changed dotfiles packages, then commit and push. Run after editing anything under fish/, zellij/, nvim/, alacritty/, or any other stow package in this repo.
+description: Re-stow changed dotfiles packages, then commit and push. Run after editing anything under fish/, zellij/, nvim/, yazi/, alacritty/, or any other stow package in this repo.
 ---
 
 # /stow

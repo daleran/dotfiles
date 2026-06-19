@@ -27,7 +27,7 @@ return {
                 },
             })
 
-            -- Auto-open vertical split preview on entry
+            -- Auto-open Yazi-like vertical split preview on entry
             vim.api.nvim_create_autocmd("User", {
                 pattern = "OilEnter",
                 callback = vim.schedule_wrap(function(args)

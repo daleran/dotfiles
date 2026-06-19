@@ -12,8 +12,7 @@ This is a GNU Stow-based dotfiles repository. Each top-level directory is a stow
 # Symlink a package to home directory (e.g., fish configs)
 stow fish
 
-# Symlink all real packages (docs/ and wofstack/ are NOT packages and
-# carry a .stow-local-ignore so they stay no-ops; safe to include here)
+# Symlink all packages
 stow */
 
 # Remove symlinks for a package
@@ -33,6 +32,7 @@ Each package follows the pattern `<package>/.config/<app>/...`, which stow maps 
 - **fish** — Fish shell: custom functions in `functions/`, completions in `completions/`, theme/env in `conf.d/`, plugin list in `fish_plugins` (managed by Fisher)
 - **gemini** — Gemini/Antigravity CLI configuration: user settings and keybindings in `.gemini/antigravity-cli/`
 - **nvim** — Neovim config using lazy.nvim plugin manager. Entry point is `init.lua`, options/keymaps/autocmds split under `lua/config/`, plugins defined per-concern under `lua/plugins/`
+- **yazi** — File manager with ayu-dark flavor
 - **zellij** — Terminal multiplexer config (KDL format) with custom layouts and scripts
 
 

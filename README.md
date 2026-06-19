@@ -21,7 +21,7 @@ cd ~/dotfiles
 - **Editor:** [Neovim](docs/nvim.md) (Unstable PPA) with Lazy.nvim, Mason, and LSP.
 - **Terminal:** [Alacritty](docs/alacritty.md) (Ayu-style theme, JetBrainsMono Nerd Font).
 - **Multiplexer:** [Zellij](docs/zellij.md) with custom project and worktree layouts.
-- **File Manager:** [Oil.nvim](docs/nvim.md) (edit the filesystem like a Neovim buffer).
+- **File Manager:** [Yazi](docs/yazi.md) (fast terminal file manager).
 
 ### Workflow & Tools
 - **[Git Worktrees](docs/worktrees.md):** Custom functions (`cwt`, `cwt-rm`, `wt`) for parallel branch development with independent databases and ports.
@@ -36,6 +36,7 @@ cd ~/dotfiles
 - `fish/`: Shell functions, aliases, and completions.
 - `gemini/`: Gemini/Antigravity user settings and keybindings.
 - `nvim/`: Neovim configuration (Lua).
+- `yazi/`: File manager configuration.
 - `zellij/`: Multiplexer layouts and configuration.
 
 

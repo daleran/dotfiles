@@ -16,12 +16,12 @@ Default mode: **locked**. Press `Ctrl-g` to enter normal mode; `Ctrl-g` again to
 | `Alt e` | Open Neovim in Oil view (in stacked pane) |
 | `Alt g` | Run agy (in stacked pane) |
 | `Alt p` | Open a new pane in a right split |
-| `Alt r` | Open docs directory in Oil (in stacked pane) |
+| `Alt r` | Open docs directory in `yazi` (in stacked pane) |
 | `Alt s` | New stacked pane |
 | `Alt t` | New tab |
 | `Alt w` | Open blank Neovim instance in current directory (in stacked pane) |
 | `Alt x` | Close focused pane |
-| `Alt y` | Open Oil file manager in current directory (in stacked pane) |
+| `Alt y` | Open `yazi` file manager in current directory (in stacked pane) |
 | `Ctrl-g` | Enter normal mode |
 
 ---
