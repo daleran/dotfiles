@@ -63,13 +63,19 @@ dir_name=$(basename "$dir_path")
 session_name=$(echo "$input" | jq -r '.session_name // ""')
 [ "$session_name" = "null" ] && session_name=""
 
-# Nerd Font icons: folder (dir), robot (agent), tag (session)
+# Nerd Font icons: folder (dir), robot (agent), tag (session), git branch
 ICON_DIR=$''
 ICON_AGENT=$'\U000f06a9'
+ICON_BRANCH=$''
 ICON_SESSION=$''
 
 title_text="${ICON_DIR} ${dir_name}  ${ICON_AGENT} claude"
-[ -n "$session_name" ] && title_text="${title_text}  ${ICON_SESSION} ${session_name}"
+# Off main: show the branch. On main (or no branch): show the session name.
+if [ -n "$branch" ] && [ "$branch" != "main" ]; then
+  title_text="${title_text}  ${ICON_BRANCH} ${branch}"
+elif [ -n "$session_name" ]; then
+  title_text="${title_text}  ${ICON_SESSION} ${session_name}"
+fi
 
 if [ -n "$ZELLIJ" ] && [ -n "$ZELLIJ_PANE_ID" ] && command -v zellij &>/dev/null; then
   # Dedupe against the last value so we only hit the zellij server when it changes.
