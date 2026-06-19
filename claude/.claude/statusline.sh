@@ -36,8 +36,13 @@ duration_ms=$(echo "$input" | jq -r '.cost.total_duration_ms // .cost.duration_m
 cost=$(echo "$input" | jq -r '.cost.total_cost_usd // .cost.cost_usd // .cost.cost // 0')
 [ "$cost" = "null" ] && cost=0
 
-# --- Terminal title (OSC) ---
-# Format:  <dir>   claude   <session-name>   (self-clears when Claude exits)
+# --- Pane title ---
+# Format:  <dir>   claude   <session-name>
+# Claude runs the statusline with no controlling terminal (OSC to /dev/tty fails) and
+# overwrites the OS title itself anyway, so under zellij we set the *pane* title via the
+# zellij CLI — an explicit rename takes precedence over Claude's own title and is
+# pane-targeted (needed for multiple dirs in one tab). conf.d/zellij-pane-reset.fish
+# clears it once Claude exits.
 
 # Git branch (also used by the visible status line below)
 branch=$(echo "$input" | jq -r '.vcs.branch // .workspace.repo.branch // ""')
@@ -66,8 +71,17 @@ ICON_SESSION=$''
 title_text="${ICON_DIR} ${dir_name}  ${ICON_AGENT} claude"
 [ -n "$session_name" ] && title_text="${title_text}  ${ICON_SESSION} ${session_name}"
 
-# Write the title via OSC straight to the terminal; it self-clears when Claude exits.
-printf "\033]0;%s\007" "${title_text}" > /dev/tty 2>/dev/null
+if [ -n "$ZELLIJ" ] && [ -n "$ZELLIJ_PANE_ID" ] && command -v zellij &>/dev/null; then
+  # Dedupe against the last value so we only hit the zellij server when it changes.
+  title_state_file="/tmp/claude-pane-title-${ZELLIJ_PANE_ID}"
+  if [ ! -f "$title_state_file" ] || [ "$(cat "$title_state_file" 2>/dev/null)" != "$title_text" ]; then
+    printf '%s' "$title_text" > "$title_state_file"
+    zellij action rename-pane -p "$ZELLIJ_PANE_ID" "$title_text" &>/dev/null &
+  fi
+else
+  # Outside zellij, fall back to setting the terminal title via OSC.
+  printf "\033]0;%s\007" "${title_text}" > /dev/tty 2>/dev/null
+fi
 
 
 # Define ANSI color escape codes (compatible with Alacritty's ayu-dark theme)
