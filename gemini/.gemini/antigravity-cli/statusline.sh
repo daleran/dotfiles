@@ -37,6 +37,8 @@ RESET="\033[0m"
 CYAN="\033[1;36m"
 MAGENTA="\033[1;35m"
 GREEN="\033[1;32m"
+BRANCH="\033[1;34m" # Blue for git branch
+BRANCH_ICON=$'\ue725' # Nerd Font git branch glyph (nf-dev-git_branch)
 
 # Style the effort level dynamically
 case "${effort,,}" in
@@ -97,6 +99,20 @@ format_duration() {
   fi
 }
 
+# Extract git branch (icon + name only)
+branch=$(echo "$input" | jq -r '.vcs.branch // .workspace.repo.branch // ""')
+if [ "$branch" = "null" ] || [ -z "$branch" ]; then
+  if command -v git &>/dev/null; then
+    branch=$(git branch --show-current 2>/dev/null)
+  fi
+fi
+
+if [ -n "$branch" ]; then
+  branch_part="  ${BRANCH}${BRANCH_ICON} ${branch}${RESET}"
+else
+  branch_part=""
+fi
+
 # Responsive design formatting based on current terminal columns
 if [ "$cols" -ge 110 ]; then
   # Wide mode: Detailed token split but no labels
@@ -124,14 +140,14 @@ if [ "$cols" -ge 110 ]; then
     subagents_part=""
   fi
 
-  echo -e "${CYAN}󰚩 ${model}${RESET}  ${EFFORT_COLOR}⚡ ${effort}${RESET}  ${CONTEXT_COLOR}󰘚 ${context_int}%${RESET}  ${MAGENTA} ${formatted_tokens}${RESET}  ${GREEN} ${formatted_duration}${RESET}${subagents_part}"
+  echo -e "${CYAN}󰚩 ${model}${RESET}  ${EFFORT_COLOR}⚡ ${effort}${RESET}  ${CONTEXT_COLOR}󰘚 ${context_int}%${RESET}  ${MAGENTA} ${formatted_tokens}${RESET}  ${GREEN} ${formatted_duration}${RESET}${subagents_part}${branch_part}"
 
 elif [ "$cols" -ge 80 ]; then
   # Narrow mode: Compact tokens, no subagents details
   formatted_tokens="$(format_number $total_tokens)"
   formatted_duration="$(format_duration $duration_ms)"
 
-  echo -e "${CYAN}󰚩 ${model}${RESET}  ${EFFORT_COLOR}⚡ ${effort}${RESET}  ${CONTEXT_COLOR}󰘚 ${context_int}%${RESET}  ${MAGENTA} ${formatted_tokens}${RESET}  ${GREEN} ${formatted_duration}${RESET}"
+  echo -e "${CYAN}󰚩 ${model}${RESET}  ${EFFORT_COLOR}⚡ ${effort}${RESET}  ${CONTEXT_COLOR}󰘚 ${context_int}%${RESET}  ${MAGENTA} ${formatted_tokens}${RESET}  ${GREEN} ${formatted_duration}${RESET}${branch_part}"
 
 else
   # Ultra-Narrow mode: Show critical stats (Model, Context usage %, Tokens)

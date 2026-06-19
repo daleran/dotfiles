@@ -3,6 +3,7 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
+        branch = "master",
         build = ":TSUpdate",
         config = function()
             require("nvim-treesitter").setup({
@@ -19,7 +20,7 @@ return {
 
     {
         "EmranMR/tree-sitter-blade",
-        dependencies = "nvim-treesitter/nvim-treesitter",
+        dependencies = { "nvim-treesitter/nvim-treesitter", branch = "master" },
         ft = "blade",
         config = function()
             local parser_config = require("nvim-treesitter.parsers").get_parser_configs()

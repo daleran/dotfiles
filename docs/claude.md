@@ -68,3 +68,9 @@ In `~/.claude/settings.json`:
 | `agentPushNotifEnabled` | `true` | Push notifications for agent events |
 | `skipAutoPermissionPrompt` | `true` | Skip the automatic permission prompt |
 | `voiceEnabled` | `true` | Voice input enabled |
+
+### Keybindings (`~/.claude/keybindings.json`)
+
+| Key | Action |
+|-----|--------|
+| `Alt+M` | Open model picker |

@@ -1,0 +1,5 @@
+# This directory is documentation, NOT a stow package.
+# Ignore everything so `stow docs` (or `stow */`) never links these
+# files into $HOME. See the June 2026 incident where docs/*.md got
+# symlinked into ~/.
+.*
