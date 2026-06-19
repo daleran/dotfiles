@@ -11,17 +11,13 @@ Default mode: **locked**. Press `Ctrl-g` to enter normal mode; `Ctrl-g` again to
 | `Alt -` | Previous tab |
 | `Alt =` | Next tab |
 | `Alt 1`–`6` | Jump to tab N |
-| `Alt c` | Run Claude (in stacked pane) |
-| `Alt d` | Open Neovim in DiffviewOpen main (in stacked pane) |
-| `Alt e` | Open Neovim in Oil view (in stacked pane) |
-| `Alt g` | Run agy (in stacked pane) |
+| `Alt b` | Split a new pane below |
+| `Alt n` | Open `~/notes/the.md` in Neovim (in stacked pane) |
 | `Alt p` | Open a new pane in a right split |
-| `Alt r` | Open docs directory in `yazi` (in stacked pane) |
+| `Alt r` | Rename the current tab |
 | `Alt s` | New stacked pane |
 | `Alt t` | New tab |
-| `Alt w` | Open blank Neovim instance in current directory (in stacked pane) |
 | `Alt x` | Close focused pane |
-| `Alt y` | Open `yazi` file manager in current directory (in stacked pane) |
 | `Ctrl-g` | Enter normal mode |
 
 ---
@@ -175,7 +171,7 @@ Default mode: **locked**. Press `Ctrl-g` to enter normal mode; `Ctrl-g` again to
 | `socialdb` | `zsoc` | Single workspace tab. 60% Oil + 40% shell. |
 | `izaddit` | `ziz` | Single workspace tab. 60% Oil + 40% shell. |
 | `vesper` | `zvesp` | Single workspace tab. 60% Oil + 40% shell. |
-| `wofstack` | `zwf` | WofStack workspace: 1 main tab (`w1`: 60% Oil, 40% shell) and 11 numbered agent-dev tabs (`w2`–`w12`). |
+| `wofstack` | `zwf` | WofStack workspace: a single `w1` tab with one terminal in `~/localdev/wofstack`. |
 | `wayfarer` | `zwy` | Single workspace tab. 60% Oil + 40% shell. |
 | `worktree` | `cwt <branch>` | Single-tab worktree workspace. Used by `cwt` via `zellij action new-tab`. |
 | `dev` | — | Generic single workspace tab. 60% Oil + 40% shell. No project cwd. |

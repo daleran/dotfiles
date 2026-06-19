@@ -12,17 +12,12 @@ keybinds clear-defaults=true {
         bind "Alt 5" { GoToTab 5; }
         bind "Alt 6" { GoToTab 6; }
         bind "Alt =" { GoToNextTab; }
-        bind "Alt c" { Run "claude" "--model" "opusplan" "--permission-mode" "plan" { stacked true; }; }
-        bind "Alt d" { Run "nvim" "-c" "DiffviewOpen main" { name "diff"; stacked true; }; }
-        bind "Alt e" { Run "nvim" "-c" "Oil" { name "oil"; stacked true; }; }
-        bind "Alt g" { Run "agy" { stacked true; }; }
+        bind "Alt b" { NewPane "down"; }
         bind "Alt n" { Run "nvim" "/home/sdavis/notes/the.md" { name "notes"; stacked true; }; }
         bind "Alt p" { NewPane "right"; }
-        bind "Alt r" { Run "yazi" "/home/sdavis/dotfiles/docs" { name "README"; stacked true; }; }
+        bind "Alt r" { SwitchToMode "renametab"; TabNameInput 0; }
         bind "Alt s" { NewPane "stacked"; }
         bind "Alt t" { NewTab; }
-        bind "Alt w" { Run "nvim" { name "neovim"; stacked true; }; }
-        bind "Alt y" { Run "yazi" { name "yazi"; stacked true; }; }
         bind "Alt x" { CloseFocus; }
         bind "Ctrl g" { SwitchToMode "normal"; }
     }

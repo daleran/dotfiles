@@ -53,5 +53,17 @@ else
   prefix=""
 fi
 
-# Print the final formatted title
-echo "${prefix}agy${working_on}${vcs_part} - ${state}"
+title_text="${prefix}agy${working_on}${vcs_part} - ${state}"
+
+# Inside zellij, the host's OSC title is swallowed by zellij; rename the pane directly
+# via the zellij CLI (targeted by pane id). Dedupe to avoid spamming the server.
+if [ -n "$ZELLIJ" ] && [ -n "$ZELLIJ_PANE_ID" ] && command -v zellij &>/dev/null; then
+  title_state_file="/tmp/agy-pane-title-${ZELLIJ_PANE_ID}"
+  if [ ! -f "$title_state_file" ] || [ "$(cat "$title_state_file" 2>/dev/null)" != "$title_text" ]; then
+    printf '%s' "$title_text" > "$title_state_file"
+    zellij action rename-pane -p "$ZELLIJ_PANE_ID" "${title_text}" &>/dev/null &
+  fi
+fi
+
+# Print the final formatted title (used by the host's title hook outside zellij)
+echo "$title_text"

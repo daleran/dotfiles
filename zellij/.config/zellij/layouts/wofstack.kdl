@@ -6,55 +6,7 @@ layout {
         }
     }
 
-    tab name="w1" cwd="/home/sdavis/localdev/wofstack" split_direction="vertical" {
-        pane size="60%" {
-            command "nvim"
-            args "-c" "Oil"
-        }
-        pane size="40%"
-    }
-
-    tab name="w2" cwd="/home/sdavis/localdev/wofstack2" {
-        pane
-    }
-
-    tab name="w3" cwd="/home/sdavis/localdev/wofstack3" {
-        pane
-    }
-
-    tab name="w4" cwd="/home/sdavis/localdev/wofstack4" {
-        pane
-    }
-
-    tab name="w5" cwd="/home/sdavis/localdev/wofstack5" {
-        pane
-    }
-
-    tab name="w6" cwd="/home/sdavis/localdev/wofstack6" {
-        pane
-    }
-
-    tab name="w7" cwd="/home/sdavis/localdev/wofstack7" {
-        pane
-    }
-
-    tab name="w8" cwd="/home/sdavis/localdev/wofstack8" {
-        pane
-    }
-
-    tab name="w9" cwd="/home/sdavis/localdev/wofstack9" {
-        pane
-    }
-
-    tab name="w10" cwd="/home/sdavis/localdev/wofstack10" {
-        pane
-    }
-
-    tab name="w11" cwd="/home/sdavis/localdev/wofstack11" {
-        pane
-    }
-
-    tab name="w12" cwd="/home/sdavis/localdev/wofstack12" {
+    tab name="w1" cwd="/home/sdavis/localdev/wofstack" {
         pane
     }
 }

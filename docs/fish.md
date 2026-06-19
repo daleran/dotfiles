@@ -31,6 +31,17 @@ See [worktrees.md](worktrees.md) for the full guide.
 
 ---
 
+## Editor & Claude Launchers
+
+| Command | Description |
+|---------|-------------|
+| `noil` | Open Neovim Oil in the current directory |
+| `ndiff` | Open Neovim Diffview against `main` |
+| `nman` | Open Neovim Oil in the dotfiles `docs/` directory |
+| `cplan` | Launch Claude with `--model opusplan --permission-mode plan` |
+
+---
+
 ## Git Wrappers
 
 | Command | Expands to |
@@ -60,9 +71,9 @@ See [worktrees.md](worktrees.md) for the full guide.
 |---------|-------------|
 | `ll` | `ls -la` |
 | `wst` | `cd ~/localdev/wofstack` |
+| `w1`–`w12` | `cd` to `~/localdev/wofstack`, `wofstack2`, … `wofstack12` |
 | `rsh` | `gcloud compute ssh` |
 | `clswch` | Switch Claude SSO accounts (logout + re-login) |
-| `zwf_pane <num> <cmd>` | Run a command inside a wofstack pane and immediately rename its Zellij tab to `w<num>: branch_name` |
 
 ---
 

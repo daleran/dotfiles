@@ -79,7 +79,19 @@ else
 fi
 
 title_text="${prefix}claude${working_on}${vcs_part} - ${state}"
-printf "\033]0;%s\007" "${title_text}" > /dev/tty 2>/dev/null
+
+# Set the title. Inside zellij the statusLine subprocess has no usable /dev/tty and
+# zellij swallows OSC title escapes anyway, so rename the pane directly via the zellij
+# CLI (targeted by pane id). Dedupe against the last value to avoid spamming the server.
+if [ -n "$ZELLIJ" ] && [ -n "$ZELLIJ_PANE_ID" ] && command -v zellij &>/dev/null; then
+  title_state_file="/tmp/claude-pane-title-${ZELLIJ_PANE_ID}"
+  if [ ! -f "$title_state_file" ] || [ "$(cat "$title_state_file" 2>/dev/null)" != "$title_text" ]; then
+    printf '%s' "$title_text" > "$title_state_file"
+    zellij action rename-pane -p "$ZELLIJ_PANE_ID" "${title_text}" &>/dev/null &
+  fi
+else
+  printf "\033]0;%s\007" "${title_text}" > /dev/tty 2>/dev/null
+fi
 
 
 # Define ANSI color escape codes (compatible with Alacritty's ayu-dark theme)
@@ -88,6 +100,8 @@ CYAN="\033[1;36m"
 MAGENTA="\033[1;35m"
 GREEN="\033[1;32m"
 YELLOW="\033[1;33m" # Gold for cost
+BRANCH="\033[1;34m" # Blue for git branch
+BRANCH_ICON=$'\ue725' # Nerd Font git branch glyph (nf-dev-git_branch)
 
 # Style the effort level dynamically
 case "${effort,,}" in
@@ -156,6 +170,13 @@ format_cost() {
   awk -v val="$c" 'BEGIN { printf "$%.4f", val }'
 }
 
+# Build git branch segment (icon + name only)
+if [ -n "$branch" ]; then
+  branch_part="  ${BRANCH}${BRANCH_ICON} ${branch}${RESET}"
+else
+  branch_part=""
+fi
+
 # Responsive design formatting based on current terminal columns
 if [ "$cols" -ge 110 ]; then
   # Wide mode: Detailed token split but no labels
@@ -184,7 +205,7 @@ if [ "$cols" -ge 110 ]; then
     subagents_part=""
   fi
 
-  echo -e "${CYAN}󰚩 ${model}${RESET}  ${EFFORT_COLOR}⚡ ${effort}${RESET}  ${CONTEXT_COLOR}󰘚 ${context_int}%${RESET}  ${MAGENTA} ${formatted_tokens}${RESET}  ${GREEN} ${formatted_duration}${RESET}  ${YELLOW}🪙 ${formatted_cost}${RESET}${subagents_part}"
+  echo -e "${CYAN}󰚩 ${model}${RESET}  ${EFFORT_COLOR}⚡ ${effort}${RESET}  ${CONTEXT_COLOR}󰘚 ${context_int}%${RESET}  ${MAGENTA} ${formatted_tokens}${RESET}  ${GREEN} ${formatted_duration}${RESET}  ${YELLOW}🪙 ${formatted_cost}${RESET}${subagents_part}${branch_part}"
 
 elif [ "$cols" -ge 80 ]; then
   # Narrow mode: Compact tokens, no subagents details
@@ -192,7 +213,7 @@ elif [ "$cols" -ge 80 ]; then
   formatted_duration="$(format_duration $duration_ms)"
   formatted_cost="$(format_cost $cost)"
 
-  echo -e "${CYAN}󰚩 ${model}${RESET}  ${EFFORT_COLOR}⚡ ${effort}${RESET}  ${CONTEXT_COLOR}󰘚 ${context_int}%${RESET}  ${MAGENTA} ${formatted_tokens}${RESET}  ${GREEN} ${formatted_duration}${RESET}  ${YELLOW}🪙 ${formatted_cost}${RESET}"
+  echo -e "${CYAN}󰚩 ${model}${RESET}  ${EFFORT_COLOR}⚡ ${effort}${RESET}  ${CONTEXT_COLOR}󰘚 ${context_int}%${RESET}  ${MAGENTA} ${formatted_tokens}${RESET}  ${GREEN} ${formatted_duration}${RESET}  ${YELLOW}🪙 ${formatted_cost}${RESET}${branch_part}"
 
 else
   # Ultra-Narrow mode: Show critical stats (Model, Context usage %, Tokens, and Cost)
