@@ -69,3 +69,24 @@ swap_tiled_layout name="Stacked" {
         }
     }
 }
+
+swap_tiled_layout name="Sidebar 30/70" {
+    tab exact_panes=1 {
+        pane
+    }
+    tab exact_panes=2 {
+        pane split_direction="vertical" {
+            pane size="30%"
+            pane size="70%"
+        }
+    }
+    tab min_panes=3 {
+        pane split_direction="vertical" {
+            pane size="30%"
+            pane size="70%" stacked=true {
+                pane
+                pane
+            }
+        }
+    }
+}
