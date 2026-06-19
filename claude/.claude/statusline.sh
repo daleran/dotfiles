@@ -36,28 +36,10 @@ duration_ms=$(echo "$input" | jq -r '.cost.total_duration_ms // .cost.duration_m
 cost=$(echo "$input" | jq -r '.cost.total_cost_usd // .cost.cost_usd // .cost.cost // 0')
 [ "$cost" = "null" ] && cost=0
 
-# --- Terminal Title bar Logic (Dynamic injection for Claude Code) ---
-state=$(echo "$input" | jq -r '.agent_state // .state // "idle"')
-[ "$state" = "null" ] && state="idle"
+# --- Terminal title (OSC) ---
+# Format:  <dir>   claude   <session-name>   (self-clears when Claude exits)
 
-active_tool=$(echo "$input" | jq -r '.active_tool // ""')
-if [ "$active_tool" = "null" ] || [ "$active_tool" = "None" ]; then
-  active_tool=""
-fi
-
-task_name=$(echo "$input" | jq -r '.background_tasks[0].name // ""')
-[ "$task_name" = "null" ] && task_name=""
-
-if [ -n "$active_tool" ]; then
-  working_on=" (${active_tool})"
-elif [ -n "$task_name" ]; then
-  working_on=" [${task_name}]"
-elif [ "$state" = "thinking" ]; then
-  working_on=" (thinking)"
-else
-  working_on=""
-fi
-
+# Git branch (also used by the visible status line below)
 branch=$(echo "$input" | jq -r '.vcs.branch // .workspace.repo.branch // ""')
 if [ "$branch" = "null" ] || [ -z "$branch" ]; then
   if command -v git &>/dev/null; then
@@ -65,40 +47,27 @@ if [ "$branch" = "null" ] || [ -z "$branch" ]; then
   fi
 fi
 
-if [ -n "$branch" ]; then
-  vcs_part=" (${branch})"
-else
-  vcs_part=""
-fi
-
-pending=$(echo "$input" | jq -r '.tool_confirmation_pending // .confirmation_pending // false')
-if [ "$pending" = "true" ]; then
-  prefix="[!] "
-else
-  prefix=""
-fi
-
-# Current directory name to prefix the title (basename of the workspace dir)
+# Current directory name (basename of the workspace dir)
 dir_path=$(echo "$input" | jq -r '.workspace.current_dir // .cwd // .workspace.cwd // ""')
 if [ "$dir_path" = "null" ] || [ -z "$dir_path" ]; then
   dir_path="$PWD"
 fi
 dir_name=$(basename "$dir_path")
 
-title_text="${prefix}${dir_name} claude${working_on}${vcs_part} - ${state}"
+# Human-readable session name (used to tell panes apart)
+session_name=$(echo "$input" | jq -r '.session_name // ""')
+[ "$session_name" = "null" ] && session_name=""
 
-# Set the title. Inside zellij the statusLine subprocess has no usable /dev/tty and
-# zellij swallows OSC title escapes anyway, so rename the pane directly via the zellij
-# CLI (targeted by pane id). Dedupe against the last value to avoid spamming the server.
-if [ -n "$ZELLIJ" ] && [ -n "$ZELLIJ_PANE_ID" ] && command -v zellij &>/dev/null; then
-  title_state_file="/tmp/claude-pane-title-${ZELLIJ_PANE_ID}"
-  if [ ! -f "$title_state_file" ] || [ "$(cat "$title_state_file" 2>/dev/null)" != "$title_text" ]; then
-    printf '%s' "$title_text" > "$title_state_file"
-    zellij action rename-pane -p "$ZELLIJ_PANE_ID" "${title_text}" &>/dev/null &
-  fi
-else
-  printf "\033]0;%s\007" "${title_text}" > /dev/tty 2>/dev/null
-fi
+# Nerd Font icons: folder (dir), robot (agent), tag (session)
+ICON_DIR=$''
+ICON_AGENT=$'\U000f06a9'
+ICON_SESSION=$''
+
+title_text="${ICON_DIR} ${dir_name}  ${ICON_AGENT} claude"
+[ -n "$session_name" ] && title_text="${title_text}  ${ICON_SESSION} ${session_name}"
+
+# Write the title via OSC straight to the terminal; it self-clears when Claude exits.
+printf "\033]0;%s\007" "${title_text}" > /dev/tty 2>/dev/null
 
 
 # Define ANSI color escape codes (compatible with Alacritty's ayu-dark theme)
