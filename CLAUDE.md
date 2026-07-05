@@ -47,6 +47,13 @@ Each package follows the pattern `<package>/.config/<app>/...`, which stow maps 
 
 **Documentation:** Per-tool docs live in `docs/<tool>.md`. When adding a new keybinding, function, or shortcut, update the matching file (e.g., a new Neovim leader key → `docs/nvim.md`; a new fish function → `docs/fish.md`). Match the existing markdown table style.
 
+**Adding a new zellij workspace layout:** A workspace is four coordinated pieces — create all of them, then re-stow (`stow fish zellij`) and commit. For a workspace named `<name>` living in `~/localdev/<name>`, launched by fish command `z<abbr>`:
+
+1. **Layout** — `zellij/.config/zellij/layouts/<name>.kdl`. Copy an existing single-tab layout (e.g. `vesper.kdl`); it uses `cwd="${PROJECT_DIR}"`, so nothing inside changes.
+2. **Swap layout symlink** — `zellij/.config/zellij/layouts/<name>.swap.kdl` → `standard.swap.kdl` (`ln -s standard.swap.kdl <name>.swap.kdl`). Every layout has one; without it the workspace loses the shared swap layouts.
+3. **Launcher function** — `fish/.config/fish/functions/z<abbr>.fish`. Copy `zvesp.fish`: set `PROJECT_DIR` and run `zellij --layout <name> $argv`.
+4. **Docs** — add a row to the launcher table in `docs/fish.md` and the layout table in `docs/zellij.md`.
+
 ## AI Workflows
 
 ### Mode A — Review markers (no PR needed)
