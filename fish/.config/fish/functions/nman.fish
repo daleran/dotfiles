@@ -1,3 +1,3 @@
-function nman --wraps='nvim -c Oil /home/sdavis/dotfiles/docs' --description 'Open Neovim Oil in the dotfiles docs directory'
-    nvim -c "Oil /home/sdavis/dotfiles/docs" $argv
+function nman --description 'Open Neovim with each dotfiles docs/*.md file in its own tab'
+    nvim -p /home/sdavis/dotfiles/docs/*.md $argv
 end
