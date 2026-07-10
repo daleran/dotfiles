@@ -72,7 +72,7 @@ See [worktrees.md](worktrees.md) for the full guide.
 |---------|-------------|
 | `ll` | `ls -la` |
 | `wst` | `cd ~/localdev/wofstack` |
-| `w1`–`w12` | `cd` to `~/localdev/wofstack`, `wofstack2`, … `wofstack12` |
+| `w1`–`w12` | `cd` to `~/localdev/wofstack`, `wofstack2`, … `wofstack12`; optional arg renames the focused zellij tab (`w2 EAX15` → tab `w2:EAX15`) |
 | `wstat` | List each `w1`–`w12` wofstack dir with its branch (`*` on the dir = uncommitted changes) |
 | `rsh` | `gcloud compute ssh` |
 | `clswch` | Switch Claude SSO accounts (logout + re-login) |
