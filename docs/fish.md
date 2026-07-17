@@ -39,7 +39,7 @@ See [worktrees.md](worktrees.md) for the full guide.
 | `noil` | Open Neovim Oil in the current directory |
 | `ndiff` | Open Neovim Diffview against `main` |
 | `nman` | Open Neovim Oil in the dotfiles `docs/` directory |
-| `cplan` | Launch Claude with `--model opusplan --permission-mode plan` |
+| `cplan [task]` | Launch Claude (opusplan, plan mode); with a task number, runs `/ipl <task>` as the first prompt |
 
 ---
 
