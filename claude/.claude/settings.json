@@ -28,7 +28,7 @@
       "Bash(whoami)"
     ]
   },
-  "model": "sonnet",
+  "model": "opus",
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh"
@@ -42,10 +42,10 @@
       }
     }
   },
+  "effortLevel": "medium",
   "skipWorkflowUsageWarning": true,
   "theme": "auto",
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true,
-  "effortLevel": "medium"
+  "voiceEnabled": true
 }

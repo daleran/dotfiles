@@ -25,3 +25,7 @@ end
 
 # Added by Antigravity CLI installer
 set -gx PATH "/home/sdavis/.local/bin" $PATH
+
+# >>> grok installer >>>
+fish_add_path $HOME/.grok/bin
+# <<< grok installer <<<
