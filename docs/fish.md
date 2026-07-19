@@ -32,7 +32,7 @@ See [worktrees.md](worktrees.md) for the full guide.
 
 ---
 
-## Editor & Claude Launchers
+## Editor & AI Launchers
 
 | Command | Description |
 |---------|-------------|
@@ -40,6 +40,7 @@ See [worktrees.md](worktrees.md) for the full guide.
 | `ndiff` | Open Neovim Diffview against `main` |
 | `nman` | Open Neovim Oil in the dotfiles `docs/` directory |
 | `cplan [task]` | Launch Claude (opusplan, plan mode); with a task number, runs `/ipl <task>` as the first prompt |
+| `gplan [task]` | Launch Grok (plan mode); with a task number, runs `/ipl <task>` as the first prompt |
 
 ---
 
