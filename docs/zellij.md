@@ -174,6 +174,7 @@ Default mode: **locked**. Press `Ctrl-g` to enter normal mode; `Ctrl-g` again to
 | `wofstack` | `zwf` | WofStack workspace: a single `w1` tab with one terminal in `~/localdev/wofstack`. |
 | `wayfarer` | `zwy` | Single workspace tab. 60% Oil + 40% shell. |
 | `aiventure` | `zav` | Single workspace tab. 60% Oil + 40% shell. |
+| `reports` | `zrep` | Single workspace tab. 60% Oil + 40% shell. |
 | `worktree` | `cwt <branch>` | Single-tab worktree workspace. Used by `cwt` via `zellij action new-tab`. |
 | `dev` | — | Generic single workspace tab. 60% Oil + 40% shell. No project cwd. |
 

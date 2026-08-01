@@ -29,6 +29,7 @@ See [worktrees.md](worktrees.md) for the full guide.
 | `zvesp` | `vesper` | `~/localdev/vesper` |
 | `zwy` | `wayfarer` | `~/localdev/wayfarer` |
 | `zav` | `aiventure` | `~/localdev/aiventure` |
+| `zrep` | `reports` | `~/localdev/reports` |
 
 ---
 
