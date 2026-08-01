@@ -86,6 +86,6 @@ See [worktrees.md](worktrees.md) for the full guide.
 - Editor: `nvim` (`$EDITOR` and `$VISUAL`)
 - Node: managed via nvm, default version 22
 - `~/.local/bin` on PATH
-- `GCP_MCP_TOKEN` — set at startup from `gcloud auth application-default print-access-token` (when `gcloud` is available)
+- `GCP_MCP_TOKEN` — bearer token for the GCP remote MCP servers (`gcp-compute`, `gcp-recommender`). Set at shell start via `gcloud auth application-default print-access-token` so Claude/Grok inherit it; expires ~1h
 - Secret env vars: `.env.fish` — sourced at startup if present (gitignored). Holds DB creds (`PGSQL_READONLY_*`, `PGSQL_PROD_*`), tokens, etc. — never commit it.
 - Plugins: `jorgebucaran/fisher` (plugin manager), `jorgebucaran/nvm.fish`

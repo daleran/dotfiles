@@ -17,7 +17,9 @@ ulimit -n 65536
 set -gx EDITOR nvim
 set -gx VISUAL nvim
 
-# GCP MCP token (refreshed each shell start from application-default credentials)
+# Bearer token for GCP remote MCP servers (gcp-compute, gcp-recommender).
+# Those servers expect Authorization: Bearer ${GCP_MCP_TOKEN} (see ~/.claude.json).
+# Refreshed each shell start from ADC; tokens expire ~1h.
 if command -q gcloud
     set -gx GCP_MCP_TOKEN (gcloud auth application-default print-access-token 2>/dev/null)
 end
