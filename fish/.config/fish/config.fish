@@ -17,6 +17,11 @@ ulimit -n 65536
 set -gx EDITOR nvim
 set -gx VISUAL nvim
 
+# GCP MCP token (refreshed each shell start from application-default credentials)
+if command -q gcloud
+    set -gx GCP_MCP_TOKEN (gcloud auth application-default print-access-token 2>/dev/null)
+end
+
 # Source secrets from gitignored .env.fish
 if test -f (status dirname)/.env.fish
     source (status dirname)/.env.fish
