@@ -40,8 +40,8 @@ See [worktrees.md](worktrees.md) for the full guide.
 | `noil` | Open Neovim Oil in the current directory |
 | `ndiff` | Open Neovim Diffview against `main` |
 | `nman` | Open Neovim Oil in the dotfiles `docs/` directory |
-| `cplan [task]` | Launch Claude (opusplan, plan mode); with a task number, runs `/ipl <task>` as the first prompt |
-| `gplan <task>` | Launch Grok with `/igo <task>` as the first prompt (always approve) |
+| `cgo [task]` | Launch Claude (`claude-opus-4-8`); with a task number, runs `/igo <task>` as the first prompt |
+| `ggo <task>` | Launch Grok with `/igo <task>` as the first prompt (always approve) |
 
 ---
 
