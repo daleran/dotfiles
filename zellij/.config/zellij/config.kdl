@@ -12,6 +12,7 @@ keybinds clear-defaults=true {
         bind "Alt 5" { GoToTab 5; }
         bind "Alt 6" { GoToTab 6; }
         bind "Alt =" { GoToNextTab; }
+        bind "Alt a" { Run "/home/sdavis/.config/zellij/scripts/autoname-tab" { floating true; close_on_exit true; name "autoname"; }; }
         bind "Alt b" { NewPane "down"; }
         bind "Alt n" { Run "nvim" "/home/sdavis/notes/the.md" { name "notes"; stacked true; }; }
         bind "Alt p" { NewPane "right"; }

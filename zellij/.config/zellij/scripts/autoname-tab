@@ -1,0 +1,117 @@
+#!/usr/bin/env python3
+"""Auto-rename the focused zellij tab from its panes.
+
+Looks at the currently-focused tab and builds a name of the form:
+
+    w<digits>[:<PROJECT>]
+
+- <digits>  concatenated trailing digits of each claude work-pane's cwd,
+            in the order the panes appear (e.g. wofstack5 + wofstack6 -> "56").
+- <PROJECT> the project code passed to a running `iproj` pane, detected as the
+            last non-flag argument of a `torch:project-status` command
+            (e.g. `... torch:project-status --watch --interval=30 EDC` -> "EDC").
+
+So a tab with claude panes in wofstack3/7/9 plus an iproj pane watching EBH
+becomes `w379:EBH`. Panes that are not claude work panes (a plain log/shell
+pane, the iproj dashboard, the status bar) are ignored when collecting digits.
+
+Reads `zellij action dump-layout`. Pass a file path as $1 (or set
+AUTONAME_DUMP) to parse a saved dump instead, and set AUTONAME_DRYRUN=1 to
+print the computed name instead of renaming.
+"""
+import os
+import re
+import subprocess
+import sys
+
+
+def load_layout():
+    src = sys.argv[1] if len(sys.argv) > 1 else os.environ.get("AUTONAME_DUMP")
+    if src:
+        with open(src) as fh:
+            return fh.read()
+    return subprocess.run(
+        ["zellij", "action", "dump-layout"],
+        capture_output=True, text=True, check=True,
+    ).stdout
+
+
+def focused_tab_block(lines):
+    """Return the lines of the `tab ... focus=true { ... }` block, or None."""
+    start = None
+    for i, line in enumerate(lines):
+        s = line.strip()
+        if s.startswith("tab ") and "focus=true" in s and s.endswith("{"):
+            start = i
+            break
+    if start is None:
+        return None
+
+    depth = 0
+    block = []
+    for line in lines[start:]:
+        block.append(line)
+        depth += line.count("{") - line.count("}")
+        if depth == 0:
+            break
+    return block
+
+
+def is_claude_pane(line):
+    return 'command="claude"' in line or re.search(r'name="[^"]*claude', line) is not None
+
+
+def collect(block):
+    digits = []
+    code = None
+    for line in block:
+        s = line.strip()
+
+        # Project code from the iproj / torch:project-status pane.
+        if code is None and "torch:project-status" in s:
+            toks = re.findall(r'"([^"]+)"', s)
+            try:
+                after = toks[toks.index("torch:project-status") + 1:]
+            except ValueError:
+                after = []
+            positional = [t for t in after if not t.startswith("-")]
+            if positional:
+                code = positional[-1]
+            continue
+
+        # Work directory from each claude pane's cwd.
+        if not s.startswith("pane"):
+            continue
+        m = re.search(r'cwd="([^"]+)"', s)
+        if not m or not is_claude_pane(s):
+            continue
+        d = re.search(r"(\d+)$", os.path.basename(m.group(1)))
+        if d and d.group(1) not in digits:
+            digits.append(d.group(1))
+
+    return digits, code
+
+
+def main():
+    block = focused_tab_block(load_layout().splitlines())
+    if block is None:
+        return
+
+    digits, code = collect(block)
+
+    name = ""
+    if digits:
+        name = "w" + "".join(digits)
+    if code:
+        name = f"{name}:{code}" if name else code
+    if not name:
+        return
+
+    if os.environ.get("AUTONAME_DRYRUN"):
+        print(name)
+        return
+    subprocess.run(["zellij", "action", "rename-tab", name], check=False)
+
+
+if __name__ == "__main__":
+    main()
