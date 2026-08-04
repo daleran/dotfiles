@@ -5,15 +5,16 @@ Looks at the currently-focused tab and builds a name of the form:
 
     w<digits>[:<PROJECT>]
 
-- <digits>  concatenated trailing digits of each claude work-pane's cwd,
+- <digits>  concatenated trailing digits of each agent work-pane's cwd,
             in the order the panes appear (e.g. wofstack5 + wofstack6 -> "56").
 - <PROJECT> the project code passed to a running `iproj` pane, detected as the
             last non-flag argument of a `torch:project-status` command
             (e.g. `... torch:project-status --watch --interval=30 EDC` -> "EDC").
 
-So a tab with claude panes in wofstack3/7/9 plus an iproj pane watching EBH
-becomes `w379:EBH`. Panes that are not claude work panes (a plain log/shell
-pane, the iproj dashboard, the status bar) are ignored when collecting digits.
+So a tab with agent panes in wofstack3/7/9 plus an iproj pane watching EBH
+becomes `w379:EBH`. Agent panes are those whose command (or title) is claude,
+grok, or gemini. Plain log/shell panes, the iproj dashboard, and the status bar
+are ignored when collecting digits.
 
 Reads `zellij action dump-layout`. Pass a file path as $1 (or set
 AUTONAME_DUMP) to parse a saved dump instead, and set AUTONAME_DRYRUN=1 to
@@ -23,6 +24,13 @@ import os
 import re
 import subprocess
 import sys
+
+# Agent CLIs whose panes contribute worktree digits to the tab name.
+AGENT_CMDS = ("claude", "grok", "gemini")
+_AGENT_NAME_RE = re.compile(
+    r'name="[^"]*(?:' + "|".join(AGENT_CMDS) + r")",
+    re.IGNORECASE,
+)
 
 
 def load_layout():
@@ -57,8 +65,12 @@ def focused_tab_block(lines):
     return block
 
 
-def is_claude_pane(line):
-    return 'command="claude"' in line or re.search(r'name="[^"]*claude', line) is not None
+def is_agent_pane(line):
+    """True if this pane line is a claude/grok/gemini agent work pane."""
+    for cmd in AGENT_CMDS:
+        if f'command="{cmd}"' in line:
+            return True
+    return _AGENT_NAME_RE.search(line) is not None
 
 
 def collect(block):
@@ -79,11 +91,11 @@ def collect(block):
                 code = positional[-1]
             continue
 
-        # Work directory from each claude pane's cwd.
+        # Work directory from each agent (claude/grok/gemini) pane's cwd.
         if not s.startswith("pane"):
             continue
         m = re.search(r'cwd="([^"]+)"', s)
-        if not m or not is_claude_pane(s):
+        if not m or not is_agent_pane(s):
             continue
         d = re.search(r"(\d+)$", os.path.basename(m.group(1)))
         if d and d.group(1) not in digits:

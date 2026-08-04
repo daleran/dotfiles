@@ -11,7 +11,7 @@ Default mode: **locked**. Press `Ctrl-g` to enter normal mode; `Ctrl-g` again to
 | `Alt -` | Previous tab |
 | `Alt =` | Next tab |
 | `Alt 1`–`6` | Jump to tab N |
-| `Alt a` | Auto-name the current tab `w<dirs>:<PROJECT>` from its claude panes + `iproj` pane |
+| `Alt a` | Auto-name the current tab `w<dirs>:<PROJECT>` from its agent (claude/grok/gemini) panes + `iproj` pane |
 | `Alt b` | Split a new pane below |
 | `Alt n` | Open `~/notes/the.md` in Neovim (in stacked pane) |
 | `Alt p` | Open a new pane in a right split |
@@ -212,15 +212,16 @@ If the project needs extra tabs, create `zellij/.config/zellij/layouts/<name>.kd
 `Alt a` runs `scripts/autoname-tab`, which reads `zellij action dump-layout`,
 finds the focused tab, and renames it to `w<digits>:<PROJECT>`:
 
-- **`<digits>`** — the trailing number of each **claude** pane's working
+- **`<digits>`** — the trailing number of each **agent** pane's working
   directory, in order (e.g. panes in `wofstack3`, `wofstack7`, `wofstack9`
-  give `w379`). A pane counts as a claude pane if its command is `claude` or
-  its title contains `claude`; plain shell/log panes are skipped.
+  give `w379`). A pane counts as an agent pane if its command is `claude`,
+  `grok`, or `gemini`, or its title contains one of those names; plain
+  shell/log panes are skipped.
 - **`<PROJECT>`** — the project code of an `iproj` pane in the tab, taken from
   the last non-flag argument of its `torch:project-status` command
   (`… torch:project-status --watch --interval=30 EBH` → `EBH`).
 
-So a tab with claude worktrees `wofstack3/7/9` plus an `iproj EBH` pane becomes
-`w379:EBH`. If no claude panes are found and no `iproj` pane is running, the tab
+So a tab with agent worktrees `wofstack3/7/9` plus an `iproj EBH` pane becomes
+`w379:EBH`. If no agent panes are found and no `iproj` pane is running, the tab
 is left untouched. The script launches in a floating, close-on-exit pane, so it
 flashes briefly and disappears.
