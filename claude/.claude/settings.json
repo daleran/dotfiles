@@ -28,7 +28,7 @@
       "Bash(whoami)"
     ]
   },
-  "model": "opus",
+  "model": "claude-opus-4-8",
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh"
@@ -42,7 +42,7 @@
       }
     }
   },
-  "effortLevel": "medium",
+  "effortLevel": "high",
   "skipWorkflowUsageWarning": true,
   "theme": "auto",
   "agentPushNotifEnabled": true,
