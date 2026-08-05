@@ -55,7 +55,7 @@ See [worktrees.md](worktrees.md) for the full guide.
 | `gac "<msg>"` | `git add . && git commit -m "<msg>"` |
 | `gpso` | `git push origin` |
 | `gplo` | `git pull origin` |
-| `gmain` | `git checkout main && git fetch && git pull origin main` |
+| `gmain` / `gm` | `git checkout main && git fetch && git pull origin main` |
 
 ---
 
