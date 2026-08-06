@@ -89,4 +89,10 @@ See [worktrees.md](worktrees.md) for the full guide.
 - `~/.local/bin` on PATH
 - `GCP_MCP_TOKEN` — bearer token for the GCP remote MCP servers (`gcp-compute`, `gcp-recommender`). Set at shell start via `gcloud auth application-default print-access-token` so Claude/Grok inherit it; expires ~1h
 - Secret env vars: `.env.fish` — sourced at startup if present (gitignored). Holds DB creds (`PGSQL_READONLY_*`, `PGSQL_PROD_*`), tokens, etc. — never commit it.
+- Torch / TMX MCP (also from `.env.fish`; Claude, Grok, and Codex MCP configs reference these — **no hardcoded secrets**):
+  - `TORCH_MCP_TOKEN` — bare JWT for `https://prm.wordonfire.org/mcp/torch`
+  - `TORCH_MCP_AUTH_HEADER` — derived at session start as `Bearer $TORCH_MCP_TOKEN` (see `config.fish`)
+  - `TORCH_CF_ACCESS_CLIENT_ID` / `TORCH_CF_ACCESS_CLIENT_SECRET` — Cloudflare **Access service tokens** (not browser/OAuth login) for torch-prod
+  - `PGSQL_READONLY_USER` / `PGSQL_READONLY_PASS` / `PGSQL_PROD_HOST` / `PGSQL_PROD_DB` — tmxprod postgres MCP + `dbp`
+  - Legacy alias: `TORCH_KEY` mirrors `TORCH_MCP_TOKEN`
 - Plugins: `jorgebucaran/fisher` (plugin manager), `jorgebucaran/nvm.fish`

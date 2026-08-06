@@ -22,6 +22,10 @@ if test -f (status dirname)/.env.fish
     source (status dirname)/.env.fish
 end
 
+# Derive MCP auth headers from secrets (never store the composed value in .env.fish)
+if set -q TORCH_MCP_TOKEN
+    set -gx TORCH_MCP_AUTH_HEADER "Bearer $TORCH_MCP_TOKEN"
+end
 
 # Added by Antigravity CLI installer
 set -gx PATH "/home/sdavis/.local/bin" $PATH
