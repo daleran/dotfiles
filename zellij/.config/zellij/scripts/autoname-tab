@@ -14,8 +14,9 @@ Looks at the currently-focused tab and builds a name of the form:
             last non-flag argument of a `torch:project-status` command
             (e.g. `... torch:project-status --watch --interval=30 EDX` -> "EDX").
 - <slug>    1–3 word, ≤12-char abbreviation of the Torch project name/description,
-            produced by a one-shot headless `grok` call that uses torch-prod MCP
-            (`view-project`). Cached under ~/.cache/zellij-autoname/<CODE>.
+            produced by a one-shot headless `grok` call (low reasoning effort,
+            torch-prod `view-project` only). Cached under
+            ~/.cache/zellij-autoname/<CODE>.
 
 Example: panes in wofstack3/5/8 plus `iproj EDX` → `w358:EDX-plan-skills`.
 
@@ -37,10 +38,12 @@ WOF_COMPONENT_RE = re.compile(r"^wofstack(\d*)$", re.IGNORECASE)
 CODE_RE = re.compile(r"^[A-Za-z][A-Za-z0-9]{0,7}$")
 SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 MAX_SLUG_LEN = 12
-GROK_TIMEOUT_S = 90
+# Low-effort one-shot should finish well under this; keep a small cushion for MCP.
+GROK_TIMEOUT_S = 45
 CACHE_DIR = Path.home() / ".cache" / "zellij-autoname"
-# Prefer the primary wofstack checkout so grok loads project MCP config.
-WOFSTACK_CWD = Path.home() / "localdev" / "wofstack"
+# Lightweight cwd: avoid wofstack monorepo discovery / CLAUDE.md (torch MCP is
+# already in ~/.grok/config.toml).
+GROK_CWD = CACHE_DIR
 FISH_ENV = Path.home() / ".config" / "fish" / ".env.fish"
 
 
@@ -233,37 +236,57 @@ def grok_project_slug(code: str) -> str | None:
 
     ensure_torch_env()
 
-    cwd = str(WOFSTACK_CWD if WOFSTACK_CWD.is_dir() else Path.cwd())
+    try:
+        GROK_CWD.mkdir(parents=True, exist_ok=True)
+    except OSError:
+        pass
+    cwd = str(GROK_CWD if GROK_CWD.is_dir() else Path.cwd())
+
+    # Keep the prompt tiny: low effort + few turns; no project rules / shell tools.
     prompt = (
-        f'Use the torch-prod MCP tool view-project with code="{code}". '
-        "From the project's name and description only, invent a short tab label slug:\n"
-        f"- 1 to 3 lowercase words, hyphen-separated\n"
-        f"- max {MAX_SLUG_LEN} characters total\n"
-        "- letters and hyphens only (no spaces, no project code)\n"
-        "- capture the project's essence, not task names\n\n"
-        "Reply with ONLY the slug on one line. Example: proj-rig"
+        f'Call torch-prod MCP view-project code="{code}". '
+        f"Reply with ONLY a tab slug: 1-3 lowercase hyphenated words, "
+        f"≤{MAX_SLUG_LEN} chars, letters/hyphens only, no project code. "
+        "Example: plan-skills"
     )
     cmd = [
         "grok",
         "-p",
         prompt,
         "--always-approve",
+        "--reasoning-effort",
+        "low",
         "--max-turns",
-        "8",
+        "3",
         "--no-subagents",
+        "--no-memory",
+        "--no-plan",
+        "--no-auto-update",
         "--disable-web-search",
+        # Built-ins only via allowlist (empty → none); MCP tools stay available.
+        "--tools",
+        "",
+        "--disallowed-tools",
+        "Agent",
+        "--system-prompt-override",
+        (
+            "You generate short tab-name slugs. Use only the torch-prod "
+            "view-project tool, then reply with the slug alone on one line."
+        ),
         "--output-format",
         "plain",
         "--cwd",
         cwd,
     ]
+    env = os.environ.copy()
+    env.setdefault("GROK_DISABLE_AUTOUPDATER", "1")
     try:
         result = subprocess.run(
             cmd,
             capture_output=True,
             text=True,
             timeout=GROK_TIMEOUT_S,
-            env=os.environ.copy(),
+            env=env,
         )
     except (FileNotFoundError, subprocess.TimeoutExpired):
         return None
