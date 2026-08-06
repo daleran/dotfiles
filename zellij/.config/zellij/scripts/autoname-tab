@@ -10,23 +10,23 @@ Looks at the currently-focused tab and builds a name of the form:
             Bare `wofstack` (no trailing number) maps to "1", matching the
             w1..w12 convention. The iproj / torch:project-status dashboard
             pane is skipped so it does not inject a spurious digit.
-- <PROJECT> the project code passed to a running `iproj` pane, detected as the
-            last non-flag argument of a `torch:project-status` command
-            (e.g. `... torch:project-status --watch --interval=30 EDX` -> "EDX").
-- <slug>    1–3 word, ≤12-char abbreviation of the Torch project name/description,
-            produced by a one-shot headless `grok` call (low reasoning effort,
-            torch-prod `view-project` only). Cached under
-            ~/.cache/zellij-autoname/<CODE>.
+- <PROJECT> the project code of a running `iproj` pane — from its command line
+            in the layout dump and/or the `CODE — Name` header on its screen.
+- <slug>    1–3 word, ≤12-char abbreviation of the project name taken from the
+            iproj pane screen (`torch:project-status` prints
+            `{code} — {name}` at the top). Deterministic local slugify; no LLM.
 
-Example: panes in wofstack3/5/8 plus `iproj EDX` → `w358:EDX-plan-skills`.
+Example: panes in wofstack3/5/8 plus `iproj EDX` showing
+`EDX — Plan Skills` → `w358:EDX-plan-skills`.
 
 Reads `zellij action dump-layout`. Pass a file path as $1 (or set
 AUTONAME_DUMP) to parse a saved dump instead, and set AUTONAME_DRYRUN=1 to
-print the computed name instead of renaming. Set AUTONAME_NO_GROK=1 to skip
-the slug lookup (code only). Set AUTONAME_REFRESH_SLUG=1 to bypass the cache.
+print the computed name instead of renaming. Set AUTONAME_NO_SLUG=1 to skip
+screen dump / slug (code only).
 """
 from __future__ import annotations
 
+import json
 import os
 import re
 import subprocess
@@ -37,14 +37,32 @@ WOF_COMPONENT_RE = re.compile(r"^wofstack(\d*)$", re.IGNORECASE)
 # Project codes look like EA, EDX, EBH, EU37-style prefixes — keep alnum only.
 CODE_RE = re.compile(r"^[A-Za-z][A-Za-z0-9]{0,7}$")
 SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+# torch:project-status header: "EDX — Plan Skills" (em/en/ASCII dash).
+HEADER_RE = re.compile(
+    r"^([A-Za-z][A-Za-z0-9]{0,7})\s*[—–-]{1,3}\s+(.+)$"
+)
+ANSI_RE = re.compile(r"\x1b\[[0-9;?]*[A-Za-z]")
 MAX_SLUG_LEN = 12
-# Low-effort one-shot should finish well under this; keep a small cushion for MCP.
-GROK_TIMEOUT_S = 45
-CACHE_DIR = Path.home() / ".cache" / "zellij-autoname"
-# Lightweight cwd: avoid wofstack monorepo discovery / CLAUDE.md (torch MCP is
-# already in ~/.grok/config.toml).
-GROK_CWD = CACHE_DIR
-FISH_ENV = Path.home() / ".config" / "fish" / ".env.fish"
+STOP_WORDS = frozenset(
+    {
+        "a",
+        "an",
+        "and",
+        "at",
+        "by",
+        "for",
+        "from",
+        "in",
+        "of",
+        "on",
+        "or",
+        "the",
+        "to",
+        "via",
+        "vs",
+        "with",
+    }
+)
 
 
 def load_layout() -> str:
@@ -81,6 +99,13 @@ def focused_tab_block(lines: list[str]) -> list[str] | None:
     return block
 
 
+def focused_tab_name(block: list[str]) -> str | None:
+    if not block:
+        return None
+    m = re.search(r'name="([^"]*)"', block[0])
+    return m.group(1) if m else None
+
+
 def wofstack_digit(cwd: str) -> str | None:
     """Return the wN digit for a cwd under a wofstack tree, or None."""
     # Prefer path components so worktrees like .../wofstack5/foo still match.
@@ -95,22 +120,27 @@ def is_iproj_pane(line: str) -> bool:
     return "torch:project-status" in line
 
 
+def code_from_iproj_command(line: str) -> str | None:
+    toks = re.findall(r'"([^"]+)"', line)
+    try:
+        after = toks[toks.index("torch:project-status") + 1 :]
+    except ValueError:
+        after = []
+    positional = [t for t in after if not t.startswith("-")]
+    if positional and CODE_RE.match(positional[-1]):
+        return positional[-1]
+    return None
+
+
 def collect(block: list[str]) -> tuple[list[str], str | None]:
     digits: list[str] = []
     code: str | None = None
     for line in block:
         s = line.strip()
 
-        # Project code from the iproj / torch:project-status pane.
+        # Project code from the iproj / torch:project-status pane command line.
         if code is None and is_iproj_pane(s):
-            toks = re.findall(r'"([^"]+)"', s)
-            try:
-                after = toks[toks.index("torch:project-status") + 1 :]
-            except ValueError:
-                after = []
-            positional = [t for t in after if not t.startswith("-")]
-            if positional and CODE_RE.match(positional[-1]):
-                code = positional[-1]
+            code = code_from_iproj_command(s)
             # Never treat the dashboard's cwd as a work digit.
             continue
 
@@ -126,192 +156,155 @@ def collect(block: list[str]) -> tuple[list[str], str | None]:
     return digits, code
 
 
-def ensure_torch_env() -> None:
-    """Load TORCH_* (and CF Access) vars from fish .env.fish if missing.
-
-    Zellij `Run` inherits the session env; if the session was not started from
-    an interactive fish shell those vars may be absent and grok's torch MCP
-    will fail. The fish env file is the canonical source for them.
-    """
-    needed = (
-        "TORCH_KEY",
-        "TORCH_CF_ACCESS_CLIENT_ID",
-        "TORCH_CF_ACCESS_CLIENT_SECRET",
-        "TORCH_MCP_TOKEN",
-        "TORCH_MCP_AUTH_HEADER",
-    )
-    if all(os.environ.get(k) for k in ("TORCH_KEY",)):
-        return
-    if not FISH_ENV.is_file():
-        return
-    # set -gx NAME "value"  |  set -gx NAME 'value'  |  set -gx NAME value
-    pat = re.compile(
-        r"^set\s+-gx\s+([A-Za-z_][A-Za-z0-9_]*)\s+(?:\"([^\"]*)\"|'([^']*)'|(\S+))"
-    )
-    try:
-        text = FISH_ENV.read_text()
-    except OSError:
-        return
-    for line in text.splitlines():
-        line = line.strip()
-        if not line or line.startswith("#"):
-            continue
-        m = pat.match(line)
-        if not m:
-            continue
-        key = m.group(1)
-        if key not in needed and not key.startswith("TORCH_"):
-            continue
-        if os.environ.get(key):
-            continue
-        val = m.group(2) if m.group(2) is not None else (
-            m.group(3) if m.group(3) is not None else m.group(4)
-        )
-        if val is not None:
-            os.environ[key] = val
+def strip_ansi(text: str) -> str:
+    return ANSI_RE.sub("", text)
 
 
-def sanitize_slug(raw: str) -> str | None:
-    """Normalize model output to a ≤12-char hyphenated lowercase slug."""
-    if not raw:
+def slugify_project_name(name: str) -> str | None:
+    """Turn a project title into a ≤12-char hyphenated lowercase slug."""
+    if not name:
         return None
-    # Take first non-empty line; strip common wrappers.
-    line = ""
-    for candidate in raw.strip().splitlines():
-        candidate = candidate.strip().strip("`\"'").strip()
-        if candidate:
-            line = candidate
+    words = re.findall(r"[a-z0-9]+", name.lower())
+    if not words:
+        return None
+    kept = [w for w in words if w not in STOP_WORDS and len(w) > 1]
+    if not kept:
+        kept = words
+
+    chosen: list[str] = []
+    for w in kept[:3]:
+        trial = "-".join(chosen + [w])
+        if len(trial) > MAX_SLUG_LEN:
+            if not chosen:
+                cut = w[:MAX_SLUG_LEN].strip("-")
+                return cut if cut and len(cut) >= 2 and SLUG_RE.match(cut) else None
             break
-    if not line:
+        chosen.append(w)
+
+    slug = "-".join(chosen)
+    if not slug or len(slug) < 2 or not SLUG_RE.match(slug):
         return None
-    # If the model echoed CODE-slug, drop a leading code prefix.
-    line = line.split()[0]
-    line = line.lower()
-    line = re.sub(r"[^a-z0-9-]+", "-", line)
-    line = re.sub(r"-{2,}", "-", line).strip("-")
-    if not line or not SLUG_RE.match(line):
-        return None
-    if len(line) > MAX_SLUG_LEN:
-        # Prefer cutting on a hyphen boundary when possible.
-        cut = line[:MAX_SLUG_LEN].rstrip("-")
-        if "-" in cut:
-            cut = cut.rsplit("-", 1)[0]
-        line = cut.strip("-")
-    if not line or len(line) < 2:
-        return None
-    return line
-
-
-def cache_path(code: str) -> Path:
-    return CACHE_DIR / f"{code.upper()}.slug"
-
-
-def read_cached_slug(code: str) -> str | None:
-    if os.environ.get("AUTONAME_REFRESH_SLUG"):
-        return None
-    path = cache_path(code)
-    try:
-        raw = path.read_text().strip()
-    except OSError:
-        return None
-    return sanitize_slug(raw)
-
-
-def write_cached_slug(code: str, slug: str) -> None:
-    try:
-        CACHE_DIR.mkdir(parents=True, exist_ok=True)
-        cache_path(code).write_text(slug + "\n")
-    except OSError:
-        pass
-
-
-def grok_project_slug(code: str) -> str | None:
-    """One-shot headless grok + torch-prod MCP → short project slug."""
-    if os.environ.get("AUTONAME_NO_GROK"):
-        return None
-
-    cached = read_cached_slug(code)
-    if cached:
-        return cached
-
-    ensure_torch_env()
-
-    try:
-        GROK_CWD.mkdir(parents=True, exist_ok=True)
-    except OSError:
-        pass
-    cwd = str(GROK_CWD if GROK_CWD.is_dir() else Path.cwd())
-
-    # Keep the prompt tiny: low effort + few turns; no project rules / shell tools.
-    prompt = (
-        f'Call torch-prod MCP view-project code="{code}". '
-        f"Reply with ONLY a tab slug: 1-3 lowercase hyphenated words, "
-        f"≤{MAX_SLUG_LEN} chars, letters/hyphens only, no project code. "
-        "Example: plan-skills"
-    )
-    cmd = [
-        "grok",
-        "-p",
-        prompt,
-        "--always-approve",
-        "--reasoning-effort",
-        "low",
-        "--max-turns",
-        "3",
-        "--no-subagents",
-        "--no-memory",
-        "--no-plan",
-        "--no-auto-update",
-        "--disable-web-search",
-        # Built-ins only via allowlist (empty → none); MCP tools stay available.
-        "--tools",
-        "",
-        "--disallowed-tools",
-        "Agent",
-        "--system-prompt-override",
-        (
-            "You generate short tab-name slugs. Use only the torch-prod "
-            "view-project tool, then reply with the slug alone on one line."
-        ),
-        "--output-format",
-        "plain",
-        "--cwd",
-        cwd,
-    ]
-    env = os.environ.copy()
-    env.setdefault("GROK_DISABLE_AUTOUPDATER", "1")
-    try:
-        result = subprocess.run(
-            cmd,
-            capture_output=True,
-            text=True,
-            timeout=GROK_TIMEOUT_S,
-            env=env,
-        )
-    except (FileNotFoundError, subprocess.TimeoutExpired):
-        return None
-
-    # Prefer stdout; some failure paths put useful text on stderr.
-    out = (result.stdout or "").strip() or (result.stderr or "").strip()
-    if not out or "max turns" in out.lower() or out.lower().startswith("error:"):
-        # Last non-empty line sometimes holds the answer after tool chatter.
-        lines = [ln.strip() for ln in (result.stdout or "").splitlines() if ln.strip()]
-        out = lines[-1] if lines else ""
-
-    slug = sanitize_slug(out)
-    if slug:
-        write_cached_slug(code, slug)
     return slug
 
 
-def build_name(digits: list[str], code: str | None) -> str:
+def parse_iproj_header(
+    screen: str, expected_code: str | None = None
+) -> tuple[str, str] | None:
+    """Parse `CODE — Project Name` from a torch:project-status screen dump."""
+    text = strip_ansi(screen)
+    lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
+    for i, line in enumerate(lines[:40]):
+        m = HEADER_RE.match(line)
+        if not m:
+            continue
+        code, name = m.group(1), m.group(2).strip()
+        if not CODE_RE.match(code) or not name:
+            continue
+        if expected_code and code.upper() != expected_code.upper():
+            continue
+        # Prefer a true project-status frame (header near Schedule / tasks).
+        window = "\n".join(lines[i : i + 8])
+        looks_like_status = (
+            "Schedule:" in window
+            or "No tasks in this project" in window
+            or "Refreshing every" in text
+            or "Blocked by project" in window
+            or re.search(r"\[(?:Released|Merged|Closed|Blocked)", window) is not None
+            or re.search(r"^\[([A-Z]{1,4}\d*)\]", window, re.M) is not None
+        )
+        if looks_like_status or expected_code:
+            return code, name
+    return None
+
+
+def list_panes_json() -> list[dict]:
+    try:
+        result = subprocess.run(
+            ["zellij", "action", "list-panes", "-j", "-t"],
+            capture_output=True,
+            text=True,
+            check=True,
+            timeout=5,
+        )
+    except (FileNotFoundError, subprocess.TimeoutExpired, subprocess.CalledProcessError):
+        return []
+    try:
+        data = json.loads(result.stdout or "[]")
+    except json.JSONDecodeError:
+        return []
+    return data if isinstance(data, list) else []
+
+
+def dump_pane_screen(pane_id: int | str) -> str:
+    try:
+        result = subprocess.run(
+            ["zellij", "action", "dump-screen", "-p", str(pane_id)],
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=5,
+        )
+    except (FileNotFoundError, subprocess.TimeoutExpired):
+        return ""
+    return result.stdout or ""
+
+
+def project_from_iproj_screen(
+    tab_name: str | None, expected_code: str | None
+) -> tuple[str | None, str | None]:
+    """Dump focused-tab panes and extract (code, slug) from an iproj screen.
+
+    Skipped when AUTONAME_NO_SLUG is set, or when parsing a saved layout dump
+    (no live zellij session to dump).
+    """
+    if os.environ.get("AUTONAME_NO_SLUG") or os.environ.get("AUTONAME_NO_GROK"):
+        return expected_code, None
+    # Offline dump-only mode: no live panes.
+    if len(sys.argv) > 1 or os.environ.get("AUTONAME_DUMP"):
+        return expected_code, None
+
+    panes = list_panes_json()
+    if not panes:
+        return expected_code, None
+
+    candidates: list[dict] = []
+    for pane in panes:
+        if pane.get("is_plugin"):
+            continue
+        if tab_name is not None and pane.get("tab_name") != tab_name:
+            continue
+        candidates.append(pane)
+
+    # Prefer non-focused panes first — the user is usually not sitting in iproj.
+    candidates.sort(key=lambda p: (bool(p.get("is_focused")), p.get("id", 0)))
+
+    for pane in candidates:
+        pid = pane.get("id")
+        if pid is None:
+            continue
+        screen = dump_pane_screen(pid)
+        if not screen.strip():
+            continue
+        parsed = parse_iproj_header(screen, expected_code=expected_code)
+        if parsed is None and expected_code is None:
+            # Last resort: any project-status header on this tab.
+            parsed = parse_iproj_header(screen, expected_code=None)
+        if parsed is None:
+            continue
+        code, name = parsed
+        slug = slugify_project_name(name)
+        return code, slug
+
+    return expected_code, None
+
+
+def build_name(digits: list[str], code: str | None, slug: str | None) -> str:
     parts_left = ""
     if digits:
         parts_left = "w" + "".join(digits)
 
     right = ""
     if code:
-        slug = grok_project_slug(code)
         right = f"{code}-{slug}" if slug else code
 
     if parts_left and right:
@@ -320,12 +313,16 @@ def build_name(digits: list[str], code: str | None) -> str:
 
 
 def main() -> None:
-    block = focused_tab_block(load_layout().splitlines())
+    lines = load_layout().splitlines()
+    block = focused_tab_block(lines)
     if block is None:
         return
 
     digits, code = collect(block)
-    name = build_name(digits, code)
+    tab_name = focused_tab_name(block)
+    code, slug = project_from_iproj_screen(tab_name, code)
+
+    name = build_name(digits, code, slug)
     if not name:
         return
 

@@ -11,7 +11,7 @@ Default mode: **locked**. Press `Ctrl-g` to enter normal mode; `Ctrl-g` again to
 | `Alt -` | Previous tab |
 | `Alt =` | Next tab |
 | `Alt 1`–`6` | Jump to tab N |
-| `Alt a` | Auto-name the current tab `w<dirs>:<PROJECT>[-slug]` from wofstack pane cwds + `iproj` (slug via headless grok + torch MCP) |
+| `Alt a` | Auto-name the current tab `w<dirs>:<PROJECT>[-slug]` from wofstack pane cwds + `iproj` screen (`CODE — Name`) |
 | `Alt b` | Split a new pane below |
 | `Alt n` | Open `~/notes/the.md` in Neovim (in stacked pane) |
 | `Alt p` | Open a new pane in a right split |
@@ -218,20 +218,18 @@ finds the focused tab, and renames it to `w<digits>:<PROJECT>[-slug]`:
   Any pane counts — claude, grok, codex, shell — as long as the cwd is under
   a wofstack dir. The `iproj` / `torch:project-status` dashboard is skipped so
   it does not inject a spurious digit.
-- **`<PROJECT>`** — the project code of an `iproj` pane in the tab, taken from
-  the last non-flag argument of its `torch:project-status` command
-  (`… torch:project-status --watch --interval=30 EDX` → `EDX`).
-- **`<slug>`** — optional 1–3 word, ≤12-char abbreviation of the Torch project
-  name/description. On first use for a code, the script runs a one-shot
-  headless `grok` (`view-project` via torch-prod MCP, `--reasoning-effort low`,
-  max 3 turns, no built-in tools / memory / plan) and caches the result in
-  `~/.cache/zellij-autoname/<CODE>.slug`. Later `Alt a` hits the cache.
+- **`<PROJECT>`** — the project code of an `iproj` pane in the tab, from the
+  last non-flag arg of its `torch:project-status` command and/or the
+  `CODE — Name` header on that pane’s screen.
+- **`<slug>`** — optional 1–3 word, ≤12-char abbreviation of the project
+  **name** shown by `iproj` (`torch:project-status` prints
+  `{code} — {name}` at the top). The script dumps the pane screen with
+  `zellij action dump-screen` and slugifies locally — no LLM, no MCP, near-instant.
 
-Example: panes in `wofstack3/5/8` plus `iproj EDX` → `w358:EDX-plan-skills`.
-If no wofstack panes and no `iproj` pane are found, the tab is left untouched.
-The first slug fetch can take up to ~45s (floating close-on-exit pane stays
-open until done); cached renames are near-instant.
+Example: panes in `wofstack3/5/8` plus `iproj EDX` showing `EDX — Plan Skills`
+→ `w358:EDX-plan-skills`. If no wofstack panes and no `iproj` pane are found,
+the tab is left untouched.
 
-Env knobs: `AUTONAME_DRYRUN=1` print only; `AUTONAME_NO_GROK=1` skip slug;
-`AUTONAME_REFRESH_SLUG=1` bypass cache; `AUTONAME_DUMP=/path` parse a saved
-layout dump.
+Env knobs: `AUTONAME_DRYRUN=1` print only; `AUTONAME_NO_SLUG=1` (or legacy
+`AUTONAME_NO_GROK=1`) skip screen dump / slug; `AUTONAME_DUMP=/path` parse a
+saved layout dump (code from command line only — no live screen).
