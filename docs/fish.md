@@ -42,7 +42,7 @@ See [worktrees.md](worktrees.md) for the full guide.
 | `nman` | Open Neovim Oil in the dotfiles `docs/` directory |
 | `cgo [task]` | Launch Claude (`opus`); with a task number, runs `/igo <task>` as the first prompt |
 | `ggo <task>` | Launch Grok with `/igo <task>` as the first prompt (always approve) |
-| `xgo <task>` | Launch Codex with `/igo <task>` as the first prompt (auto approve: `-a never -s workspace-write`) |
+| `xgo <task>` | Launch Codex with `/igo <task>` as the first prompt (auto approve, including Git writes) |
 
 ---
 
