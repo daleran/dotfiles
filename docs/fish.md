@@ -95,4 +95,7 @@ See [worktrees.md](worktrees.md) for the full guide.
   - `TORCH_CF_ACCESS_CLIENT_ID` / `TORCH_CF_ACCESS_CLIENT_SECRET` — Cloudflare **Access service tokens** (not browser/OAuth login) for torch-prod
   - `PGSQL_READONLY_USER` / `PGSQL_READONLY_PASS` / `PGSQL_PROD_HOST` / `PGSQL_PROD_DB` — tmxprod postgres MCP + `dbp`
   - Legacy alias: `TORCH_KEY` mirrors `TORCH_MCP_TOKEN`
+- GitHub MCP:
+  - `GITHUB_MCP_PAT` — GitHub personal access token (source of truth in `.env.fish`)
+  - `GITHUB_MCP_TOKEN` — derived at session start as a copy of `GITHUB_MCP_PAT` (Codex requires this exact name; see `config.fish`)
 - Plugins: `jorgebucaran/fisher` (plugin manager), `jorgebucaran/nvm.fish`
