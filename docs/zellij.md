@@ -11,7 +11,7 @@ Default mode: **locked**. Press `Ctrl-g` to enter normal mode; `Ctrl-g` again to
 | `Alt -` | Previous tab |
 | `Alt =` | Next tab |
 | `Alt 1`–`6` | Jump to tab N |
-| `Alt a` | Auto-name the current tab `w<dirs>:<PROJECT>` from its agent (claude/grok/gemini) panes + `iproj` pane |
+| `Alt a` | Auto-name the current tab `w<dirs>:<PROJECT>[-slug]` from wofstack pane cwds + `iproj` (slug via headless grok + torch MCP) |
 | `Alt b` | Split a new pane below |
 | `Alt n` | Open `~/notes/the.md` in Neovim (in stacked pane) |
 | `Alt p` | Open a new pane in a right split |
@@ -210,18 +210,27 @@ If the project needs extra tabs, create `zellij/.config/zellij/layouts/<name>.kd
 ## Auto-naming tabs (`Alt a`)
 
 `Alt a` runs `scripts/autoname-tab`, which reads `zellij action dump-layout`,
-finds the focused tab, and renames it to `w<digits>:<PROJECT>`:
+finds the focused tab, and renames it to `w<digits>:<PROJECT>[-slug]`:
 
-- **`<digits>`** — the trailing number of each **agent** pane's working
-  directory, in order (e.g. panes in `wofstack3`, `wofstack7`, `wofstack9`
-  give `w379`). A pane counts as an agent pane if its command is `claude`,
-  `grok`, or `gemini`, or its title contains one of those names; plain
-  shell/log panes are skipped.
+- **`<digits>`** — digits from each pane whose **cwd** is a `wofstack` tree, in
+  pane order (e.g. `wofstack3` + `wofstack5` + `wofstack8` → `w358`). Bare
+  `wofstack` (no trailing number) maps to `1` (same as the `w1` fish alias).
+  Any pane counts — claude, grok, codex, shell — as long as the cwd is under
+  a wofstack dir. The `iproj` / `torch:project-status` dashboard is skipped so
+  it does not inject a spurious digit.
 - **`<PROJECT>`** — the project code of an `iproj` pane in the tab, taken from
   the last non-flag argument of its `torch:project-status` command
-  (`… torch:project-status --watch --interval=30 EBH` → `EBH`).
+  (`… torch:project-status --watch --interval=30 EDX` → `EDX`).
+- **`<slug>`** — optional 1–3 word, ≤12-char abbreviation of the Torch project
+  name/description. On first use for a code, the script runs a one-shot
+  headless `grok` (`view-project` via torch-prod MCP) and caches the result in
+  `~/.cache/zellij-autoname/<CODE>.slug`. Later `Alt a` hits the cache.
 
-So a tab with agent worktrees `wofstack3/7/9` plus an `iproj EBH` pane becomes
-`w379:EBH`. If no agent panes are found and no `iproj` pane is running, the tab
-is left untouched. The script launches in a floating, close-on-exit pane, so it
-flashes briefly and disappears.
+Example: panes in `wofstack3/5/8` plus `iproj EDX` → `w358:EDX-plan-skills`.
+If no wofstack panes and no `iproj` pane are found, the tab is left untouched.
+The first slug fetch can take up to ~90s (floating close-on-exit pane stays
+open until done); cached renames are near-instant.
+
+Env knobs: `AUTONAME_DRYRUN=1` print only; `AUTONAME_NO_GROK=1` skip slug;
+`AUTONAME_REFRESH_SLUG=1` bypass cache; `AUTONAME_DUMP=/path` parse a saved
+layout dump.
