@@ -28,6 +28,7 @@ See [worktrees.md](worktrees.md) for the full guide.
 | `ziz` | `izaddit` | `~/localdev/izaddit` |
 | `zvesp` | `vesper` | `~/localdev/vesper` |
 | `zwy` | `wayfarer` | `~/localdev/wayfarer` |
+| `zwc` | `worldcanvas` | `~/localdev/worldcanvas` |
 | `zav` | `aiventure` | `~/localdev/aiventure` |
 | `zrep` | `reports` | `~/localdev/reports` |
 
